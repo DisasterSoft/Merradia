@@ -91,9 +91,9 @@ public class databaseHelper
     public Cursor login(String paramString1, String paramString2)
     {
         SQLiteDatabase localSQLiteDatabase = getReadableDatabase();
-        Log.d("SQL", paramString2);
+       // Log.d("SQL", paramString2);
         String str1 = "SELECT * FROM users_table_Merradia where userName='"+paramString1+"' and  password='" + paramString2 + "'";
-        Log.d("SQL", str1);
+        //Log.d("SQL", str1);
         Cursor localCursor = localSQLiteDatabase.rawQuery(str1, null);
         if (localCursor.getCount() == 0)
         {
