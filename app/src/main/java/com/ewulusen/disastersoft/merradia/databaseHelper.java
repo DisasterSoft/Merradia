@@ -13,7 +13,7 @@ import java.sql.Timestamp;
  * Ebben a javafájlban fogom létrehozni az adatbázisokat amivel dolgozni fogunk
  */
 
-public class databaseHelper
+public class DatabaseHelper
         extends SQLiteOpenHelper
 {
     /**
@@ -24,10 +24,10 @@ public class databaseHelper
     public static final String Password = "password";
     public static final String uTableName = "users_table_Merradia";
     public static final String owner = "OWNER";
-    public static final String charTable = "unit_table_Merradia";
-    public databaseHelper(Context paramContext)
+    public static final String charTable = "char_table_Merradia";
+    public DatabaseHelper(Context paramContext)
     {
-        super(paramContext, "merradiaUsers.db", null, 12);
+        super(paramContext, "merradiaUsers.db", null, 13);
     }
 
     /**
@@ -51,7 +51,7 @@ public class databaseHelper
     public Cursor getChar(String id)
     {
         SQLiteDatabase localSQLiteDatabase = getReadableDatabase();
-        String str1 = "SELECT * FROM unit_table_Merradia where OWNER='"+id+"'";
+        String str1 = "SELECT * FROM char_table_Merradia where OWNER='"+id+"'";
         Log.d("SQL", str1);
         Cursor localCursor = localSQLiteDatabase.rawQuery(str1, null);
         return localCursor;
@@ -91,9 +91,9 @@ public class databaseHelper
     public Cursor login(String paramString1, String paramString2)
     {
         SQLiteDatabase localSQLiteDatabase = getReadableDatabase();
-        Log.d("SQL", paramString2);
+       // Log.d("SQL", paramString2);
         String str1 = "SELECT * FROM users_table_Merradia where userName='"+paramString1+"' and  password='" + paramString2 + "'";
-        Log.d("SQL", str1);
+        //Log.d("SQL", str1);
         Cursor localCursor = localSQLiteDatabase.rawQuery(str1, null);
         if (localCursor.getCount() == 0)
         {
@@ -108,14 +108,44 @@ public class databaseHelper
     public void onCreate(SQLiteDatabase paramSQLiteDatabase)
     {
         paramSQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS users_table_Merradia (ID INTEGER PRIMARY KEY AUTOINCREMENT,  userName TEXT, password TEXT)");
-        paramSQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS unit_table_Merradia( ID INTEGER PRIMARY KEY AUTOINCREMENT,   OWNER TEXT, Name TEXT,  AGI TEXT,   STR TEXT,   DEF TEXT,   CON TEXT,   REF TEXT,   LUCK TEXT)");
+        paramSQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS char_table_Merradia( ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "Owner TEXT, Name TEXT,  AGI TEXT,   STR TEXT,   DEF TEXT,   CON TEXT," +
+                "   REF TEXT,   LUCK TEXT, DEX TEXT,INTE TEXT,KASZT TEXT," +
+                "POINT TEXT,LVL TEXT,MONEY TEXT)");
     }
 
     public void onUpgrade(SQLiteDatabase paramSQLiteDatabase, int paramInt1, int paramInt2)
     {
         paramSQLiteDatabase.execSQL("DROP TABLE if EXISTS users_table_Merradia");
         onCreate(paramSQLiteDatabase);
-        paramSQLiteDatabase.execSQL("DROP TABLE if EXISTS unit_table_Merradia");
+        paramSQLiteDatabase.execSQL("DROP TABLE if EXISTS char_table_Merradia");
         onCreate(paramSQLiteDatabase);
+    }
+
+    /**
+     * arrayként megkapott adatokat menti
+     * 0=names,1=stri,2=agii,3=defi,4=dexi,5=intei,6=coni,7=refi,8=lucki,9=kaszt,10=id,11=point,12=lvl,13=money
+     * @param datas
+     */
+    public void saveData(String datas[])
+    {
+        SQLiteDatabase localSQLiteDatabase = getWritableDatabase();
+        ContentValues localContentValues = new ContentValues();
+        localContentValues.put("Owner", datas[10]);
+        localContentValues.put("Name", datas[0]);
+        localContentValues.put("STR", datas[1]);
+        localContentValues.put("AGI", datas[2]);
+        localContentValues.put("DEF", datas[3]);
+        localContentValues.put("DEX", datas[4]);
+        localContentValues.put("INTE", datas[5]);
+        localContentValues.put("CON", datas[6]);
+        localContentValues.put("REF", datas[7]);
+        localContentValues.put("LUCK", datas[8]);
+        localContentValues.put("KASZT", datas[9]);
+        localContentValues.put("POINT", datas[11]);
+        localContentValues.put("LVL", datas[12]);
+        localContentValues.put("MONEY", datas[13]);
+        localSQLiteDatabase.insert("char_table_Merradia", null, localContentValues);
+        localContentValues.clear();
     }
 }
