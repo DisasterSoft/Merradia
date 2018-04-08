@@ -3,7 +3,6 @@ package com.ewulusen.disastersoft.merradia;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,7 +15,7 @@ import pl.droidsonroids.gif.GifImageView;
 public class MakeCharakter extends AppCompatActivity {
     public static Intent intent;
     public static String id;
-    databaseHelper userDB;
+    DatabaseHelper userDB;
     TextView str,agi,dex,def,con,inte,ref,luck,ac,mc,dmg,move,point,name,hp,mana;
     GifImageView kinght,ork,archer,rouge,wizard;
     Button strm,strp,agim,agip,dexm,dexp,defm,defp,conm,conp,intem,intep,refm,refp,luckm,luckp,save;
@@ -28,6 +27,7 @@ public class MakeCharakter extends AppCompatActivity {
     int coni;
     int refi;
     int lucki;
+    int pointsz=0;
     int kaszt;//1=knight,2=rouge,3=archer,4=ork,5=wizard;
     String names;
     @Override
@@ -37,7 +37,7 @@ public class MakeCharakter extends AppCompatActivity {
         parkereso();
         intent = getIntent();
         id = intent.getStringExtra("datas");
-        userDB = new databaseHelper(this);
+        userDB = new DatabaseHelper(this);
         Random r = new Random();
         int points = r.nextInt(48 - 6) + 6;
         point.setText("points:"+points);
@@ -209,30 +209,39 @@ public class MakeCharakter extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 kaszt=1;
+                Toast.makeText(MakeCharakter.this, R.string.knigt_select, Toast.LENGTH_LONG).show();
+
             }
         });
         rouge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 kaszt=2;
+                Toast.makeText(MakeCharakter.this, R.string.rouge_select, Toast.LENGTH_LONG).show();
+
             }
         });
         archer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 kaszt=3;
+                Toast.makeText(MakeCharakter.this, R.string.archer_select, Toast.LENGTH_LONG).show();
             }
         });
         ork.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 kaszt=4;
+                Toast.makeText(MakeCharakter.this, R.string.ork_select, Toast.LENGTH_LONG).show();
+
             }
         });
         wizard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 kaszt=5;
+                Toast.makeText(MakeCharakter.this, R.string.wiz_select, Toast.LENGTH_LONG).show();
+
             }
         });
         save.setOnClickListener(new View.OnClickListener() {
@@ -252,7 +261,7 @@ public class MakeCharakter extends AppCompatActivity {
     public void statnovel(int id)
     {
         int szam=0;
-        int pointsz=0;
+
         String szoveg;
         switch(id)
         {
@@ -412,7 +421,7 @@ public class MakeCharakter extends AppCompatActivity {
     public void statcsokkent(int id)
     {
         int szam=0;
-        int pointsz=0;
+
         String szoveg;
         switch(id)
         {
@@ -615,16 +624,24 @@ public class MakeCharakter extends AppCompatActivity {
      * elmenti az oldalon látható karakter minden tulajdonságát.
      */
     public void saveData() {
-
-        if (kaszt == 0) {
+name=findViewById(R.id.name) ;
+    if (kaszt == 0) {
             Toast.makeText(MakeCharakter.this, R.string.no_kaszt, Toast.LENGTH_LONG).show();
-            if (name.equals(""))
+            if (name.getText().toString().isEmpty())
                 Toast.makeText(MakeCharakter.this, R.string.no_name, Toast.LENGTH_LONG).show();
         } else {
             names=name.getText().toString();
-            String[] datas={names,Integer.toString(stri),Integer.toString(agii),Integer.toString(defi),Integer.toString(dexi),Integer.toString(intei),Integer.toString(coni),Integer.toString(refi),Integer.toString(lucki),Integer.toString(kaszt),id};
+            String[] datas={names,Integer.toString(stri),Integer.toString(agii),
+                    Integer.toString(defi),Integer.toString(dexi),Integer.toString(intei),
+                    Integer.toString(coni),Integer.toString(refi),Integer.toString(lucki),
+                    Integer.toString(kaszt),id,Integer.toString(pointsz),"1","100"};
             
                     userDB.saveData(datas);
+        Intent intent2 = null;
+        intent2 = new Intent(MakeCharakter.this, MainScreen.class);
+        intent2.putExtra("datas", id);
+        startActivity(intent2);
+        finish();
         }
     }
 

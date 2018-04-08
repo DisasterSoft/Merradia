@@ -13,7 +13,7 @@ import java.sql.Timestamp;
  * Ebben a javafájlban fogom létrehozni az adatbázisokat amivel dolgozni fogunk
  */
 
-public class databaseHelper
+public class DatabaseHelper
         extends SQLiteOpenHelper
 {
     /**
@@ -25,9 +25,9 @@ public class databaseHelper
     public static final String uTableName = "users_table_Merradia";
     public static final String owner = "OWNER";
     public static final String charTable = "char_table_Merradia";
-    public databaseHelper(Context paramContext)
+    public DatabaseHelper(Context paramContext)
     {
-        super(paramContext, "merradiaUsers.db", null, 12);
+        super(paramContext, "merradiaUsers.db", null, 13);
     }
 
     /**
@@ -108,7 +108,10 @@ public class databaseHelper
     public void onCreate(SQLiteDatabase paramSQLiteDatabase)
     {
         paramSQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS users_table_Merradia (ID INTEGER PRIMARY KEY AUTOINCREMENT,  userName TEXT, password TEXT)");
-        paramSQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS char_table_Merradia( ID INTEGER PRIMARY KEY AUTOINCREMENT,   Owner TEXT, Name TEXT,  AGI TEXT,   STR TEXT,   DEF TEXT,   CON TEXT,   REF TEXT,   LUCK TEXT, DEX TEXT,INTE TEXT,KASZT TEXT)");
+        paramSQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS char_table_Merradia( ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "Owner TEXT, Name TEXT,  AGI TEXT,   STR TEXT,   DEF TEXT,   CON TEXT," +
+                "   REF TEXT,   LUCK TEXT, DEX TEXT,INTE TEXT,KASZT TEXT," +
+                "POINT TEXT,LVL TEXT,MONEY TEXT)");
     }
 
     public void onUpgrade(SQLiteDatabase paramSQLiteDatabase, int paramInt1, int paramInt2)
@@ -121,7 +124,7 @@ public class databaseHelper
 
     /**
      * arrayként megkapott adatokat menti
-     * 0=names,1=stri,2=agii,3=defi,4=dexi,5=intei,6=coni,7=refi,8=lucki,9=kaszt,10=id
+     * 0=names,1=stri,2=agii,3=defi,4=dexi,5=intei,6=coni,7=refi,8=lucki,9=kaszt,10=id,11=point,12=lvl,13=money
      * @param datas
      */
     public void saveData(String datas[])
@@ -136,9 +139,12 @@ public class databaseHelper
         localContentValues.put("DEX", datas[4]);
         localContentValues.put("INTE", datas[5]);
         localContentValues.put("CON", datas[6]);
-        localContentValues.put("REFr", datas[7]);
+        localContentValues.put("REF", datas[7]);
         localContentValues.put("LUCK", datas[8]);
         localContentValues.put("KASZT", datas[9]);
+        localContentValues.put("POINT", datas[11]);
+        localContentValues.put("LVL", datas[12]);
+        localContentValues.put("MONEY", datas[13]);
         localSQLiteDatabase.insert("char_table_Merradia", null, localContentValues);
         localContentValues.clear();
     }
