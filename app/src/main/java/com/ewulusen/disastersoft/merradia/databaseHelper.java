@@ -27,7 +27,7 @@ public class DatabaseHelper
     public static final String charTable = "char_table_Merradia";
     public DatabaseHelper(Context paramContext)
     {
-        super(paramContext, "merradiaUsers.db", null, 13);
+        super(paramContext, DatabaseName, null, 13);
     }
 
     /**
@@ -147,5 +147,10 @@ public class DatabaseHelper
         localContentValues.put("MONEY", datas[13]);
         localSQLiteDatabase.insert("char_table_Merradia", null, localContentValues);
         localContentValues.clear();
+    }
+    public void deleteChar(String id)
+    {
+        SQLiteDatabase localSQLiteDatabase = getWritableDatabase();
+        localSQLiteDatabase.delete(charTable, "ID=" + id, null);
     }
 }

@@ -46,7 +46,7 @@ public class MainScreen extends AppCompatActivity {
                 intent2 = new Intent(MainScreen.this, MakeCharakter.class);
                 intent2.putExtra("datas", id);
                 startActivity(intent2);
-                finish();
+
             }
         });
         editChar.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +56,7 @@ public class MainScreen extends AppCompatActivity {
                 intent2 = new Intent(MainScreen.this, CharList.class);
                 intent2.putExtra("datas", id);
                 startActivity(intent2);
-                finish();
+
             }
         });
 

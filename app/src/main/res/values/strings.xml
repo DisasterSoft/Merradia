@@ -22,6 +22,8 @@
     <string name="name">Name</string>
     <string name="empty1">Empty</string>
     <string name="empty2">None</string>
+    <string name="edit_char">Edit</string>
+    <string name="delete_char">delete</string>
     <string name="hp">Healt point</string>
     <string name="mana">Mana point</string>
     <string name="chous">Please chouse a charackter</string>
