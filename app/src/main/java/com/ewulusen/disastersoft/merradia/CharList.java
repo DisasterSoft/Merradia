@@ -30,7 +30,7 @@ public class CharList extends AppCompatActivity {
         intent = getIntent();
         id = intent.getStringExtra("datas");
         userDB = new DatabaseHelper(this);
-        Cursor localCursor=userDB.getChar(id);
+        Cursor localCursor=userDB.getCharacters(id);
         int i=1;
         /**
          * végig futunk a kapott karakter listán és beállítjuk a kinézete hozzá+ azt hogy mi történjen ha rákattintunk

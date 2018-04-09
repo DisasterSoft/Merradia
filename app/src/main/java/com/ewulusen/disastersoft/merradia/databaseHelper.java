@@ -16,7 +16,7 @@ import java.sql.Timestamp;
 public class DatabaseHelper
         extends SQLiteOpenHelper
 {
-    /** 
+    /**
      * Előszőr is létrhozzuk az összes változót amivel dolgozni fogunk.
      */
     public static final String DatabaseName = "merradiaUsers.db";
@@ -27,7 +27,7 @@ public class DatabaseHelper
     public static final String charTable = "char_table_Merradia";
     public DatabaseHelper(Context paramContext)
     {
-        super(paramContext, DatabaseName, null, 13);
+        super(paramContext, DatabaseName, null, 14);
     }
 
     /**
@@ -48,11 +48,25 @@ public class DatabaseHelper
      * @param id
      * @return vissza adja az adott ember birtokában lévő karaktereket
      */
-    public Cursor getChar(String id)
+    public Cursor getCharacters(String id)
     {
         SQLiteDatabase localSQLiteDatabase = getReadableDatabase();
         String str1 = "SELECT * FROM char_table_Merradia where OWNER='"+id+"'";
         Log.d("SQL", str1);
+        Cursor localCursor = localSQLiteDatabase.rawQuery(str1, null);
+        return localCursor;
+    }
+
+    /**
+     * egy adott id-jű charakterrel tér vissza
+     * @param id
+     * @return
+     */
+    public Cursor getChar(String id)
+    {
+        SQLiteDatabase localSQLiteDatabase = getReadableDatabase();
+        String str1 = "SELECT * FROM char_table_Merradia where ID='"+id+"'";
+       // Log.d("SQL", str1);
         Cursor localCursor = localSQLiteDatabase.rawQuery(str1, null);
         return localCursor;
     }
@@ -117,7 +131,6 @@ public class DatabaseHelper
     public void onUpgrade(SQLiteDatabase paramSQLiteDatabase, int paramInt1, int paramInt2)
     {
         paramSQLiteDatabase.execSQL("DROP TABLE if EXISTS users_table_Merradia");
-        onCreate(paramSQLiteDatabase);
         paramSQLiteDatabase.execSQL("DROP TABLE if EXISTS char_table_Merradia");
         onCreate(paramSQLiteDatabase);
     }
@@ -146,6 +159,27 @@ public class DatabaseHelper
         localContentValues.put("LVL", datas[12]);
         localContentValues.put("MONEY", datas[13]);
         localSQLiteDatabase.insert("char_table_Merradia", null, localContentValues);
+        localContentValues.clear();
+    }
+    /**
+     * arrayként megkapott adatokkal frissíti a charakterek táblát
+     * 0=stri,1=agii,2=defi,3=dexi,4=intei,5=coni,6=refi,7=lucki,8=id,9=point
+     * @param datas
+     */
+    public void upgradeData(String datas[])
+    {
+        SQLiteDatabase localSQLiteDatabase = getWritableDatabase();
+        ContentValues localContentValues = new ContentValues();
+        localContentValues.put("STR", datas[0]);
+        localContentValues.put("AGI", datas[1]);
+        localContentValues.put("DEF", datas[2]);
+        localContentValues.put("DEX", datas[3]);
+        localContentValues.put("INTE", datas[4]);
+        localContentValues.put("CON", datas[5]);
+        localContentValues.put("REF", datas[6]);
+        localContentValues.put("LUCK", datas[7]);
+        localContentValues.put("POINT", datas[9]);
+        localSQLiteDatabase.update(charTable, localContentValues, "ID =" + datas[8], null);
         localContentValues.clear();
     }
     public void deleteChar(String id)
