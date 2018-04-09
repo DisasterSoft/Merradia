@@ -16,7 +16,7 @@ import java.sql.Timestamp;
 public class DatabaseHelper
         extends SQLiteOpenHelper
 {
-    /**
+    /** 
      * Előszőr is létrhozzuk az összes változót amivel dolgozni fogunk.
      */
     public static final String DatabaseName = "merradiaUsers.db";
