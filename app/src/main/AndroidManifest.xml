@@ -35,7 +35,8 @@
             android:name=".MakeCharakter"
             android:screenOrientation="portrait" />
         <activity android:name=".CharList" />
-        <activity android:name=".TheCharakter"></activity>
+        <activity android:name=".TheCharakter" />
+        <activity android:name=".Fight_Start"></activity>
     </application>
 
 </manifest>

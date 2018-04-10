@@ -19,7 +19,9 @@
     <string name="move">Evade</string>
     <string name="dmg">Damage</string>
     <string name="save">save</string>
-    <string name="name">Name</string>
+    <string name="names">Name</string>
+    <string name="Lvl">LVL</string>
+    <string name="charakter">Charakter</string>
     <string name="empty1">Empty</string>
     <string name="empty2">None</string>
     <string name="edit_char">Edit</string>
