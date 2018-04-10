@@ -39,8 +39,8 @@ public class MakeCharakter extends AppCompatActivity {
         id = intent.getStringExtra("datas");
         userDB = new DatabaseHelper(this);
         Random r = new Random();
-        int points = r.nextInt(48 - 6) + 6;
-        point.setText("points:"+points);
+        pointsz = r.nextInt(48 - 6) + 6;
+        point.setText("points:"+pointsz);
         kaszt=0;
         lisztenerek();
     }

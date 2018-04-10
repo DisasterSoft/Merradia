@@ -54,7 +54,27 @@ public class DatabaseHelper
         String str1 = "SELECT * FROM char_table_Merradia where OWNER='"+id+"'";
         Log.d("SQL", str1);
         Cursor localCursor = localSQLiteDatabase.rawQuery(str1, null);
+       // printDatabaseHelper(id);
         return localCursor;
+    }
+    public void printDatabaseHelper(String id)
+    {
+        SQLiteDatabase localSQLiteDatabase = getReadableDatabase();
+        String str1 = "SELECT * FROM char_table_Merradia where OWNER='"+id+"'";
+        Cursor cursor = localSQLiteDatabase.rawQuery(str1, null);
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                String line="";
+                for(int i=0; i<cursor.getColumnCount();i++)
+                {
+                    line=line+(cursor.getString(i).toString())+"->"+cursor.getColumnName(i)+",";
+                }
+
+               Log.d("tartalom",line);
+               cursor.moveToNext();
+            }
+        }
+
     }
 
     /**
