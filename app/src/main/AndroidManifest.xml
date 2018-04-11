@@ -36,7 +36,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".CharList" />
         <activity android:name=".TheCharakter" />
-        <activity android:name=".Fight_Start"></activity>
+        <activity android:name=".Fight_Start" />
+        <activity android:name=".Figt_Field"></activity>
     </application>
 
 </manifest>
