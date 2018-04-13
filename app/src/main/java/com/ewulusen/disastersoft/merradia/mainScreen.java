@@ -59,6 +59,16 @@ public class MainScreen extends AppCompatActivity {
 
             }
         });
+      fight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = null;
+                intent2 = new Intent(MainScreen.this, Fight_Start.class);
+                intent2.putExtra("datas", id);
+                startActivity(intent2);
+
+            }
+        });
 
 
     }

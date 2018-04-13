@@ -21,6 +21,10 @@
     <string name="save">save</string>
     <string name="names">Name</string>
     <string name="Lvl">LVL</string>
+    <string name="enemyMove">Shomting is moving in the maze!</string>
+    <string name="sense2">You hear shomting, maybe the monster is in the near!</string>
+    <string name="sense3">You can hear wind from somewhere, maybe a trap is near you? </string>
+    <string name="sense4">Thanks to your super-sensation, you can feel somewhere near is a treasure</string>
     <string name="charakter">Charakter</string>
     <string name="empty1">Empty</string>
     <string name="empty2">None</string>
