@@ -33,12 +33,24 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".MakeCharakter"
-            android:screenOrientation="portrait" />
-        <activity android:name=".CharList" />
-        <activity android:name=".TheCharakter" />
-        <activity android:name=".Fight_Start" />
-        <activity android:name=".Figt_Field" />
-        <activity android:name=".Battle"></activity>
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".CharList"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".TheCharakter"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Fight_Start"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Figt_Field"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Battle"
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>

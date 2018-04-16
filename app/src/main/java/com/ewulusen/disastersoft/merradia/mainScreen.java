@@ -25,7 +25,7 @@ public class MainScreen extends AppCompatActivity {
         localCursor.moveToNext();
         kiir=findViewById(R.id.welcome);
         String userName[] =localCursor.getString(0).split("@");
-        kiir.setText("Wellcom dear "+userName[0]+"!" );
+        kiir.setText("Welcome dear "+userName[0]+"!" );
         localCursor=userDB.getCharacters(id);
         editChar=findViewById(R.id.editChar);
         fight=findViewById(R.id.fight);

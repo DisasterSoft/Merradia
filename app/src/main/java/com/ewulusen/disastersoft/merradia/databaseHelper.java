@@ -27,7 +27,7 @@ public class DatabaseHelper
     public static final String charTable = "char_table_Merradia";
     public DatabaseHelper(Context paramContext)
     {
-        super(paramContext, DatabaseName, null, 14);
+        super(paramContext, DatabaseName, null, 15);
     }
 
     /**
@@ -42,6 +42,27 @@ public class DatabaseHelper
     Log.d("SQL", str1);
     Cursor localCursor = localSQLiteDatabase.rawQuery(str1, null);
     return localCursor;
+    }
+
+    /**
+     * Ha talált valaki egy ládát a labirintusba ez hozzá adja a karaktere pénzösszegéhez
+     * a talált pénzt, 2 paraméterrel a karakter id-je és a kapott pénz összege
+     * @param id
+     * @param money
+     */
+
+    public void chesFound(String id, int money)
+    {
+        SQLiteDatabase localSQLiteDatabase = getWritableDatabase();
+        ContentValues localContentValues = new ContentValues();
+        String str1 = "SELECT * FROM char_table_Merradia where ID=id";
+        Cursor localCursor = localSQLiteDatabase.rawQuery(str1, null);
+        localCursor.moveToNext();
+        int m=Integer.parseInt(localCursor.getString(localCursor.getColumnIndex("MONEY")).toString());
+        m=m+money;
+        localContentValues.put("MONEY",m);
+        localSQLiteDatabase.update(charTable, localContentValues, "ID =" + id, null);
+        localContentValues.clear();
     }
     /**
      * ez a programrészlet kiszedi az ember birtokában lévő karaktereket

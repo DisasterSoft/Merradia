@@ -17,6 +17,8 @@
     <string name="mc">Magice defend</string>
     <string name="inte">Inteligent</string>
     <string name="move">Evade</string>
+    <string name="attack">Attack</string>
+    <string name="magice">Magice</string>
     <string name="dmg">Damage</string>
     <string name="save">save</string>
     <string name="names">Name</string>
@@ -49,6 +51,11 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
+    <string name="chesFound">You found a chest! you get:</string>
+    <string name="trappFound">Ohh no its a trap!</string>
+    <string name="youArDeath">You hp is under 0, so your character is  death!</string>
+    <string name="trappAvoid">Thanks to your reflex, you avoid the trap!</string>
+    <string name="trappHit">The Trap dose to you: </string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>

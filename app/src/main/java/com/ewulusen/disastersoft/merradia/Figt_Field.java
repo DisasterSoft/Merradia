@@ -59,13 +59,8 @@ public class Figt_Field extends AppCompatActivity {
         initialList = new ArrayList<String>();
         mAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, initialList);
         StringBuilder sb = new StringBuilder();
-        String line = null;
-                sb.append("Wellcom to the maze,try to find the monster, ther hiding shomwhere, but bee carefull." +
-                        "everithing is full of traps" + "\n");
-            String text = "";
-            text = sb.toString();
-            initialList.clear();
-            initialList.add(text);
+        addItems("Welcome to the maze,try to find the monster, ther hiding shomwhere, but bee carefull." +
+                "everithing is full of traps" + "\n");
             mAdapter.notifyDataSetChanged();
             display_events.setAdapter(mAdapter);
     }
@@ -294,40 +289,71 @@ public class Figt_Field extends AppCompatActivity {
         {
             enemyMove(5);
         }
-        else{
-  //      Log.d("moveto","bejött");
-       field[i][j]=1;
-       field[x][y]=0;
-        switch (kaszt) {
-            case 1:
-                mainChar.setImageResource(R.drawable.k1wallk);
-                break;
-            case 2:
-                mainChar.setImageResource(R.drawable.rougeall);
-                break;
-            case 3:
-                mainChar.setImageResource(R.drawable.archerwalk);
-                break;
-            case 4:
-                mainChar.setImageResource(R.drawable.orkwalk);
-                break;
-            case 5:
-                mainChar.setImageResource(R.drawable.wizzardwalk);
-                break;
-        }
+        else {
+            //      Log.d("moveto","bejött");
+            if (field[i][j] == 2) {
+                attackTarget();
 
-        final Handler mHandler = new Handler();
+            } else {
+                if(field[i][j]==4)
+                {
+                    Random rand = new Random();
+                    int k = (rand.nextInt(300));
+                    addItems(getText(R.string.chesFound).toString()+" "+k+" Trefu");
+                    userDB.chesFound(ids,k);
+                }
+                if(field[i][j]==3)
+                {
+                    addItems(getText(R.string.trappFound).toString());
+                    Random rand = new Random();
+                    int trap = (rand.nextInt(20)+5);
+                    int you=(rand.nextInt(20)+refi);
+                    if(you>trap) {
+                        addItems(getText(R.string.trappAvoid).toString());
+                    }
+                    else
+                    {
+                        int dmg=rand.nextInt(10)+1;
+                        addItems(getText(R.string.trappHit).toString() + " " + dmg + " dmg");
+                        hp=hp-dmg;
+                        if(hp<0) {
+                            userDB.deleteChar(ids);
+                        }
+                    }
+                }
+                field[i][j] = 1;
+                field[x][y] = 0;
+                switch (kaszt) {
+                    case 1:
+                        mainChar.setImageResource(R.drawable.k1wallk);
+                        break;
+                    case 2:
+                        mainChar.setImageResource(R.drawable.rougeall);
+                        break;
+                    case 3:
+                        mainChar.setImageResource(R.drawable.archerwalk);
+                        break;
+                    case 4:
+                        mainChar.setImageResource(R.drawable.orkwalk);
+                        break;
+                    case 5:
+                        mainChar.setImageResource(R.drawable.wizzardwalk);
+                        break;
+                }
 
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                charAnimation(kaszt);
-                mHandler.removeCallbacks(this);
+                final Handler mHandler = new Handler();
+
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        charAnimation(kaszt);
+                        mHandler.removeCallbacks(this);
+                    }
+                }, 2000);
+
+                filds[elem].setImageResource(R.drawable.green_j);
+                drawField();
             }
-        }, 2000);
-
-        filds[elem].setImageResource(R.drawable.green_j);
-       drawField();
         }
 
 
@@ -376,50 +402,39 @@ public class Figt_Field extends AppCompatActivity {
       }
         if(irany[k]==1) {
             if ((y - 1) > -1) {
-                if (field[y - 1][x] != 1) {
+                korbeNez((y - 1),x);
                     field[y - 1][x] = 2;
                     field[y][x] = 0;
                     emove--;
                     addItems(getString(R.string.enemyMove));
-                } else {
-                    attackTarget();
-                }
             }
         }
         if(irany[k]==2) {
             if ((y + 1) < 5) {
-                if (field[y + 1][x] != 1) {
+                korbeNez((y + 1),x);
                     field[y + 1][x] = 2;
                     field[y][x] = 0;
                     emove--;
                     addItems(getString(R.string.enemyMove));
-                } else {
-                    attackTarget();
                 }
             }
-        }
         if(irany[k]==3) {
             if ((x - 1) > -1) {
-                if (field[y ][x-1] != 1) {
+                korbeNez(y,(x-1));
+
                     field[y ][x-1] = 2;
                     field[y][x] = 0;
                     emove--;
                     addItems(getString(R.string.enemyMove));
-                } else {
-                    attackTarget();
-                }
             }
         }
         if(irany[k]==4) {
             if ((x+ 1)< 5) {
-                if (field[y ][x+1] != 1) {
+                korbeNez(y,(x+1));
                     field[y ][x+1] = 2;
                     field[y][x] = 0;
                     emove--;
                     addItems(getString(R.string.enemyMove));
-                } else {
-                    attackTarget();
-                }
             }
         }
         if(emove>0)
@@ -436,7 +451,9 @@ public class Figt_Field extends AppCompatActivity {
         {
             Intent intent2 = null;
             intent2 = new Intent(Figt_Field.this, Battle.class);
-            intent2.putExtra("datas", names);
+            String datas;
+            datas=ids+","+hp;
+            intent2.putExtra("datas",datas);
             startActivity(intent2);
             finish();
         }
@@ -461,6 +478,34 @@ public class Figt_Field extends AppCompatActivity {
         }
 
     }
+public void korbeNez(int x,int y)
+{
+   if(field[x][y]==1)
+    {
+        attackTarget();
+    }
+    if ((x + 1) < 6) {
+        if (field[x + 1][y] == 1) {
+            attackTarget();
+        }
+    }
+    if ((x - 1) > -1) {
+        if (field[x - 1][y] == 1) {
+            attackTarget();
+        }
+    }
+    if ((y + 1) < 6) {
+        if (field[x][y + 1] == 1) {
+            attackTarget();
+        }
+    }
+        if ((y - 1) > -1) {
+            if (field[x][y - 1] == 1) {
+                attackTarget();
+            }
+        }
 
+
+}
 }
 

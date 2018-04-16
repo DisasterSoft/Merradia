@@ -6,7 +6,7 @@ android {
         applicationId "com.ewulusen.disastersoft.merradia"
         minSdkVersion 14
         targetSdkVersion 17
-        versionCode 6
+        versionCode 7
         versionName "1.1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 

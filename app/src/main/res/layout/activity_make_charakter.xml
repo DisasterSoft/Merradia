@@ -194,7 +194,7 @@
                                 android:layout_height="wrap_content"
 
                                 android:text="@string/con"
-                                app:layout_constraintEnd_toStartOf="@+id/hp"
+                                app:layout_constraintEnd_toStartOf="@+id/yourName"
                                 app:layout_constraintHorizontal_bias="0.0"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/inte" />
@@ -267,7 +267,7 @@
                                 app:layout_constraintTop_toBottomOf="@+id/defm" />
 
                             <TextView
-                                android:id="@+id/hp"
+                                android:id="@+id/yourName"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
 
@@ -319,7 +319,7 @@
 
                                 android:text="@string/mana"
                                 app:layout_constraintEnd_toStartOf="@+id/refp"
-                                app:layout_constraintTop_toBottomOf="@+id/hp" />
+                                app:layout_constraintTop_toBottomOf="@+id/yourName" />
                         </TableRow>
 
                         <TableRow
