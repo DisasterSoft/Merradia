@@ -27,7 +27,7 @@ public class DatabaseHelper
     public static final String charTable = "char_table_Merradia";
     public DatabaseHelper(Context paramContext)
     {
-        super(paramContext, DatabaseName, null, 15);
+        super(paramContext, DatabaseName, null, 16);
     }
 
     /**
@@ -156,6 +156,23 @@ public class DatabaseHelper
             String str2 = "SELECT * FROM users_table_Merradia where userName='"+paramString1+"' and password='" + paramString2 + "'";
             //Log.d("SQL", str2);
             localCursor = localSQLiteDatabase.rawQuery(str2, null);
+            ContentValues localContentValues = new ContentValues();
+            localContentValues.put("Owner", 0);
+            localContentValues.put("Name","teszt");
+            localContentValues.put("STR", 0);
+            localContentValues.put("AGI", 0);
+            localContentValues.put("DEF", 0);
+            localContentValues.put("DEX", 0);
+            localContentValues.put("INTE", 0);
+            localContentValues.put("CON", 0);
+            localContentValues.put("REF", 0);
+            localContentValues.put("LUCK", 0);
+            localContentValues.put("KASZT", 4);
+            localContentValues.put("POINT", 32);
+            localContentValues.put("LVL", 1);
+            localContentValues.put("MONEY", 100);
+            localSQLiteDatabase.insert("char_table_Merradia", null, localContentValues);
+            localContentValues.clear();
         }
 
         return localCursor;

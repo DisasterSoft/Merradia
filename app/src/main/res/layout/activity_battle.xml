@@ -92,13 +92,13 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/yhp"
+                android:id="@+id/yhptxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/hp" />
 
             <TextView
-                android:id="@+id/hp"
+                android:id="@+id/yhp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                  />
