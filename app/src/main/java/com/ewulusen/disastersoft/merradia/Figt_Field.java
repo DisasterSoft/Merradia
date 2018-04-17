@@ -53,16 +53,16 @@ public class Figt_Field extends AppCompatActivity {
         userDB = new DatabaseHelper(this);
         Cursor localCursor = userDB.getChar(ids);
         localCursor.moveToNext();
+        initialList = new ArrayList<String>();
+        display_events=(ListView) findViewById(R.id.list_);
+        addItems("Welcome to the maze,try to find the monster, ther hiding shomwhere, but bee carefull." +
+                "everithing is full of traps" + "\n");
         parkereso(localCursor);
         makeField();
         drawField();
-        initialList = new ArrayList<String>();
         mAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, initialList);
-        StringBuilder sb = new StringBuilder();
-        addItems("Welcome to the maze,try to find the monster, ther hiding shomwhere, but bee carefull." +
-                "everithing is full of traps" + "\n");
-            mAdapter.notifyDataSetChanged();
-            display_events.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
+        display_events.setAdapter(mAdapter);
     }
 
     public void parkereso(Cursor cursore) {
@@ -75,7 +75,6 @@ public class Figt_Field extends AppCompatActivity {
         refi = Integer.parseInt(cursore.getString(cursore.getColumnIndex("REF")).toString());
         lucki = Integer.parseInt(cursore.getString(cursore.getColumnIndex("LUCK")).toString());
         names = cursore.getString(cursore.getColumnIndex("Name")).toString();
-        Log.d("name",names);
         kaszt = Integer.parseInt(cursore.getString(cursore.getColumnIndex("KASZT")).toString());
        filds[0]= a1 = findViewById(R.id.a1);
         filds[1] =a2 = findViewById(R.id.a2);
@@ -105,9 +104,7 @@ public class Figt_Field extends AppCompatActivity {
         mainChar=findViewById(R.id.mainChar);
         moves=agii;
         name=findViewById(R.id.charName);
-
         charAnimation(kaszt);
-        display_events=(ListView) findViewById(R.id.list_);
         szamol();
     }
 
@@ -195,12 +192,12 @@ public class Figt_Field extends AppCompatActivity {
 
                    if (j - 1 > -1) {
                        if (field[i][j - 1] == 1) {
+                           getInfo(field[i][j]);
                            filds[elem].setImageResource(R.drawable.green_j);
                            final int finalI4 = i;
                            final int finalJ4 = j;
                            final int finalI5 = i;
                            final int finalJ5 = j;
-                           getInfo(field[i][j]);
                            filds[elem].setOnClickListener(new View.OnClickListener() {
                                @Override
                                public void onClick(View view) {
@@ -459,21 +456,23 @@ public class Figt_Field extends AppCompatActivity {
         }
     public void addItems(String szoveg) {
         initialList.add(szoveg);
+        mAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, initialList);
         mAdapter.notifyDataSetChanged();
-        display_events.setSelection(mAdapter.getCount());
+        display_events.setAdapter(mAdapter);
+        display_events.setSelection(mAdapter.getCount()-1);
     }
     public void getInfo(int szam)
     {
         switch (szam)
         {
             case 2:
-                addItems(getString(R.string.sense2));
+                addItems(getString(R.string.sense2).toString());
             break;
             case 3:
-                addItems(getString(R.string.sense3));
+                addItems(getString(R.string.sense3).toString());
             break;
             case 4:
-                addItems(getString(R.string.sense4));
+                addItems(getString(R.string.sense4).toString());
             break;
         }
 

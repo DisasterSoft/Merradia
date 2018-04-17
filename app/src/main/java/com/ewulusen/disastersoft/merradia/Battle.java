@@ -5,25 +5,38 @@ import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+
+import pl.droidsonroids.gif.GifImageView;
 
 public class Battle extends AppCompatActivity {
     public static Intent intent;
     public static String id;
     public static String ids;
     DatabaseHelper userDB;
-    TextView str,agi,dex,def,con,inte,ref,luck,ac,mc,dmg,move,point,name,hp,mana;
-    TextView estr,eagi,edex,edef,econ,einte,eref,eluck,eac,emc,edmg,emove,ename,ehp,emana;
-    Button strm,strp,agim,agip,dexm,dexp,defm,defp,conm,conp,intem,intep,refm,refp,luckm,luckp,save;
+    Spinner magice;
+    TextView ac,mc,dmg,name,hp,mana;
+    TextView eac,emc,edmg,ename,ehp,emana;
+    Button attack,magiceB;
     int stri,hpi,mci,aci,movei,manai,dmgi,agii,defi,dexi,intei,coni,refi,lucki,lvli;
     int estri,ehpi,emci,eaci,emanai,edmgi,eagii,edefi,edexi,eintei,econi,erefi,elucki,emovi;
-    int pointsz=0;
     int kaszt;//1=knight,2=rouge,3=archer,4=ork,5=wizard;
+    List<String> items=new ArrayList<String>();
+    GifImageView enemy,youChar;
     String names,datas;
+    ArrayAdapter<String> adapter;
+    List<String> initialList;
+    private ArrayAdapter mAdapter;
+    ListView display_events;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +49,17 @@ public class Battle extends AppCompatActivity {
         userDB = new DatabaseHelper(this);
         Cursor localCursor=userDB.getChar(ids);
         localCursor.moveToNext();
+        magiceB=findViewById(R.id.magice);
         parkereso(localCursor);
         getEnemy();
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        magice.setAdapter(adapter);
+        initialList = new ArrayList<String>();
+        display_events=(ListView) findViewById(R.id.evensts);
+        addText("C'om lets kill this thing!" + "\n");
+        mAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, initialList);
+        mAdapter.notifyDataSetChanged();
+        display_events.setAdapter(mAdapter);
     }
     public void parkereso(Cursor cursore) {
         stri = Integer.parseInt(cursore.getString(cursore.getColumnIndex("STR")).toString());
@@ -48,10 +70,11 @@ public class Battle extends AppCompatActivity {
         coni = Integer.parseInt(cursore.getString(cursore.getColumnIndex("CON")).toString());
         refi = Integer.parseInt(cursore.getString(cursore.getColumnIndex("REF")).toString());
         lucki = Integer.parseInt(cursore.getString(cursore.getColumnIndex("LUCK")).toString());
+        lucki = Integer.parseInt(cursore.getString(cursore.getColumnIndex("LVL")).toString());
         names = cursore.getString(cursore.getColumnIndex("Name")).toString();
         Log.d("name",names);
         kaszt = Integer.parseInt(cursore.getString(cursore.getColumnIndex("KASZT")).toString());
-        int osszeg = 0;
+        int osszeg;
         osszeg = intei + defi;
         mci = osszeg;
         osszeg = intei * 10;
@@ -73,16 +96,53 @@ public class Battle extends AppCompatActivity {
         mana=findViewById(R.id.mana);
         dmg=findViewById(R.id.yDMG);
         name.setText(names);
+        display_events=findViewById(R.id.evensts);
         hp.setText(Integer.toString(hpi));
         mc.setText(Integer.toString(mci));
         ac.setText(Integer.toString(aci));
         mana.setText(Integer.toString(manai));
         dmg.setText(Integer.toString(dmgi));
-
-
+        youChar=findViewById(R.id.you);
+        switch (kaszt)
+        {
+            case 1:
+                youChar.setImageResource(R.drawable.allk1);
+                break;
+            case 2:
+                youChar.setImageResource(R.drawable.rougeall);
+                break;
+            case 3:
+                youChar.setImageResource(R.drawable.archerall);
+                break;
+            case 4:
+                youChar.setImageResource(R.drawable.orkall);
+                break;
+            case 5:
+                youChar.setImageResource(R.drawable.wizardall);
+                break;
+        }
+        magice=findViewById(R.id.spinner);
+        attack=findViewById(R.id.attack);
+        addMagiceItems(kaszt);
+        attack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                attackEnemy();
+            }
+        });
+        magiceB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                attackEnemyMagice();
+            }
+        });
 
 
     }
+
+    /**
+     * Random kiválasztok egy ellenséget, melyet random statokkal töltök fel. képet is hozzá teszem.
+     */
     public void getEnemy()
     {
         String[] irany={"Fair","Elf Archer","Blue Fair","Elf Warrior","Green Fair","Elf Mage",
@@ -125,7 +185,158 @@ public class Battle extends AppCompatActivity {
         eac.setText(Integer.toString(eaci));
         emana.setText(Integer.toString(emanai));
         edmg.setText(Integer.toString(edmgi));
+        enemy=findViewById(R.id.enemy);
+        switch (k)
+        {
+            case 0:
+                enemy.setImageResource(R.drawable.fairall);
+                break;
+                case 1:
+                enemy.setImageResource(R.drawable.archerall);
+                break;
+                case 2:
+                enemy.setImageResource(R.drawable.bfairall);
+                break;
+                case 3:
+                enemy.setImageResource(R.drawable.elfwarriorall);
+                break;
+                case 4:
+                enemy.setImageResource(R.drawable.gfairall);
+                break;
+                case 5:
+                enemy.setImageResource(R.drawable.elfwaizzardall);
+                break;
+                case 6:
+                enemy.setImageResource(R.drawable.allk1);
+                break;
+                case 7:
+                enemy.setImageResource(R.drawable.cooperknightall);
+                break;
+                case 8:
+                enemy.setImageResource(R.drawable.goldenknightall);
+                break;
+                case 9:
+                enemy.setImageResource(R.drawable.orkall);
+                break;
+                case 10:
+                enemy.setImageResource(R.drawable.pirateorkall);
+                break;
+                case 11:
+                enemy.setImageResource(R.drawable.expertorkall);
+                break;
+                case 12:
+                enemy.setImageResource(R.drawable.wizardall);
+                break;
+                case 13:
+                enemy.setImageResource(R.drawable.firewizzardall);
+                break;
+                case 14:
+                enemy.setImageResource(R.drawable.icewizzardall);
+                break;
+                case 15:
+                enemy.setImageResource(R.drawable.greentrollall);
+                break;
+                case 16:
+                enemy.setImageResource(R.drawable.graytrollall);
+                break;
+                case 17:
+                enemy.setImageResource(R.drawable.browntrollall);
+                break;
+                case 18:
+                enemy.setImageResource(R.drawable.amazonwarriorall);
+                break;
+                case 19:
+                enemy.setImageResource(R.drawable.rougeall);
+                break;
+                case 20:
+                enemy.setImageResource(R.drawable.amazonarcherall);
+                break;
+
+        }
     }
 
+    /**
+     * az adott kaszthoz tartozó varázslat neveket adja vissza
+     * @param id
+     */
+    public void addMagiceItems(int id)
+    {
+        items.add("Select Magice!");
+        String[] nevek=userDB.getMagicName(id);
+       // Log.d("nevek",nevek[1]);
+                items.add(nevek[0]);
+                items.add(nevek[1]);
+                items.add(nevek[2]);
+                items.add(nevek[3]);
+
+        }
+
+    /**
+     * egyy gyors 20 oldaló kockadobást szimulálva aphatfinder szerepjáték
+     * harcrendszerét alapúlvéve kiszámolja hogy eltalálja e a szörnyet
+     * és ha igen akkor mekkora csapás mér rá.
+     */
+    public void attackEnemy()
+    {
+        int dmg=0;
+        Random rand = new Random();
+        int k = (rand.nextInt(20)+1);
+        if(k==20)
+        {
+
+            k = (rand.nextInt(20)+1);
+            k=k+dmgi;
+            if(k>eaci)
+            {
+                dmg=(rand.nextInt(dmgi)+1)*2;
+            }
+            else
+            {
+                dmg=(rand.nextInt(dmgi)+1);
+            }
+        }
+        else
+        {
+            k=k+dmgi;
+            if(k>eaci)
+            {
+                dmg=(rand.nextInt(dmgi)+1);
+            }
+            else
+            {
+                addText(getString(R.string.next_to));
+            }
+        }
+        if(dmg>0)
+        {
+            addText(getString(R.string.you_hit)+" and do "+dmg+" dmg");
+            ehpi=ehpi-dmg;
+            if(ehpi<0)
+            {
+                youWin();
+            }
+            ehp.setText(Integer.toString(ehpi));
+        }
+    }
+    public void attackEnemyMagice()
+    {
+
+    }
+
+    /**
+     * adott szöveget adja hozzá a lenti listanézethez.
+     * @param szoveg
+     */
+    public void addText(String szoveg) {
+        initialList.add(szoveg);
+        mAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, initialList);
+        mAdapter.notifyDataSetChanged();
+        display_events.setAdapter(mAdapter);
+        display_events.setSelection(mAdapter.getCount()-1);
+    }
+    public void youWin()
+    {
+
+    }
 
 }

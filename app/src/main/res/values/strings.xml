@@ -56,6 +56,8 @@
     <string name="youArDeath">You hp is under 0, so your character is  death!</string>
     <string name="trappAvoid">Thanks to your reflex, you avoid the trap!</string>
     <string name="trappHit">The Trap dose to you: </string>
+    <string name="next_to">Unfortunately, you ran to the side</string>
+    <string name="you_hit">You got your opponent!</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>

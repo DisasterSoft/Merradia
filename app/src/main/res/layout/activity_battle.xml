@@ -322,5 +322,7 @@
         app:layout_constraintBottom_toTopOf="@+id/evensts"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/magice"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout2"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"/>
 </android.support.constraint.ConstraintLayout>

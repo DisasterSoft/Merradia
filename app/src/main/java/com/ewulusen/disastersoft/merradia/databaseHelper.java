@@ -23,11 +23,12 @@ public class DatabaseHelper
     public static final String Username = "userName";
     public static final String Password = "password";
     public static final String uTableName = "users_table_Merradia";
+    public static final String mTableName = "magice_table_Merradia";
     public static final String owner = "OWNER";
     public static final String charTable = "char_table_Merradia";
     public DatabaseHelper(Context paramContext)
     {
-        super(paramContext, DatabaseName, null, 16);
+        super(paramContext, DatabaseName, null, 18);
     }
 
     /**
@@ -171,7 +172,7 @@ public class DatabaseHelper
             localContentValues.put("POINT", 32);
             localContentValues.put("LVL", 1);
             localContentValues.put("MONEY", 100);
-            localSQLiteDatabase.insert("char_table_Merradia", null, localContentValues);
+            localSQLiteDatabase.insert(uTableName, null, localContentValues);
             localContentValues.clear();
         }
 
@@ -180,16 +181,19 @@ public class DatabaseHelper
     public void onCreate(SQLiteDatabase paramSQLiteDatabase)
     {
         paramSQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS users_table_Merradia (ID INTEGER PRIMARY KEY AUTOINCREMENT,  userName TEXT, password TEXT)");
+        paramSQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+mTableName+" (ID INTEGER PRIMARY KEY AUTOINCREMENT,  Name TEXT, DMG TEXT, MANA TEXT, TYPE TEXT, TARGET TEXT,KASZT TEXT)");
         paramSQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS char_table_Merradia( ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "Owner TEXT, Name TEXT,  AGI TEXT,   STR TEXT,   DEF TEXT,   CON TEXT," +
                 "   REF TEXT,   LUCK TEXT, DEX TEXT,INTE TEXT,KASZT TEXT," +
                 "POINT TEXT,LVL TEXT,MONEY TEXT)");
+        fillMagice(paramSQLiteDatabase);
     }
 
     public void onUpgrade(SQLiteDatabase paramSQLiteDatabase, int paramInt1, int paramInt2)
     {
-        paramSQLiteDatabase.execSQL("DROP TABLE if EXISTS users_table_Merradia");
-        paramSQLiteDatabase.execSQL("DROP TABLE if EXISTS char_table_Merradia");
+        paramSQLiteDatabase.execSQL("DROP TABLE if EXISTS "+uTableName);
+        paramSQLiteDatabase.execSQL("DROP TABLE if EXISTS "+charTable);
+        paramSQLiteDatabase.execSQL("DROP TABLE if EXISTS "+mTableName);
         onCreate(paramSQLiteDatabase);
     }
 
@@ -244,5 +248,161 @@ public class DatabaseHelper
     {
         SQLiteDatabase localSQLiteDatabase = getWritableDatabase();
         localSQLiteDatabase.delete(charTable, "ID=" + id, null);
+    }
+    /**
+     * feltölti a magice táblát
+     * Target 0=me, 1=enemy
+     * Type 0=magice 1=phisical
+     * KASZT 0=all 1....
+     */
+    public void fillMagice(SQLiteDatabase paramSQLiteDatabase)
+    {
+        ContentValues localContentValues = new ContentValues();
+        localContentValues.put("Name", "First Aid");
+        localContentValues.put("DMG","3");
+        localContentValues.put("MANA", 5);
+        localContentValues.put("TARGET", 0);
+        localContentValues.put("TYPE", 0);
+        localContentValues.put("KASZT", 0);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Shield Slam");
+        localContentValues.put("DMG","2");
+        localContentValues.put("MANA", 3);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 1);
+        localContentValues.put("KASZT", 1);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Justice hit");
+        localContentValues.put("DMG","6");
+        localContentValues.put("MANA", 10);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 1);
+        localContentValues.put("KASZT", 1);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Heal");
+        localContentValues.put("DMG","5");
+        localContentValues.put("MANA", 10);
+        localContentValues.put("TARGET", 0);
+        localContentValues.put("TYPE", 0);
+        localContentValues.put("KASZT", 1);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Precizion Shot");
+        localContentValues.put("DMG","7");
+        localContentValues.put("MANA", 5);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 1);
+        localContentValues.put("KASZT", 3);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Double Arrow");
+        localContentValues.put("DMG","9");
+        localContentValues.put("MANA", 10);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 1);
+        localContentValues.put("KASZT", 3);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Shadow Arrow");
+        localContentValues.put("DMG","7");
+        localContentValues.put("MANA", 8);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 0);
+        localContentValues.put("KASZT", 3);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Back Stab");
+        localContentValues.put("DMG","4");
+        localContentValues.put("MANA", 5);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 1);
+        localContentValues.put("KASZT", 2);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Dancing Blade");
+        localContentValues.put("DMG","8");
+        localContentValues.put("MANA", 10);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 1);
+        localContentValues.put("KASZT", 2);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Arcane Stab");
+        localContentValues.put("DMG","6");
+        localContentValues.put("MANA", 12);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 0);
+        localContentValues.put("KASZT", 2);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Big Slam");
+        localContentValues.put("DMG","8");
+        localContentValues.put("MANA", 3);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 1);
+        localContentValues.put("KASZT", 4);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Stomp");
+        localContentValues.put("DMG","7");
+        localContentValues.put("MANA", 7);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 1);
+        localContentValues.put("KASZT", 4);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Blood Magice");
+        localContentValues.put("DMG","4");
+        localContentValues.put("MANA", 10);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 0);
+        localContentValues.put("KASZT", 4);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Fire bolt");
+        localContentValues.put("DMG","7");
+        localContentValues.put("MANA", 7);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 0);
+        localContentValues.put("KASZT", 5);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Ice Arrow");
+        localContentValues.put("DMG","5");
+        localContentValues.put("MANA", 10);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 0);
+        localContentValues.put("KASZT", 5);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Thunder");
+        localContentValues.put("DMG",12);
+        localContentValues.put("MANA", 20);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 0);
+        localContentValues.put("KASZT", 5);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+    }
+    public String[] getMagicName(int id)
+    {
+        String[] nevek;
+        nevek = new String[4];
+        SQLiteDatabase localSQLiteDatabase = getReadableDatabase();
+        String str1 = "SELECT Name FROM "+mTableName+" where KASZT='"+id+"' or KASZT='0'";
+        // Log.d("SQL", str1);
+        Cursor localCursor = localSQLiteDatabase.rawQuery(str1, null);
+        int i=0;
+        while(localCursor.moveToNext())
+        {
+
+            nevek[i]=localCursor.getString(localCursor.getColumnIndex("Name")).toString();
+           // Log.d("nevekDB",nevek[i]);
+            i++;
+        }
+        return nevek;
     }
 }

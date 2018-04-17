@@ -45,10 +45,8 @@ public class Fight_Start extends AppCompatActivity {
                             nameV.setText(name);
                             lvlV=findViewById(R.id.lvl1);
                             lvlV.setText(lvl);
-
                             edit=findViewById(R.id.edit1);
                             edit.setEnabled(true);
-                            
                             charakter=findViewById(R.id.ork1);
                             switch (kaszt)
                             {
@@ -75,6 +73,7 @@ public class Fight_Start extends AppCompatActivity {
                                     intent2 = new Intent(Fight_Start.this, Figt_Field.class);
                                     intent2.putExtra("datas", id+","+idC);
                                     startActivity(intent2);
+                                    finish();
 
                                 }
                             });
@@ -86,7 +85,6 @@ public class Fight_Start extends AppCompatActivity {
                             lvlV.setText(lvl);
                             edit=findViewById(R.id.edit2);
                             edit.setEnabled(true);
-                            
                             charakter=findViewById(R.id.ork2);
                             switch (kaszt)
                             {
@@ -113,7 +111,7 @@ public class Fight_Start extends AppCompatActivity {
                                     intent2 = new Intent(Fight_Start.this, TheCharakter.class);
                                     intent2.putExtra("datas", id+","+idC);
                                     startActivity(intent2);
-
+                                    finish();
                                 }
                             });
                            
@@ -125,7 +123,6 @@ public class Fight_Start extends AppCompatActivity {
                             lvlV.setText(lvl);
                             edit=findViewById(R.id.edit3);
                             edit.setEnabled(true);
-                            
                             charakter=findViewById(R.id.ork3);
                             switch (kaszt)
                             {
@@ -152,7 +149,7 @@ public class Fight_Start extends AppCompatActivity {
                                     intent2 = new Intent(Fight_Start.this, TheCharakter.class);
                                     intent2.putExtra("datas", id+","+idC);
                                     startActivity(intent2);
-
+                                    finish();
                                 }
                             });
                             break;
@@ -163,7 +160,6 @@ public class Fight_Start extends AppCompatActivity {
                             lvlV.setText(lvl);
                             edit=findViewById(R.id.edit4);
                             edit.setEnabled(true);
-                            
                             charakter=findViewById(R.id.ork4);
                             switch (kaszt)
                             {
@@ -190,7 +186,7 @@ public class Fight_Start extends AppCompatActivity {
                                     intent2 = new Intent(Fight_Start.this, TheCharakter.class);
                                     intent2.putExtra("datas", id+","+idC);
                                     startActivity(intent2);
-
+                                    finish();
                                 }
                             });
                             break;
@@ -201,7 +197,6 @@ public class Fight_Start extends AppCompatActivity {
                             lvlV.setText(lvl);
                             edit=findViewById(R.id.edit5);
                             edit.setEnabled(true);
-                            
                             charakter=findViewById(R.id.ork5);
                             switch (kaszt)
                             {
@@ -228,7 +223,7 @@ public class Fight_Start extends AppCompatActivity {
                                     intent2 = new Intent(Fight_Start.this, TheCharakter.class);
                                     intent2.putExtra("datas", id+","+idC);
                                     startActivity(intent2);
-
+                                    finish();
                                 }
                             });
                             break;

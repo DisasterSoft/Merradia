@@ -614,6 +614,14 @@ public class MakeCharakter extends AppCompatActivity {
        osszeg=refi+lucki;
        move.setText(getString(R.string.move)+":"+osszeg);
        osszeg=stri;
+       if(kaszt==3)
+       {
+           osszeg=dexi;
+       }
+       else
+       {
+           osszeg=stri;
+       }
        dmg.setText(getString(R.string.dmg)+":"+osszeg);
        osszeg=coni+defi;
        ac.setText(getString(R.string.ac)+":"+osszeg);
