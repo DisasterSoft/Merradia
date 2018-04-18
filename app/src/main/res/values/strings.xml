@@ -57,7 +57,11 @@
     <string name="trappAvoid">Thanks to your reflex, you avoid the trap!</string>
     <string name="trappHit">The Trap dose to you: </string>
     <string name="next_to">Unfortunately, you ran to the side</string>
+    <string name="next_toe">To your luck the enemy ran to the side</string>
     <string name="you_hit">You got your opponent!</string>
+    <string name="enemy_hit">The opponent hit you!</string>
+    <string name="you_win">Congratulation!You defeated the opponent!</string>
+    <string name="you_lose">You lose, your charakter is death...</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>

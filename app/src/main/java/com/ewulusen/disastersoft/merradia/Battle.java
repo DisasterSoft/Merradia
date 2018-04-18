@@ -2,6 +2,7 @@ package com.ewulusen.disastersoft.merradia;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +34,7 @@ public class Battle extends AppCompatActivity {
     int kaszt;//1=knight,2=rouge,3=archer,4=ork,5=wizard;
     List<String> items=new ArrayList<String>();
     GifImageView enemy,youChar;
-    String names,datas;
+    String names,datas,youID;
     ArrayAdapter<String> adapter;
     List<String> initialList;
     private ArrayAdapter mAdapter;
@@ -45,6 +47,7 @@ public class Battle extends AppCompatActivity {
         datas = intent.getStringExtra("datas");
         String[] elper=  datas.split(",");
         ids=elper[0];
+        youID=elper[2];
         hpi=Integer.parseInt(elper[1]);
         userDB = new DatabaseHelper(this);
         Cursor localCursor=userDB.getChar(ids);
@@ -317,6 +320,56 @@ public class Battle extends AppCompatActivity {
             }
             ehp.setText(Integer.toString(ehpi));
         }
+        final Handler mHandler = new Handler();
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                enemyAttack();
+            }
+            }, 1000);
+    }
+    public void enemyAttack()
+    {
+        int dmg=0;
+        Random rand = new Random();
+        int k = (rand.nextInt(20)+1);
+        if(k==20)
+        {
+
+            k = (rand.nextInt(20)+1);
+            k=k+edmgi;
+            if(k>aci)
+            {
+                dmg=(rand.nextInt(edmgi)+1)*2;
+            }
+            else
+            {
+                dmg=(rand.nextInt(edmgi)+1);
+            }
+        }
+        else
+        {
+            k=k+edmgi;
+            if(k>aci)
+            {
+                dmg=(rand.nextInt(edmgi)+1);
+            }
+            else
+            {
+                addText(getString(R.string.next_toe));
+            }
+        }
+        if(dmg>0)
+        {
+            addText(getString(R.string.enemy_hit)+" and do "+dmg+" dmg");
+            hpi=hpi-dmg;
+            if(hpi<0)
+            {
+                youLose();
+            }
+            hp.setText(Integer.toString(hpi));
+        }
+
     }
     public void attackEnemyMagice()
     {
@@ -336,7 +389,27 @@ public class Battle extends AppCompatActivity {
     }
     public void youWin()
     {
-
+        Random rand = new Random();
+        int k = (rand.nextInt(400)+1);
+        userDB.chesFound(ids,k);
+        int z = (rand.nextInt(20)*lvli);
+        userDB.addXP(ids,z);
+        Toast.makeText(Battle.this, R.string.you_win+" you get "+k+" Trefu and "+z+" xp", Toast.LENGTH_LONG).show();
+        Intent intent2 = null;
+        intent2 = new Intent(Battle.this, MainScreen.class);
+        intent2.putExtra("datas", youID);
+        startActivity(intent2);
+        finish();
+    }
+    public void youLose()
+    {
+        userDB.deleteChar(ids);
+        Toast.makeText(Battle.this, R.string.you_lose, Toast.LENGTH_LONG).show();
+        Intent intent2 = null;
+        intent2 = new Intent(Battle.this, MainScreen.class);
+        intent2.putExtra("datas", youID);
+        startActivity(intent2);
+        finish();
     }
 
 }

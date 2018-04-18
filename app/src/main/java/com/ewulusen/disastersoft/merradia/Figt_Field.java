@@ -383,6 +383,7 @@ public class Figt_Field extends AppCompatActivity {
      */
     public void enemyMove(int emove)
     {
+
         int[] irany={1,2,3,4};
         Random rand = new Random();
         int k = (rand.nextInt(3));
@@ -436,20 +437,28 @@ public class Figt_Field extends AppCompatActivity {
         }
         if(emove>0)
         {
-            enemyMove(emove);
+            final Handler mHandler = new Handler();
+            final int finalEmove = emove;
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+            enemyMove(finalEmove);
+                }
+        }, 200);
         }
         else {
             moves = agii;
             drawField();
-        }
+
     }
+}
 
     public void attackTarget()
         {
             Intent intent2 = null;
             intent2 = new Intent(Figt_Field.this, Battle.class);
             String datas;
-            datas=ids+","+hp;
+            datas=ids+","+hp+","+id;
             intent2.putExtra("datas",datas);
             startActivity(intent2);
             finish();
