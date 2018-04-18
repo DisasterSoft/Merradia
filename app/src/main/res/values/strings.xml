@@ -17,10 +17,16 @@
     <string name="mc">Magice defend</string>
     <string name="inte">Inteligent</string>
     <string name="move">Evade</string>
+    <string name="attack">Attack</string>
+    <string name="magice">Magice</string>
     <string name="dmg">Damage</string>
     <string name="save">save</string>
     <string name="names">Name</string>
     <string name="Lvl">LVL</string>
+    <string name="enemyMove">Shomting is moving in the maze!</string>
+    <string name="sense2">You hear shomting, maybe the monster is in the near!</string>
+    <string name="sense3">You can hear wind from somewhere, maybe a trap is near you? </string>
+    <string name="sense4">Thanks to your super-sensation, you can feel somewhere near is a treasure</string>
     <string name="charakter">Charakter</string>
     <string name="empty1">Empty</string>
     <string name="empty2">None</string>
@@ -45,6 +51,17 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
+    <string name="chesFound">You found a chest! you get:</string>
+    <string name="trappFound">Ohh no its a trap!</string>
+    <string name="youArDeath">You hp is under 0, so your character is  death!</string>
+    <string name="trappAvoid">Thanks to your reflex, you avoid the trap!</string>
+    <string name="trappHit">The Trap dose to you: </string>
+    <string name="next_to">Unfortunately, you ran to the side</string>
+    <string name="next_toe">To your luck the enemy ran to the side</string>
+    <string name="you_hit">You got your opponent!</string>
+    <string name="enemy_hit">The opponent hit you!</string>
+    <string name="you_win">Congratulation!You defeated the opponent!</string>
+    <string name="you_lose">You lose, your charakter is death...</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>

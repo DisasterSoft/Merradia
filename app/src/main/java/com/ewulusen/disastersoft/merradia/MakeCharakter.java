@@ -75,7 +75,7 @@ public class MakeCharakter extends AppCompatActivity {
      move=findViewById(R.id.move);
         move.setText(getString(R.string.move)+":0");
      name=findViewById(R.id.name);
-        hp=findViewById(R.id.hp);
+        hp=findViewById(R.id.yourName);
         hp.setText(getString(R.string.hp)+":0");
      mana=findViewById(R.id.mana);
         mana.setText(getString(R.string.mana)+":0");
@@ -614,6 +614,14 @@ public class MakeCharakter extends AppCompatActivity {
        osszeg=refi+lucki;
        move.setText(getString(R.string.move)+":"+osszeg);
        osszeg=stri;
+       if(kaszt==3)
+       {
+           osszeg=dexi;
+       }
+       else
+       {
+           osszeg=stri;
+       }
        dmg.setText(getString(R.string.dmg)+":"+osszeg);
        osszeg=coni+defi;
        ac.setText(getString(R.string.ac)+":"+osszeg);

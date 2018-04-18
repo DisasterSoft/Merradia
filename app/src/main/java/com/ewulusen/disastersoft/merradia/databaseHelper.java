@@ -23,11 +23,12 @@ public class DatabaseHelper
     public static final String Username = "userName";
     public static final String Password = "password";
     public static final String uTableName = "users_table_Merradia";
+    public static final String mTableName = "magice_table_Merradia";
     public static final String owner = "OWNER";
     public static final String charTable = "char_table_Merradia";
     public DatabaseHelper(Context paramContext)
     {
-        super(paramContext, DatabaseName, null, 14);
+        super(paramContext, DatabaseName, null, 18);
     }
 
     /**
@@ -44,54 +45,6 @@ public class DatabaseHelper
     return localCursor;
     }
     /**
-     * ez a programrészlet kiszedi az ember birtokában lévő karaktereket
-     * @param id
-     * @return vissza adja az adott ember birtokában lévő karaktereket
-     */
-    public Cursor getCharacters(String id)
-    {
-        SQLiteDatabase localSQLiteDatabase = getReadableDatabase();
-        String str1 = "SELECT * FROM char_table_Merradia where OWNER='"+id+"'";
-        Log.d("SQL", str1);
-        Cursor localCursor = localSQLiteDatabase.rawQuery(str1, null);
-       // printDatabaseHelper(id);
-        return localCursor;
-    }
-    public void printDatabaseHelper(String id)
-    {
-        SQLiteDatabase localSQLiteDatabase = getReadableDatabase();
-        String str1 = "SELECT * FROM char_table_Merradia where OWNER='"+id+"'";
-        Cursor cursor = localSQLiteDatabase.rawQuery(str1, null);
-        if (cursor.moveToFirst()) {
-            while (!cursor.isAfterLast()) {
-                String line="";
-                for(int i=0; i<cursor.getColumnCount();i++)
-                {
-                    line=line+(cursor.getString(i).toString())+"->"+cursor.getColumnName(i)+",";
-                }
-
-               Log.d("tartalom",line);
-               cursor.moveToNext();
-            }
-        }
-
-    }
-
-    /**
-     * egy adott id-jű charakterrel tér vissza
-     * @param id
-     * @return
-     */
-    public Cursor getChar(String id)
-    {
-        SQLiteDatabase localSQLiteDatabase = getReadableDatabase();
-        String str1 = "SELECT * FROM char_table_Merradia where ID='"+id+"'";
-       // Log.d("SQL", str1);
-        Cursor localCursor = localSQLiteDatabase.rawQuery(str1, null);
-        return localCursor;
-    }
-
-    /**
      * hozzá ad egy sort a felhasználó táblához
      * @param paramString1-email
      * @param paramString2-password
@@ -105,17 +58,6 @@ public class DatabaseHelper
         localContentValues.put("password", paramString2);
         return localSQLiteDatabase.insert("users_table_Merradia", null, localContentValues) != -1L;
     }
-
-    /**
-     * ez még nincs
-     * @param paramString
-     * @return
-     */
-    public Cursor backLogin(String paramString)
-    {
-        return getReadableDatabase().rawQuery("SELECT * FROM users_table_Merradia where ID=" + paramString + "", null);
-    }
-
     /**
      * Bejelentkezés/vagy regisztrál egy felhasználót
      * @param paramString1-email
@@ -135,6 +77,24 @@ public class DatabaseHelper
             String str2 = "SELECT * FROM users_table_Merradia where userName='"+paramString1+"' and password='" + paramString2 + "'";
             //Log.d("SQL", str2);
             localCursor = localSQLiteDatabase.rawQuery(str2, null);
+            ContentValues localContentValues = new ContentValues();
+            localContentValues.put("Owner", 0);
+            localContentValues.put("Name","teszt");
+            localContentValues.put("STR", 0);
+            localContentValues.put("AGI", 0);
+            localContentValues.put("DEF", 0);
+            localContentValues.put("DEX", 0);
+            localContentValues.put("INTE", 0);
+            localContentValues.put("CON", 0);
+            localContentValues.put("REF", 0);
+            localContentValues.put("LUCK", 0);
+            localContentValues.put("KASZT", 4);
+            localContentValues.put("POINT", 32);
+            localContentValues.put("LVL", 1);
+            localContentValues.put("MONEY", 100);
+            localContentValues.put("XP",0);
+            localSQLiteDatabase.insert(uTableName, null, localContentValues);
+            localContentValues.clear();
         }
 
         return localCursor;
@@ -142,18 +102,88 @@ public class DatabaseHelper
     public void onCreate(SQLiteDatabase paramSQLiteDatabase)
     {
         paramSQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS users_table_Merradia (ID INTEGER PRIMARY KEY AUTOINCREMENT,  userName TEXT, password TEXT)");
+        paramSQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+mTableName+" (ID INTEGER PRIMARY KEY AUTOINCREMENT,  Name TEXT, DMG TEXT, MANA TEXT, TYPE TEXT, TARGET TEXT,KASZT TEXT)");
         paramSQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS char_table_Merradia( ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "Owner TEXT, Name TEXT,  AGI TEXT,   STR TEXT,   DEF TEXT,   CON TEXT," +
                 "   REF TEXT,   LUCK TEXT, DEX TEXT,INTE TEXT,KASZT TEXT," +
-                "POINT TEXT,LVL TEXT,MONEY TEXT)");
+                "POINT TEXT,LVL TEXT,MONEY TEXT,XP TEXT)");
+        fillMagice(paramSQLiteDatabase);
     }
 
     public void onUpgrade(SQLiteDatabase paramSQLiteDatabase, int paramInt1, int paramInt2)
     {
-        paramSQLiteDatabase.execSQL("DROP TABLE if EXISTS users_table_Merradia");
-        paramSQLiteDatabase.execSQL("DROP TABLE if EXISTS char_table_Merradia");
+        paramSQLiteDatabase.execSQL("DROP TABLE if EXISTS "+uTableName);
+        paramSQLiteDatabase.execSQL("DROP TABLE if EXISTS "+charTable);
+        paramSQLiteDatabase.execSQL("DROP TABLE if EXISTS "+mTableName);
         onCreate(paramSQLiteDatabase);
     }
+    /**
+     * Ha talált valaki egy ládát a labirintusba ez hozzá adja a karaktere pénzösszegéhez
+     * a talált pénzt, 2 paraméterrel a karakter id-je és a kapott pénz összege
+     * @param id
+     * @param money
+     */
+    public void chesFound(String id, int money)
+    {
+        SQLiteDatabase localSQLiteDatabase = getWritableDatabase();
+        ContentValues localContentValues = new ContentValues();
+        String str1 = "SELECT * FROM char_table_Merradia where ID=id";
+        Cursor localCursor = localSQLiteDatabase.rawQuery(str1, null);
+        localCursor.moveToNext();
+        int m=Integer.parseInt(localCursor.getString(localCursor.getColumnIndex("MONEY")).toString());
+        m=m+money;
+        localContentValues.put("MONEY",m);
+        localSQLiteDatabase.update(charTable, localContentValues, "ID =" + id, null);
+        localContentValues.clear();
+    }
+    /**
+     * ez a programrészlet kiszedi az ember birtokában lévő karaktereket
+     * @param id
+     * @return vissza adja az adott ember birtokában lévő karaktereket
+     */
+    public Cursor getCharacters(String id)
+    {
+        SQLiteDatabase localSQLiteDatabase = getReadableDatabase();
+        String str1 = "SELECT * FROM char_table_Merradia where OWNER='"+id+"'";
+        Log.d("SQL", str1);
+        Cursor localCursor = localSQLiteDatabase.rawQuery(str1, null);
+        // printDatabaseHelper(id);
+        return localCursor;
+    }
+    public void printDatabaseHelper(String id)
+    {
+        SQLiteDatabase localSQLiteDatabase = getReadableDatabase();
+        String str1 = "SELECT * FROM char_table_Merradia where OWNER='"+id+"'";
+        Cursor cursor = localSQLiteDatabase.rawQuery(str1, null);
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                String line="";
+                for(int i=0; i<cursor.getColumnCount();i++)
+                {
+                    line=line+(cursor.getString(i).toString())+"->"+cursor.getColumnName(i)+",";
+                }
+
+                Log.d("tartalom",line);
+                cursor.moveToNext();
+            }
+        }
+
+    }
+
+    /**
+     * egy adott id-jű charakterrel tér vissza
+     * @param id
+     * @return
+     */
+    public Cursor getChar(String id)
+    {
+        SQLiteDatabase localSQLiteDatabase = getReadableDatabase();
+        String str1 = "SELECT * FROM char_table_Merradia where ID='"+id+"'";
+        // Log.d("SQL", str1);
+        Cursor localCursor = localSQLiteDatabase.rawQuery(str1, null);
+        return localCursor;
+    }
+
 
     /**
      * arrayként megkapott adatokat menti
@@ -206,5 +236,186 @@ public class DatabaseHelper
     {
         SQLiteDatabase localSQLiteDatabase = getWritableDatabase();
         localSQLiteDatabase.delete(charTable, "ID=" + id, null);
+    }
+    /**
+     * feltölti a magice táblát
+     * Target 0=me, 1=enemy
+     * Type 0=magice 1=phisical
+     * KASZT 0=all 1....
+     */
+    public void fillMagice(SQLiteDatabase paramSQLiteDatabase)
+    {
+        ContentValues localContentValues = new ContentValues();
+        localContentValues.put("Name", "First Aid");
+        localContentValues.put("DMG","3");
+        localContentValues.put("MANA", 5);
+        localContentValues.put("TARGET", 0);
+        localContentValues.put("TYPE", 0);
+        localContentValues.put("KASZT", 0);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Shield Slam");
+        localContentValues.put("DMG","2");
+        localContentValues.put("MANA", 3);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 1);
+        localContentValues.put("KASZT", 1);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Justice hit");
+        localContentValues.put("DMG","6");
+        localContentValues.put("MANA", 10);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 1);
+        localContentValues.put("KASZT", 1);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Heal");
+        localContentValues.put("DMG","5");
+        localContentValues.put("MANA", 10);
+        localContentValues.put("TARGET", 0);
+        localContentValues.put("TYPE", 0);
+        localContentValues.put("KASZT", 1);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Precizion Shot");
+        localContentValues.put("DMG","7");
+        localContentValues.put("MANA", 5);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 1);
+        localContentValues.put("KASZT", 3);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Double Arrow");
+        localContentValues.put("DMG","9");
+        localContentValues.put("MANA", 10);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 1);
+        localContentValues.put("KASZT", 3);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Shadow Arrow");
+        localContentValues.put("DMG","7");
+        localContentValues.put("MANA", 8);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 0);
+        localContentValues.put("KASZT", 3);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Back Stab");
+        localContentValues.put("DMG","4");
+        localContentValues.put("MANA", 5);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 1);
+        localContentValues.put("KASZT", 2);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Dancing Blade");
+        localContentValues.put("DMG","8");
+        localContentValues.put("MANA", 10);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 1);
+        localContentValues.put("KASZT", 2);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Arcane Stab");
+        localContentValues.put("DMG","6");
+        localContentValues.put("MANA", 12);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 0);
+        localContentValues.put("KASZT", 2);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Big Slam");
+        localContentValues.put("DMG","8");
+        localContentValues.put("MANA", 3);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 1);
+        localContentValues.put("KASZT", 4);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Stomp");
+        localContentValues.put("DMG","7");
+        localContentValues.put("MANA", 7);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 1);
+        localContentValues.put("KASZT", 4);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Blood Magice");
+        localContentValues.put("DMG","4");
+        localContentValues.put("MANA", 10);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 0);
+        localContentValues.put("KASZT", 4);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Fire bolt");
+        localContentValues.put("DMG","7");
+        localContentValues.put("MANA", 7);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 0);
+        localContentValues.put("KASZT", 5);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Ice Arrow");
+        localContentValues.put("DMG","5");
+        localContentValues.put("MANA", 10);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 0);
+        localContentValues.put("KASZT", 5);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+        localContentValues.put("Name", "Thunder");
+        localContentValues.put("DMG",12);
+        localContentValues.put("MANA", 20);
+        localContentValues.put("TARGET", 1);
+        localContentValues.put("TYPE", 0);
+        localContentValues.put("KASZT", 5);
+        paramSQLiteDatabase.insert(mTableName, null, localContentValues);
+        localContentValues.clear();
+    }
+
+    /**
+     * vissz adjaegy adott kaszt összes varázs képességét
+     * @param id
+     * @return
+     */
+    public String[] getMagicName(int id)
+    {
+        String[] nevek;
+        nevek = new String[4];
+        SQLiteDatabase localSQLiteDatabase = getReadableDatabase();
+        String str1 = "SELECT Name FROM "+mTableName+" where KASZT='"+id+"' or KASZT='0'";
+        // Log.d("SQL", str1);
+        Cursor localCursor = localSQLiteDatabase.rawQuery(str1, null);
+        int i=0;
+        while(localCursor.moveToNext())
+        {
+
+            nevek[i]=localCursor.getString(localCursor.getColumnIndex("Name")).toString();
+           // Log.d("nevekDB",nevek[i]);
+            i++;
+        }
+        return nevek;
+    }
+    /**
+     * csata után oda adja a csatáért járó xp-t
+     * @param id
+     * @param xp
+     */
+    public void addXP(String id, int xp)
+    {
+        SQLiteDatabase localSQLiteDatabase = getWritableDatabase();
+        ContentValues localContentValues = new ContentValues();
+        String str1 = "SELECT * FROM char_table_Merradia where ID=id";
+        Cursor localCursor = localSQLiteDatabase.rawQuery(str1, null);
+        localCursor.moveToNext();
+        int m=Integer.parseInt(localCursor.getString(localCursor.getColumnIndex("XP")).toString());
+        int lvl=Integer.parseInt(localCursor.getString(localCursor.getColumnIndex("LVL")).toString());
+        m=m+xp;
+        localContentValues.put("XP",m);
+        localSQLiteDatabase.update(charTable, localContentValues, "ID =" + id, null);
+        localContentValues.clear();
     }
 }
