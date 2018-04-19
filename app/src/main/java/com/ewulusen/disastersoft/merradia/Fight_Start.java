@@ -108,7 +108,7 @@ public class Fight_Start extends AppCompatActivity {
                                 @Override
                                 public void onClick(View view) {
                                     Intent intent2 = null;
-                                    intent2 = new Intent(Fight_Start.this, TheCharakter.class);
+                                    intent2 = new Intent(Fight_Start.this, Figt_Field.class);
                                     intent2.putExtra("datas", id+","+idC);
                                     startActivity(intent2);
                                     finish();
@@ -146,7 +146,7 @@ public class Fight_Start extends AppCompatActivity {
                                 @Override
                                 public void onClick(View view) {
                                     Intent intent2 = null;
-                                    intent2 = new Intent(Fight_Start.this, TheCharakter.class);
+                                    intent2 = new Intent(Fight_Start.this, Figt_Field.class);
                                     intent2.putExtra("datas", id+","+idC);
                                     startActivity(intent2);
                                     finish();
@@ -183,7 +183,7 @@ public class Fight_Start extends AppCompatActivity {
                                 @Override
                                 public void onClick(View view) {
                                     Intent intent2 = null;
-                                    intent2 = new Intent(Fight_Start.this, TheCharakter.class);
+                                    intent2 = new Intent(Fight_Start.this, Figt_Field.class);
                                     intent2.putExtra("datas", id+","+idC);
                                     startActivity(intent2);
                                     finish();
@@ -220,7 +220,7 @@ public class Fight_Start extends AppCompatActivity {
                                 @Override
                                 public void onClick(View view) {
                                     Intent intent2 = null;
-                                    intent2 = new Intent(Fight_Start.this, TheCharakter.class);
+                                    intent2 = new Intent(Fight_Start.this, Figt_Field.class);
                                     intent2.putExtra("datas", id+","+idC);
                                     startActivity(intent2);
                                     finish();
