@@ -56,6 +56,7 @@ public class TheCharakter extends AppCompatActivity {
             refi=Integer.parseInt(cursore.getString(cursore.getColumnIndex("REF")).toString());
             lucki=Integer.parseInt(cursore.getString(cursore.getColumnIndex("LUCK")).toString());
             pointsz=Integer.parseInt(cursore.getString(cursore.getColumnIndex("POINT")).toString());
+            kaszt=Integer.parseInt(cursore.getString(cursore.getColumnIndex("KASZT")).toString());
             names=cursore.getString(cursore.getColumnIndex("Name")).toString();
             point=findViewById(R.id.points);
             point.setText("points:"+pointsz);
@@ -97,7 +98,7 @@ public class TheCharakter extends AppCompatActivity {
             luckp=findViewById(R.id.luckp);
             refm=findViewById(R.id.refm);
             refp=findViewById(R.id.refp);
-            hp=findViewById(R.id.hp);
+            hp=findViewById(R.id.yourName);
             mana=findViewById(R.id.mana);
             save=findViewById(R.id.saves);
             szamol();
@@ -575,7 +576,14 @@ public class TheCharakter extends AppCompatActivity {
             mana.setText(getString(R.string.mana)+":"+osszeg);
             osszeg=refi+lucki;
             move.setText(getString(R.string.move)+":"+osszeg);
-            osszeg=stri;
+            if(kaszt==3)
+            {
+                osszeg=dexi;
+            }
+            else
+            {
+                osszeg=stri;
+            }
             dmg.setText(getString(R.string.dmg)+":"+osszeg);
             osszeg=coni+defi;
             ac.setText(getString(R.string.ac)+":"+osszeg);

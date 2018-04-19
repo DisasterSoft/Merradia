@@ -13,6 +13,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:largeHeap="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".Logo"
@@ -33,10 +34,24 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".MakeCharakter"
-            android:screenOrientation="portrait" />
-        <activity android:name=".CharList" />
-        <activity android:name=".TheCharakter" />
-        <activity android:name=".Fight_Start"></activity>
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".CharList"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".TheCharakter"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Fight_Start"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Figt_Field"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".Battle"
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>
