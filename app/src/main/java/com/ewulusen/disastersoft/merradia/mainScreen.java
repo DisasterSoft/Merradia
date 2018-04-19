@@ -8,10 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class MainScreen extends AppCompatActivity {
+public class mainScreen extends AppCompatActivity {
     public static Intent intent;
     public static String id;
-    DatabaseHelper userDB;
+    databaseHelper userDB;
     TextView kiir;
     Button mkchar,editChar,fight;
     @Override
@@ -20,7 +20,7 @@ public class MainScreen extends AppCompatActivity {
         setContentView(R.layout.activity_main_screen);
         intent = getIntent();
         id = intent.getStringExtra("datas");
-        userDB = new DatabaseHelper(this);
+        userDB = new databaseHelper(this);
         Cursor localCursor=userDB.getName(id);
         localCursor.moveToNext();
         kiir=findViewById(R.id.welcome);
@@ -43,7 +43,7 @@ public class MainScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent2 = null;
-                intent2 = new Intent(MainScreen.this, MakeCharakter.class);
+                intent2 = new Intent(mainScreen.this, MakeCharakter.class);
                 intent2.putExtra("datas", id);
                 startActivity(intent2);
 
@@ -53,7 +53,7 @@ public class MainScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent2 = null;
-                intent2 = new Intent(MainScreen.this, CharList.class);
+                intent2 = new Intent(mainScreen.this, CharList.class);
                 intent2.putExtra("datas", id);
                 startActivity(intent2);
 

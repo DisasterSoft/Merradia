@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
-    DatabaseHelper userDB;
+    databaseHelper userDB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mEmailView = (EditText) findViewById(R.id.email);
-        userDB = new DatabaseHelper(this);
+        userDB = new databaseHelper(this);
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -259,7 +259,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             Cursor localCursor=userDB.login(mEmail,mPassword);
             localCursor.moveToNext();
             Intent intent2 = null;
-            intent2 = new Intent(LoginActivity.this, MainScreen.class);
+            intent2 = new Intent(LoginActivity.this, mainScreen.class);
             String name=localCursor.getString(0);
             intent2.putExtra("datas", name);
             startActivity(intent2);

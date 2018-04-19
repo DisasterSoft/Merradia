@@ -4,23 +4,16 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Random;
-
-import pl.droidsonroids.gif.GifImageView;
-
-import static com.ewulusen.disastersoft.merradia.CharList.intent;
-
 public class TheCharakter extends AppCompatActivity {
         public static Intent intent;
         public static String id;
         public static String ids;
-        DatabaseHelper userDB;
+        databaseHelper userDB;
         TextView str,agi,dex,def,con,inte,ref,luck,ac,mc,dmg,move,point,name,hp,mana;
         Button strm,strp,agim,agip,dexm,dexp,defm,defp,conm,conp,intem,intep,refm,refp,luckm,luckp,save;
         int stri;
@@ -43,7 +36,7 @@ public class TheCharakter extends AppCompatActivity {
           String[] elper=  names.split(",");
           id=elper[0];
           ids=elper[1];
-            userDB = new DatabaseHelper(this);
+            userDB = new databaseHelper(this);
             Cursor localCursor=userDB.getChar(ids);
             localCursor.moveToNext();
             parkereso(localCursor);
@@ -599,7 +592,7 @@ public class TheCharakter extends AppCompatActivity {
                        ids,Integer.toString(pointsz)};
                 userDB.upgradeData(datas);
                 Intent intent2 = null;
-                intent2 = new Intent(TheCharakter.this, MainScreen.class);
+                intent2 = new Intent(TheCharakter.this, mainScreen.class);
                 intent2.putExtra("datas", id);
                 startActivity(intent2);
                 finish();
