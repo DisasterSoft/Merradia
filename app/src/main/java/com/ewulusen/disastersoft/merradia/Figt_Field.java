@@ -447,6 +447,7 @@ public class Figt_Field extends AppCompatActivity {
         }, 200);
         }
         else {
+          addItems(getString(R.string.you_turn));
             moves = agii;
             drawField();
 
@@ -490,25 +491,30 @@ public void korbeNez(int x,int y)
 {
    if(field[x][y]==1)
     {
+        field[x][y]=0;
         attackTarget();
     }
     if ((x + 1) < 6) {
         if (field[x + 1][y] == 1) {
+            field[x + 1][y] = 0;
             attackTarget();
         }
     }
     if ((x - 1) > -1) {
         if (field[x - 1][y] == 1) {
+            field[x - 1][y] =0;
             attackTarget();
         }
     }
     if ((y + 1) < 6) {
         if (field[x][y + 1] == 1) {
+            field[x][y + 1] =0;
             attackTarget();
         }
     }
         if ((y - 1) > -1) {
             if (field[x][y - 1] == 1) {
+                field[x][y - 1] =0;
                 attackTarget();
             }
         }

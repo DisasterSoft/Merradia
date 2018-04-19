@@ -62,6 +62,7 @@
     <string name="enemy_hit">The opponent hit you!</string>
     <string name="you_win">Congratulation!You defeated the opponent!</string>
     <string name="you_lose">You lose, your charakter is death...</string>
+    <string name="you_turn">Your Turn!</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>

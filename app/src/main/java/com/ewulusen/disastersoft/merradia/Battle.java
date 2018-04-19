@@ -31,7 +31,7 @@ public class Battle extends AppCompatActivity {
     Button attack,magiceB;
     int stri,hpi,mci,aci,movei,manai,dmgi,agii,defi,dexi,intei,coni,refi,lucki,lvli;
     int estri,ehpi,emci,eaci,emanai,edmgi,eagii,edefi,edexi,eintei,econi,erefi,elucki,emovi;
-    int kaszt;//1=knight,2=rouge,3=archer,4=ork,5=wizard;
+    int kaszt,ekaszt;//1=knight,2=rouge,3=archer,4=ork,5=wizard;
     List<String> items=new ArrayList<String>();
     GifImageView enemy,youChar;
     String names,datas,youID;
@@ -73,7 +73,7 @@ public class Battle extends AppCompatActivity {
         coni = Integer.parseInt(cursore.getString(cursore.getColumnIndex("CON")).toString());
         refi = Integer.parseInt(cursore.getString(cursore.getColumnIndex("REF")).toString());
         lucki = Integer.parseInt(cursore.getString(cursore.getColumnIndex("LUCK")).toString());
-        lucki = Integer.parseInt(cursore.getString(cursore.getColumnIndex("LVL")).toString());
+        lvli = Integer.parseInt(cursore.getString(cursore.getColumnIndex("LVL")).toString());
         names = cursore.getString(cursore.getColumnIndex("Name")).toString();
         Log.d("name",names);
         kaszt = Integer.parseInt(cursore.getString(cursore.getColumnIndex("KASZT")).toString());
@@ -154,6 +154,7 @@ public class Battle extends AppCompatActivity {
                 "Amazon Rouge","Amazon Archer"};
         Random rand = new Random();
         int k = (rand.nextInt(21));
+        ekaszt=k;
        String  enames=irany[k];
         estri=rand.nextInt(20)+lvli;
         eagii=rand.nextInt(20)+lvli;
@@ -310,23 +311,29 @@ public class Battle extends AppCompatActivity {
                 addText(getString(R.string.next_to));
             }
         }
+        int folytat=0;
         if(dmg>0)
         {
+            charAnime(kaszt,"P","a");
             addText(getString(R.string.you_hit)+" and do "+dmg+" dmg");
             ehpi=ehpi-dmg;
-            if(ehpi<0)
+            charAnime(ekaszt,"E","h");
+            if(ehpi<=0)
             {
+                folytat=1;
                 youWin();
             }
             ehp.setText(Integer.toString(ehpi));
         }
+        if(folytat==0){
         final Handler mHandler = new Handler();
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 enemyAttack();
             }
-            }, 1000);
+            }, 2000);
+        }
     }
     public void enemyAttack()
     {
@@ -361,7 +368,9 @@ public class Battle extends AppCompatActivity {
         }
         if(dmg>0)
         {
+            charAnime(ekaszt,"E","a");
             addText(getString(R.string.enemy_hit)+" and do "+dmg+" dmg");
+            charAnime(kaszt,"P","h");
             hpi=hpi-dmg;
             if(hpi<0)
             {
@@ -392,9 +401,9 @@ public class Battle extends AppCompatActivity {
         Random rand = new Random();
         int k = (rand.nextInt(400)+1);
         userDB.chesFound(ids,k);
-        int z = (rand.nextInt(20)*lvli);
+        int z = (rand.nextInt(60))*lvli;
         userDB.addXP(ids,z);
-        Toast.makeText(Battle.this, R.string.you_win+" you get "+k+" Trefu and "+z+" xp", Toast.LENGTH_LONG).show();
+        Toast.makeText(Battle.this, getString(R.string.you_win)+" you get "+k+" Trefu and "+z+" xp", Toast.LENGTH_LONG).show();
         Intent intent2 = null;
         intent2 = new Intent(Battle.this, MainScreen.class);
         intent2.putExtra("datas", youID);
@@ -412,4 +421,292 @@ public class Battle extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * változtatja az animációt ahhoz képest hogy mi történik
+     * @param id melyik dolgot használja
+     * @param who ki fogja használni
+     * @param action mit csinál
+     */
+    public void charAnime(final int id, String who, String action) {
+        if (who.equals("P")) {
+            switch (action) {
+                case "a":
+                    switch (id) {
+                        case 1:
+                            youChar.setImageResource(R.drawable.k1attak);
+                            break;
+                        case 2:
+                            youChar.setImageResource(R.drawable.rougeattack);
+                            break;
+                        case 3:
+                            youChar.setImageResource(R.drawable.archerfight);
+                            break;
+                        case 4:
+                            youChar.setImageResource(R.drawable.orkattack);
+                            break;
+                        case 5:
+                            youChar.setImageResource(R.drawable.wizzardattack);
+                            break;
+                    }
+                    break;
+                case "h":
+                    switch (id) {
+                        case 1:
+                            youChar.setImageResource(R.drawable.k1hurt);
+                            break;
+                        case 2:
+                            youChar.setImageResource(R.drawable.rougehurt);
+                            break;
+                        case 3:
+                            youChar.setImageResource(R.drawable.archerhurt);
+                            break;
+                        case 4:
+                            youChar.setImageResource(R.drawable.orkhurt);
+                            break;
+                        case 5:
+                            youChar.setImageResource(R.drawable.wizzardhurt);
+                            break;
+                    }
+                    break;
+            }
+            final Handler mHandler = new Handler();
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    switch (id) {
+                        case 1:
+                            youChar.setImageResource(R.drawable.allk1);
+                            break;
+                        case 2:
+                            youChar.setImageResource(R.drawable.rougeall);
+                            break;
+                        case 3:
+                            youChar.setImageResource(R.drawable.archerall);
+                            break;
+                        case 4:
+                            youChar.setImageResource(R.drawable.orkall);
+                            break;
+                        case 5:
+                            youChar.setImageResource(R.drawable.wizardall);
+                            break;
+                    }
+                }
+            }, 500);
+
+        }
+        if (who.equals("E")) {
+            switch (action) {
+                case "a":
+                    switch (id) {
+                        case 0:
+                            enemy.setImageResource(R.drawable.fairatttack);
+                            break;
+                        case 1:
+                            enemy.setImageResource(R.drawable.archerfight);
+                            break;
+                        case 2:
+                            enemy.setImageResource(R.drawable.bfairattack);
+                            break;
+                        case 3:
+                            enemy.setImageResource(R.drawable.elfwarriorattack);
+                            break;
+                        case 4:
+                            enemy.setImageResource(R.drawable.gfairattaxk);
+                            break;
+                        case 5:
+                            enemy.setImageResource(R.drawable.elfwaizzardattack);
+                            break;
+                        case 6:
+                            enemy.setImageResource(R.drawable.k1attak);
+                            break;
+                        case 7:
+                            enemy.setImageResource(R.drawable.cooperknightattack);
+                            break;
+                        case 8:
+                            enemy.setImageResource(R.drawable.goldenknightattack);
+                            break;
+                        case 9:
+                            enemy.setImageResource(R.drawable.orkattack);
+                            break;
+                        case 10:
+                            enemy.setImageResource(R.drawable.pirateorkattack);
+                            break;
+                        case 11:
+                            enemy.setImageResource(R.drawable.expertorkattack);
+                            break;
+                        case 12:
+                            enemy.setImageResource(R.drawable.wizzardattack);
+                            break;
+                        case 13:
+                            enemy.setImageResource(R.drawable.firewizzardattack);
+                            break;
+                        case 14:
+                            enemy.setImageResource(R.drawable.icewizzardattack);
+                            break;
+                        case 15:
+                            enemy.setImageResource(R.drawable.greentrollattack);
+                            break;
+                        case 16:
+                            enemy.setImageResource(R.drawable.graytrollattack);
+                            break;
+                        case 17:
+                            enemy.setImageResource(R.drawable.browntrollattack);
+                            break;
+                        case 18:
+                            enemy.setImageResource(R.drawable.amazonwarriorattack);
+                            break;
+                        case 19:
+                            enemy.setImageResource(R.drawable.rougeattack);
+                            break;
+                        case 20:
+                            enemy.setImageResource(R.drawable.amazonarcherattack);
+                            break;
+
+                    }
+                    break;
+                case "h":
+                    switch (id) {
+                        case 0:
+                            enemy.setImageResource(R.drawable.fairhurt);
+                            break;
+                        case 1:
+                            enemy.setImageResource(R.drawable.archerhurt);
+                            break;
+                        case 2:
+                            enemy.setImageResource(R.drawable.bfairhurt);
+                            break;
+                        case 3:
+                            enemy.setImageResource(R.drawable.elfwarriorhurt);
+                            break;
+                        case 4:
+                            enemy.setImageResource(R.drawable.gfairhurt);
+                            break;
+                        case 5:
+                            enemy.setImageResource(R.drawable.elfwaizzardhurt);
+                            break;
+                        case 6:
+                            enemy.setImageResource(R.drawable.k1hurt);
+                            break;
+                        case 7:
+                            enemy.setImageResource(R.drawable.cooperknighthurt);
+                            break;
+                        case 8:
+                            enemy.setImageResource(R.drawable.goldenknighthurt);
+                            break;
+                        case 9:
+                            enemy.setImageResource(R.drawable.orkhurt);
+                            break;
+                        case 10:
+                            enemy.setImageResource(R.drawable.pirateorkhurt);
+                            break;
+                        case 11:
+                            enemy.setImageResource(R.drawable.expertorkhurt);
+                            break;
+                        case 12:
+                            enemy.setImageResource(R.drawable.wizzardhurt);
+                            break;
+                        case 13:
+                            enemy.setImageResource(R.drawable.firewizzardhurt);
+                            break;
+                        case 14:
+                            enemy.setImageResource(R.drawable.icewizzardhurt);
+                            break;
+                        case 15:
+                            enemy.setImageResource(R.drawable.greentrollhurt);
+                            break;
+                        case 16:
+                            enemy.setImageResource(R.drawable.graytrollhurt);
+                            break;
+                        case 17:
+                            enemy.setImageResource(R.drawable.browntrollhurt);
+                            break;
+                        case 18:
+                            enemy.setImageResource(R.drawable.amazonwarriorhurt);
+                            break;
+                        case 19:
+                            enemy.setImageResource(R.drawable.rougehurt);
+                            break;
+                        case 20:
+                            enemy.setImageResource(R.drawable.amazonarcherhurt);
+                            break;
+
+                    }
+                    break;
+            }
+                    final Handler mHandler = new Handler();
+                    mHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            switch (id) {
+                                case 0:
+                                    enemy.setImageResource(R.drawable.fairall);
+                                    break;
+                                case 1:
+                                    enemy.setImageResource(R.drawable.archerall);
+                                    break;
+                                case 2:
+                                    enemy.setImageResource(R.drawable.bfairall);
+                                    break;
+                                case 3:
+                                    enemy.setImageResource(R.drawable.elfwarriorall);
+                                    break;
+                                case 4:
+                                    enemy.setImageResource(R.drawable.gfairall);
+                                    break;
+                                case 5:
+                                    enemy.setImageResource(R.drawable.elfwaizzardall);
+                                    break;
+                                case 6:
+                                    enemy.setImageResource(R.drawable.allk1);
+                                    break;
+                                case 7:
+                                    enemy.setImageResource(R.drawable.cooperknightall);
+                                    break;
+                                case 8:
+                                    enemy.setImageResource(R.drawable.goldenknightall);
+                                    break;
+                                case 9:
+                                    enemy.setImageResource(R.drawable.orkall);
+                                    break;
+                                case 10:
+                                    enemy.setImageResource(R.drawable.pirateorkall);
+                                    break;
+                                case 11:
+                                    enemy.setImageResource(R.drawable.expertorkall);
+                                    break;
+                                case 12:
+                                    enemy.setImageResource(R.drawable.wizardall);
+                                    break;
+                                case 13:
+                                    enemy.setImageResource(R.drawable.firewizzardall);
+                                    break;
+                                case 14:
+                                    enemy.setImageResource(R.drawable.icewizzardall);
+                                    break;
+                                case 15:
+                                    enemy.setImageResource(R.drawable.greentrollall);
+                                    break;
+                                case 16:
+                                    enemy.setImageResource(R.drawable.graytrollall);
+                                    break;
+                                case 17:
+                                    enemy.setImageResource(R.drawable.browntrollall);
+                                    break;
+                                case 18:
+                                    enemy.setImageResource(R.drawable.amazonwarriorall);
+                                    break;
+                                case 19:
+                                    enemy.setImageResource(R.drawable.rougeall);
+                                    break;
+                                case 20:
+                                    enemy.setImageResource(R.drawable.amazonarcherall);
+                                    break;
+
+                            }
+                        }
+                    }, 500);
+
+
+        }
+    }
 }
