@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@android:color/holo_green_dark"
+    tools:context="com.ewulusen.disastersoft.merradia.MakeCharakter">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" >
+
+                    <Button
+                        android:id="@+id/saves"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:text="@string/save"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tableLayout"
+                        tools:text="@string/save" />
+
+                    <TableLayout
+                        android:id="@+id/tableLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/name">
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/dex"
+                                android:layout_width="match_parent"
+                                android:layout_height="17dp"
+                                android:text="@string/dex"
+                                app:layout_constraintEnd_toStartOf="@+id/agip"
+                                app:layout_constraintTop_toBottomOf="@+id/name"
+                                tools:text="@string/dex" />
+
+                            <Button
+                                android:id="@+id/dexp"
+                                style="@style/Widget.AppCompat.Button.Colored"
+                                android:layout_width="match_parent"
+                                android:layout_height="37dp"
+
+                                android:backgroundTint="@android:color/holo_green_dark"
+                                android:text="+"
+                                app:layout_constraintEnd_toStartOf="@+id/strm"
+                                app:layout_constraintTop_toBottomOf="@+id/refp" />
+
+                            <Button
+                                android:id="@+id/dexm"
+                                style="@style/Widget.AppCompat.Button.Colored"
+                                android:layout_width="match_parent"
+                                android:layout_height="37dp"
+
+
+                                android:text="-"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/refm" />
+
+                            <TextView
+                                android:id="@+id/ac"
+                                android:layout_width="60dp"
+                                android:layout_height="17dp"
+
+                                android:text="@string/ac"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/str"
+                                android:layout_width="match_parent"
+                                android:layout_height="19dp"
+                                android:text="@string/str"
+                                app:layout_constraintEnd_toStartOf="@+id/move"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/agi" />
+
+                            <Button
+                                android:id="@+id/strp"
+                                style="@style/Widget.AppCompat.Button.Colored"
+                                android:layout_width="match_parent"
+                                android:layout_height="37dp"
+
+                                android:backgroundTint="@android:color/holo_green_dark"
+                                android:text="+"
+                                app:layout_constraintEnd_toStartOf="@+id/dexm"
+                                app:layout_constraintTop_toBottomOf="@+id/intep" />
+
+                            <Button
+                                android:id="@+id/strm"
+                                style="@style/Widget.AppCompat.Button.Colored"
+                                android:layout_width="54dp"
+                                android:layout_height="37dp"
+
+                                android:text="-"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/intem" />
+
+                            <TextView
+                                android:id="@+id/dmg"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:text="@string/dmg"
+                                app:layout_constraintEnd_toStartOf="@+id/dexp"
+                                app:layout_constraintTop_toBottomOf="@+id/mana" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/agi"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:text="@string/agi"
+                                app:layout_constraintEnd_toStartOf="@+id/dex"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/name" />
+
+                            <Button
+                                android:id="@+id/agip"
+                                style="@style/Widget.AppCompat.Button.Colored"
+                                android:layout_width="match_parent"
+                                android:layout_height="37dp"
+
+                                android:backgroundTint="@android:color/holo_green_dark"
+                                android:text="+"
+                                android:textColorLink="@android:color/holo_green_dark"
+                                app:layout_constraintEnd_toStartOf="@+id/agim"
+                                app:layout_constraintTop_toBottomOf="@+id/name" />
+
+                            <Button
+                                android:id="@+id/agim"
+                                style="@style/Widget.AppCompat.Button.Colored"
+                                android:layout_width="match_parent"
+                                android:layout_height="37dp"
+
+                                android:text="-"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/name" />
+
+                            <TextView
+                                android:id="@+id/move"
+                                android:layout_width="match_parent"
+                                android:layout_height="19dp"
+
+                                android:text="@string/move"
+                                app:layout_constraintEnd_toStartOf="@+id/conp"
+                                app:layout_constraintTop_toBottomOf="@+id/dex" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/con"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:text="@string/con"
+                                app:layout_constraintEnd_toStartOf="@+id/yourName"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/inte" />
+
+                            <Button
+                                android:id="@+id/conp"
+                                style="@style/Widget.AppCompat.Button.Colored"
+                                android:layout_width="match_parent"
+                                android:layout_height="37dp"
+
+                                android:backgroundTint="@android:color/holo_green_dark"
+                                android:text="+"
+                                app:layout_constraintEnd_toStartOf="@+id/conm"
+                                app:layout_constraintTop_toBottomOf="@+id/agip" />
+
+                            <Button
+                                android:id="@+id/conm"
+                                style="@style/Widget.AppCompat.Button.Colored"
+                                android:layout_width="match_parent"
+                                android:layout_height="37dp"
+
+                                android:text="-"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/agim" />
+
+                            <TextView
+                                android:id="@+id/mc"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:text="@string/mc"
+                                app:layout_constraintEnd_toStartOf="@+id/intep"
+                                app:layout_constraintTop_toBottomOf="@+id/move" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/inte"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:text="@string/inte"
+                                app:layout_constraintEnd_toStartOf="@+id/textView12"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/def" />
+
+                            <Button
+                                android:id="@+id/intep"
+                                style="@style/Widget.AppCompat.Button.Colored"
+                                android:layout_width="match_parent"
+                                android:layout_height="37dp"
+
+                                android:backgroundTint="@android:color/holo_green_dark"
+                                android:text="+"
+                                app:layout_constraintEnd_toStartOf="@+id/refm"
+                                app:layout_constraintTop_toBottomOf="@+id/conp" />
+
+                            <Button
+                                android:id="@+id/intem"
+                                style="@style/Widget.AppCompat.Button.Colored"
+                                android:layout_width="match_parent"
+                                android:layout_height="37dp"
+
+                                android:text="-"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/defm" />
+
+                            <TextView
+                                android:id="@+id/yourName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:text="@string/hp"
+                                app:layout_constraintEnd_toStartOf="@+id/defp"
+                                app:layout_constraintTop_toBottomOf="@+id/textView12" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/ref"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:text="@string/ref"
+                                app:layout_constraintEnd_toStartOf="@+id/mana"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/con" />
+
+                            <Button
+                                android:id="@+id/refp"
+                                style="@style/Widget.AppCompat.Button.Colored"
+                                android:layout_width="match_parent"
+                                android:layout_height="37dp"
+
+                                android:backgroundTint="@android:color/holo_green_dark"
+                                android:text="+"
+                                app:layout_constraintEnd_toStartOf="@+id/intem"
+                                app:layout_constraintTop_toBottomOf="@+id/defp" />
+
+                            <Button
+                                android:id="@+id/refm"
+                                style="@style/Widget.AppCompat.Button.Colored"
+                                android:layout_width="match_parent"
+                                android:layout_height="37dp"
+
+                                android:text="-"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/conm" />
+
+                            <TextView
+                                android:id="@+id/mana"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:text="@string/mana"
+                                app:layout_constraintEnd_toStartOf="@+id/refp"
+                                app:layout_constraintTop_toBottomOf="@+id/yourName" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/def"
+                                android:layout_width="match_parent"
+                                android:layout_height="18dp"
+
+                                android:text="@string/def"
+                                app:layout_constraintEnd_toStartOf="@+id/mc"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/str" />
+
+                            <Button
+                                android:id="@+id/defp"
+                                style="@style/Widget.AppCompat.Button.Colored"
+                                android:layout_width="match_parent"
+                                android:layout_height="37dp"
+                                android:backgroundTint="@android:color/holo_green_dark"
+                                android:text="+"
+                                app:layout_constraintEnd_toStartOf="@+id/defm"
+                                tools:layout_editor_absoluteY="228dp" />
+
+                            <Button
+                                android:id="@+id/defm"
+                                style="@style/Widget.AppCompat.Button.Colored"
+                                android:layout_width="match_parent"
+                                android:layout_height="37dp"
+                                android:text="-"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                tools:layout_editor_absoluteY="228dp" />
+
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/luck"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:text="@string/luck"
+                                app:layout_constraintEnd_toStartOf="@+id/dmg"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/ref" />
+
+                            <Button
+                                android:id="@+id/luckp"
+                                style="@style/Widget.AppCompat.Button.Colored"
+                                android:layout_width="match_parent"
+                                android:layout_height="37dp"
+                                android:backgroundTint="@android:color/holo_green_dark"
+                                android:text="+"
+                                app:layout_constraintEnd_toStartOf="@+id/defm"
+                                tools:layout_editor_absoluteY="228dp" />
+
+                            <Button
+                                android:id="@+id/luckm"
+                                style="@style/Widget.AppCompat.Button.Colored"
+                                android:layout_width="match_parent"
+                                android:layout_height="37dp"
+                                android:text="-"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                tools:layout_editor_absoluteY="228dp" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/chous" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp">
+
+                            <pl.droidsonroids.gif.GifImageView
+                                android:id="@+id/knight"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/allk1" />
+
+                            <pl.droidsonroids.gif.GifImageView
+                                android:id="@+id/ork"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/orkall" />
+
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <pl.droidsonroids.gif.GifImageView
+                                android:id="@+id/archer"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/archerall" />
+
+                            <pl.droidsonroids.gif.GifImageView
+                                android:id="@+id/rouge"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/rougeall" />
+
+                            <pl.droidsonroids.gif.GifImageView
+                                android:id="@+id/wizard"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/wizardall" />
+                        </TableRow>
+
+                    </TableLayout>
+
+                    <TextView
+                        android:id="@+id/points"
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/names"
+                        android:inputType="textPersonName"
+                        app:layout_constraintEnd_toStartOf="@+id/points"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

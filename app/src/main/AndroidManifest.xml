@@ -30,7 +30,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainScreen"
+            android:name=".mainScreen"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MakeCharakter"

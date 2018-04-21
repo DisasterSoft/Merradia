@@ -13,7 +13,7 @@ import pl.droidsonroids.gif.GifImageView;
 public class Fight_Start extends AppCompatActivity {
     public static Intent intent;
     public static String id;
-    DatabaseHelper userDB;
+    databaseHelper userDB;
     TextView nameV,lvlV;
     GifImageView charakter;
     Button edit;
@@ -24,7 +24,7 @@ public class Fight_Start extends AppCompatActivity {
         setContentView(R.layout.activity_fight__start);
                 intent = getIntent();
                 id = intent.getStringExtra("datas");
-                userDB = new DatabaseHelper(this);
+                userDB = new databaseHelper(this);
                 Cursor localCursor=userDB.getCharacters(id);
                 int i=1;
                 /**

@@ -36,7 +36,7 @@
 
     <ScrollView
         android:id="@+id/login_form"
-        android:layout_width="347dp"
+        android:layout_width="325dp"
         android:layout_height="256dp"
         tools:layout_editor_absoluteX="3dp"
         tools:layout_editor_absoluteY="26dp">
