@@ -339,8 +339,8 @@ public class Battle extends AppCompatActivity {
         int dmg = 0;
         Random rand = new Random();
         int k = 0;
-        k = (rand.nextInt(10) + 1);
-        if (k % 5 == 0) {
+        k = (rand.nextInt(21) + 1);
+        if (k % 7 == 0) {
             attackEnemyMagice();
         } else {
             k = (rand.nextInt(20) + 1);
@@ -387,7 +387,7 @@ public class Battle extends AppCompatActivity {
 
                     ehpi = ehpi + 3+eintei;
                     ehp.setText(Integer.toString(ehpi));
-                    addText(getString(R.string.enemy_heal)+(3+eintei));
+                    addText(getString(R.string.enemy_heal)+" "+(3+eintei));
 
     }
 
@@ -405,7 +405,7 @@ public class Battle extends AppCompatActivity {
             String theMagice = userDB.getMagicByName(aMagice);
             String[] magiceSplit = theMagice.split(",");
             //ha kevesebb manánk van mint amibe kerül a varázs kap 1 üzit
-            if (manai - Integer.parseInt(magiceSplit[1])<=0) {
+            if (manai - Integer.parseInt(magiceSplit[1])<0) {
                 addText(getString(R.string.low_mana));
             } else {
                 //levonjuk a manát
