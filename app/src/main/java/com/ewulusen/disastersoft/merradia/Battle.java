@@ -396,6 +396,7 @@ public class Battle extends AppCompatActivity {
      *
      */
     public void attackMagice() {
+        int folytat=0;
         String aMagice = magice.getSelectedItem().toString();
         //ha nem választott ki  semmit akkor kap 1 üzenet
         if (aMagice.equals("Select Magice!") || aMagice.equals("")) {
@@ -436,6 +437,11 @@ public class Battle extends AppCompatActivity {
                             ehpi = ehpi - (Integer.parseInt(magiceSplit[0])+dmgi);
                             ehp.setText(Integer.toString(ehpi));
                             addText(getString(R.string.you_cast_magice)+(Integer.parseInt(magiceSplit[0])+dmgi));
+                            if(ehpi<=0)
+                            {
+                                folytat=1;
+                                youWin();
+                            }
                         }
                         else
                         {
@@ -456,6 +462,11 @@ public class Battle extends AppCompatActivity {
                                     ehpi = ehpi - (Integer.parseInt(magiceSplit[0])+intei);
                             ehp.setText(Integer.toString(ehpi));
                             addText(getString(R.string.you_cast_magice)+(Integer.parseInt(magiceSplit[0])+intei));
+                            if(ehpi<=0)
+                            {
+                                folytat=1;
+                                youWin();
+                            }
                         }
                         else
                         {
@@ -464,7 +475,15 @@ public class Battle extends AppCompatActivity {
                     }
 
                 }
-                enemyAttack();
+                if(folytat==0){
+                    final Handler mHandler = new Handler();
+                    mHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            enemyAttack();
+                        }
+                    }, 2000);
+                }
             }
         }
     }
