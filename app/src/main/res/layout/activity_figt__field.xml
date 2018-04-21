@@ -14,6 +14,7 @@
         app:layout_constraintEnd_toStartOf="@+id/mainChar"
         app:layout_constraintStart_toStartOf="parent"
         android:drawableEnd="@drawable/move"
+        android:drawableRight="@drawable/move"
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.GridLayout

@@ -24,7 +24,7 @@ public class Battle extends AppCompatActivity {
     public static Intent intent;
     public static String id;
     public static String ids;
-    DatabaseHelper userDB;
+    databaseHelper userDB;
     Spinner magice;
     TextView ac,mc,dmg,name,hp,mana;
     TextView eac,emc,edmg,ename,ehp,emana;
@@ -49,7 +49,7 @@ public class Battle extends AppCompatActivity {
         ids=elper[0];
         youID=elper[2];
         hpi=Integer.parseInt(elper[1]);
-        userDB = new DatabaseHelper(this);
+        userDB = new databaseHelper(this);
         Cursor localCursor=userDB.getChar(ids);
         localCursor.moveToNext();
         magiceB=findViewById(R.id.magice);
@@ -396,7 +396,7 @@ public class Battle extends AppCompatActivity {
         userDB.addXP(ids,z);
         Toast.makeText(Battle.this, R.string.you_win+" you get "+k+" Trefu and "+z+" xp", Toast.LENGTH_LONG).show();
         Intent intent2 = null;
-        intent2 = new Intent(Battle.this, MainScreen.class);
+        intent2 = new Intent(Battle.this, mainScreen.class);
         intent2.putExtra("datas", youID);
         startActivity(intent2);
         finish();
@@ -406,7 +406,7 @@ public class Battle extends AppCompatActivity {
         userDB.deleteChar(ids);
         Toast.makeText(Battle.this, R.string.you_lose, Toast.LENGTH_LONG).show();
         Intent intent2 = null;
-        intent2 = new Intent(Battle.this, MainScreen.class);
+        intent2 = new Intent(Battle.this, mainScreen.class);
         intent2.putExtra("datas", youID);
         startActivity(intent2);
         finish();

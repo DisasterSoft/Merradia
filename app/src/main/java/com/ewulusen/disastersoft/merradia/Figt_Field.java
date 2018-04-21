@@ -22,7 +22,7 @@ public class Figt_Field extends AppCompatActivity {
     public static Intent intent;
     public static String id;
     public static String ids;
-    DatabaseHelper userDB;
+    databaseHelper userDB;
     TextView name;
     GifImageView a1, a2, a3, a4, a5, b1, b2, b3, b4, b5, c1, c2, c3, c4, c5, d1, d2, d3, d4, d5, e1, e2, e3, e4, e5,mainChar;
     GifImageView[] filds = new GifImageView[25];
@@ -50,7 +50,7 @@ public class Figt_Field extends AppCompatActivity {
         String[] elper = names.split(",");
         id = elper[0];
         ids = elper[1];
-        userDB = new DatabaseHelper(this);
+        userDB = new databaseHelper(this);
         Cursor localCursor = userDB.getChar(ids);
         localCursor.moveToNext();
         initialList = new ArrayList<String>();
