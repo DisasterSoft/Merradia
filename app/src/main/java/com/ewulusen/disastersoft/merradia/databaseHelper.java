@@ -20,15 +20,12 @@ public class DatabaseHelper
      * Előszőr is létrhozzuk az összes változót amivel dolgozni fogunk.
      */
     public static final String DatabaseName = "merradiaUsers.db";
-    public static final String Username = "userName";
-    public static final String Password = "password";
     public static final String uTableName = "users_table_Merradia";
     public static final String mTableName = "magice_table_Merradia";
-    public static final String owner = "OWNER";
-    public static final String charTable = "char_table_Merradia";
+    public static final String cTableName = "char_table_Merradia";
     public DatabaseHelper(Context paramContext)
     {
-        super(paramContext, DatabaseName, null, 18);
+        super(paramContext, DatabaseName, null, 22);
     }
 
     /**
@@ -78,7 +75,7 @@ public class DatabaseHelper
             //Log.d("SQL", str2);
             localCursor = localSQLiteDatabase.rawQuery(str2, null);
             ContentValues localContentValues = new ContentValues();
-            localContentValues.put("Owner", 0);
+            localContentValues.put("Owner", 1);
             localContentValues.put("Name","teszt");
             localContentValues.put("STR", 0);
             localContentValues.put("AGI", 0);
@@ -93,7 +90,7 @@ public class DatabaseHelper
             localContentValues.put("LVL", 1);
             localContentValues.put("MONEY", 100);
             localContentValues.put("XP",0);
-            localSQLiteDatabase.insert(uTableName, null, localContentValues);
+            localSQLiteDatabase.insert(cTableName, null, localContentValues);
             localContentValues.clear();
         }
 
@@ -101,19 +98,19 @@ public class DatabaseHelper
     }
     public void onCreate(SQLiteDatabase paramSQLiteDatabase)
     {
-        paramSQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS users_table_Merradia (ID INTEGER PRIMARY KEY AUTOINCREMENT,  userName TEXT, password TEXT)");
+        paramSQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+uTableName+" (ID INTEGER PRIMARY KEY AUTOINCREMENT,  userName TEXT, password TEXT)");
         paramSQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+mTableName+" (ID INTEGER PRIMARY KEY AUTOINCREMENT,  Name TEXT, DMG TEXT, MANA TEXT, TYPE TEXT, TARGET TEXT,KASZT TEXT)");
-        paramSQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS char_table_Merradia( ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+        paramSQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+cTableName+"( ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "Owner TEXT, Name TEXT,  AGI TEXT,   STR TEXT,   DEF TEXT,   CON TEXT," +
                 "   REF TEXT,   LUCK TEXT, DEX TEXT,INTE TEXT,KASZT TEXT," +
-                "POINT TEXT,LVL TEXT,MONEY TEXT,XP TEXT)");
+                "POINT TEXT,LVL TEXT DEFAULT '1',MONEY TEXT,XP TEXT DEFAULT '0')");
         fillMagice(paramSQLiteDatabase);
     }
 
     public void onUpgrade(SQLiteDatabase paramSQLiteDatabase, int paramInt1, int paramInt2)
     {
         paramSQLiteDatabase.execSQL("DROP TABLE if EXISTS "+uTableName);
-        paramSQLiteDatabase.execSQL("DROP TABLE if EXISTS "+charTable);
+        paramSQLiteDatabase.execSQL("DROP TABLE if EXISTS "+cTableName);
         paramSQLiteDatabase.execSQL("DROP TABLE if EXISTS "+mTableName);
         onCreate(paramSQLiteDatabase);
     }
@@ -127,13 +124,13 @@ public class DatabaseHelper
     {
         SQLiteDatabase localSQLiteDatabase = getWritableDatabase();
         ContentValues localContentValues = new ContentValues();
-        String str1 = "SELECT * FROM char_table_Merradia where ID=id";
+        String str1 = "SELECT * FROM char_table_Merradia where ID='"+id+"'";
         Cursor localCursor = localSQLiteDatabase.rawQuery(str1, null);
         localCursor.moveToNext();
         int m=Integer.parseInt(localCursor.getString(localCursor.getColumnIndex("MONEY")).toString());
         m=m+money;
         localContentValues.put("MONEY",m);
-        localSQLiteDatabase.update(charTable, localContentValues, "ID =" + id, null);
+        localSQLiteDatabase.update(cTableName, localContentValues, "ID =" + id, null);
         localContentValues.clear();
     }
     /**
@@ -153,7 +150,7 @@ public class DatabaseHelper
     public void printDatabaseHelper(String id)
     {
         SQLiteDatabase localSQLiteDatabase = getReadableDatabase();
-        String str1 = "SELECT * FROM char_table_Merradia where OWNER='"+id+"'";
+        String str1 = "SELECT * FROM char_table_Merradia where ID='"+id+"'";
         Cursor cursor = localSQLiteDatabase.rawQuery(str1, null);
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
@@ -179,7 +176,7 @@ public class DatabaseHelper
     {
         SQLiteDatabase localSQLiteDatabase = getReadableDatabase();
         String str1 = "SELECT * FROM char_table_Merradia where ID='"+id+"'";
-        // Log.d("SQL", str1);
+        printDatabaseHelper(id);
         Cursor localCursor = localSQLiteDatabase.rawQuery(str1, null);
         return localCursor;
     }
@@ -229,13 +226,13 @@ public class DatabaseHelper
         localContentValues.put("REF", datas[6]);
         localContentValues.put("LUCK", datas[7]);
         localContentValues.put("POINT", datas[9]);
-        localSQLiteDatabase.update(charTable, localContentValues, "ID =" + datas[8], null);
+        localSQLiteDatabase.update(cTableName, localContentValues, "ID =" + datas[8], null);
         localContentValues.clear();
     }
     public void deleteChar(String id)
     {
         SQLiteDatabase localSQLiteDatabase = getWritableDatabase();
-        localSQLiteDatabase.delete(charTable, "ID=" + id, null);
+        localSQLiteDatabase.delete(cTableName, "ID=" + id, null);
     }
     /**
      * feltölti a magice táblát
@@ -398,24 +395,59 @@ public class DatabaseHelper
             i++;
         }
         return nevek;
+    } 
+    /**
+     * vissz ad egy adott varázs képességét neve alpján vesszővel elválasztva
+     * @param name a varázslat neve
+     * @return
+     */
+    public String getMagicByName(String name)
+    {
+        String magice="";
+        SQLiteDatabase localSQLiteDatabase = getReadableDatabase();
+        String str1 = "SELECT * FROM "+mTableName+" where Name='"+name+"'";
+        // Log.d("SQL", str1);
+        Cursor localCursor = localSQLiteDatabase.rawQuery(str1, null);
+      localCursor.moveToNext();
+
+            magice=localCursor.getString(localCursor.getColumnIndex("DMG")).toString();
+            magice=magice+","+localCursor.getString(localCursor.getColumnIndex("MANA")).toString();
+            magice=magice+","+localCursor.getString(localCursor.getColumnIndex("TARGET")).toString();
+            magice=magice+","+localCursor.getString(localCursor.getColumnIndex("TYPE")).toString();
+
+        return magice;
     }
     /**
-     * csata után oda adja a csatáért járó xp-t
-     * @param id
-     * @param xp
+     * csata után oda adja a csatáért járó xp-t+ lvl up és 5 pont elosztható
+     * @param id azaonosító
+     * @param xp mennyi xp-t kap
      */
     public void addXP(String id, int xp)
     {
         SQLiteDatabase localSQLiteDatabase = getWritableDatabase();
         ContentValues localContentValues = new ContentValues();
-        String str1 = "SELECT * FROM char_table_Merradia where ID=id";
+        String str1 = "SELECT * FROM "+cTableName+" where ID='"+id+"'";
         Cursor localCursor = localSQLiteDatabase.rawQuery(str1, null);
-        localCursor.moveToNext();
-        int m=Integer.parseInt(localCursor.getString(localCursor.getColumnIndex("XP")).toString());
+        localCursor.moveToFirst();
+       String mxp=localCursor.getString(localCursor.getColumnIndex("XP")).toString();
         int lvl=Integer.parseInt(localCursor.getString(localCursor.getColumnIndex("LVL")).toString());
-        m=m+xp;
-        localContentValues.put("XP",m);
-        localSQLiteDatabase.update(charTable, localContentValues, "ID =" + id, null);
+        localCursor.close();
+       Log.d("xpelőtt",mxp+"");
+       Log.d("id",id+"");
+        mxp=Integer.toString(Integer.parseInt(mxp)+xp);
+        Log.d("xp",mxp+"");
+        Log.d("xpszámol",(Integer.parseInt(mxp)/(lvl*100))+"");
+        Log.d("lvl",lvl+"");
+        if(Integer.parseInt(mxp)/(lvl*100)>0)
+            {
+                mxp=Integer.toString(Integer.parseInt(mxp)%(lvl*100));
+                Log.d("bejöttxp",mxp+"");
+                lvl++;
+                localContentValues.put("LVL",Integer.toString(lvl));
+                localContentValues.put("POINT","5");
+            }
+        localContentValues.put("XP",mxp);
+        localSQLiteDatabase.update(cTableName, localContentValues, "ID =" + id, null);
         localContentValues.clear();
     }
 }

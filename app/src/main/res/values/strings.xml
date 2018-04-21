@@ -18,7 +18,7 @@
     <string name="inte">Inteligent</string>
     <string name="move">Evade</string>
     <string name="attack">Attack</string>
-    <string name="magice">Magice</string>
+    <string name="magice">Special Attack</string>
     <string name="dmg">Damage</string>
     <string name="save">save</string>
     <string name="names">Name</string>
@@ -60,9 +60,14 @@
     <string name="next_toe">To your luck the enemy ran to the side</string>
     <string name="you_hit">You got your opponent!</string>
     <string name="enemy_hit">The opponent hit you!</string>
+    <string name="select_magice">Please select a magice!</string>
+    <string name="low_mana">You dont have enugh mana to do this!</string>
     <string name="you_win">Congratulation!You defeated the opponent!</string>
     <string name="you_lose">You lose, your charakter is death...</string>
     <string name="you_turn">Your Turn!</string>
+    <string name="you_heal">Your Heal your self </string>
+    <string name="you_cast_magice">Your special attack deal dmg: </string>
+    <string name="enemy_heal">Enemy heal him self </string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>

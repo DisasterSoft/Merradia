@@ -75,7 +75,7 @@ public class Battle extends AppCompatActivity {
         lucki = Integer.parseInt(cursore.getString(cursore.getColumnIndex("LUCK")).toString());
         lvli = Integer.parseInt(cursore.getString(cursore.getColumnIndex("LVL")).toString());
         names = cursore.getString(cursore.getColumnIndex("Name")).toString();
-        Log.d("name",names);
+       // Log.d("name",names);
         kaszt = Integer.parseInt(cursore.getString(cursore.getColumnIndex("KASZT")).toString());
         int osszeg;
         osszeg = intei + defi;
@@ -136,7 +136,7 @@ public class Battle extends AppCompatActivity {
         magiceB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                attackEnemyMagice();
+                attackMagice();
             }
         });
 
@@ -335,54 +335,138 @@ public class Battle extends AppCompatActivity {
             }, 2000);
         }
     }
-    public void enemyAttack()
-    {
-        int dmg=0;
+    public void enemyAttack() {
+        int dmg = 0;
         Random rand = new Random();
-        int k = (rand.nextInt(20)+1);
-        if(k==20)
-        {
+        int k = 0;
+        k = (rand.nextInt(10) + 1);
+        if (k % 5 == 0) {
+            attackEnemyMagice();
+        } else {
+            k = (rand.nextInt(20) + 1);
+            if (k == 20) {
 
-            k = (rand.nextInt(20)+1);
-            k=k+edmgi;
-            if(k>aci)
-            {
-                dmg=(rand.nextInt(edmgi)+1)*2;
+                k = (rand.nextInt(20) + 1);
+                k = k + edmgi;
+                if (k > aci) {
+                    dmg = (rand.nextInt(edmgi) + 1) * 2;
+                } else {
+                    dmg = (rand.nextInt(edmgi) + 1);
+                }
+            } else {
+                k = k + edmgi;
+                if (k > aci) {
+                    dmg = (rand.nextInt(edmgi) + 1);
+                } else {
+                    addText(getString(R.string.next_toe));
+                }
             }
-            else
-            {
-                dmg=(rand.nextInt(edmgi)+1);
+            if (dmg > 0) {
+                charAnime(ekaszt, "E", "a");
+                addText(getString(R.string.enemy_hit) + " and do " + dmg + " dmg");
+                charAnime(kaszt, "P", "h");
+                hpi = hpi - dmg;
+                if (hpi < 0) {
+                    youLose();
+                }
+                hp.setText(Integer.toString(hpi));
             }
-        }
-        else
-        {
-            k=k+edmgi;
-            if(k>aci)
-            {
-                dmg=(rand.nextInt(edmgi)+1);
-            }
-            else
-            {
-                addText(getString(R.string.next_toe));
-            }
-        }
-        if(dmg>0)
-        {
-            charAnime(ekaszt,"E","a");
-            addText(getString(R.string.enemy_hit)+" and do "+dmg+" dmg");
-            charAnime(kaszt,"P","h");
-            hpi=hpi-dmg;
-            if(hpi<0)
-            {
-                youLose();
-            }
-            hp.setText(Integer.toString(hpi));
-        }
 
+        }
     }
     public void attackEnemyMagice()
     {
 
+            if (emanai < (emanai - 3)) {
+                addText(getString(R.string.low_mana));
+            }
+                //levonjuk a manát
+                emanai = emanai - 3;
+                emana.setText(Integer.toString(emanai));
+                //ha mi vagyunk a célpont, akkor healelődünk
+
+                    ehpi = ehpi + 3+eintei;
+                    ehp.setText(Integer.toString(ehpi));
+                    addText(getString(R.string.enemy_heal)+(3+eintei));
+
+    }
+
+    /**
+     *A vársgombra nyomva adott varázslatot süt el az ellenfél felé
+     *
+     */
+    public void attackMagice() {
+        String aMagice = magice.getSelectedItem().toString();
+        //ha nem választott ki  semmit akkor kap 1 üzenet
+        if (aMagice.equals("Select Magice!") || aMagice.equals("")) {
+            addText(getString(R.string.select_magice).toString());
+        } else {
+            //megkapjuka varázs tulajdonságait vesszővel elválasztva
+            String theMagice = userDB.getMagicByName(aMagice);
+            String[] magiceSplit = theMagice.split(",");
+            //ha kevesebb manánk van mint amibe kerül a varázs kap 1 üzit
+            if (manai - Integer.parseInt(magiceSplit[1])<=0) {
+                addText(getString(R.string.low_mana));
+            } else {
+                //levonjuk a manát
+                manai = manai - Integer.parseInt(magiceSplit[1]);
+                mana.setText(Integer.toString(manai));
+                //ha mi vagyunk a célpont, akkor healelődünk
+                if (magiceSplit[3].equals("0")) {
+                    hpi = hpi + Integer.parseInt(magiceSplit[0])+intei;
+                    hp.setText(Integer.toString(hpi));
+                    addText(getString(R.string.you_heal)+" "+(Integer.parseInt(magiceSplit[0])+intei));
+                }
+                //ha az ellenfél a célpont
+                if (magiceSplit[3].equals("1")) {
+                    Random rand = new Random();
+                    //ha fizikai sebzést okoz
+                    if (magiceSplit[2].equals("1")) {
+
+                        int y = (rand.nextInt(20) + 1);
+                        if (kaszt == 3) {
+                            y = y + dexi;
+                        } else {
+                            y = y + stri;
+                        }
+                        //ha  túl ütöm a pajzsát akkor dmg
+                        if (y > eaci) {
+                            charAnime(kaszt,"P","a");
+                            charAnime(ekaszt,"E","h");
+                            ehpi = ehpi - (Integer.parseInt(magiceSplit[0])+dmgi);
+                            ehp.setText(Integer.toString(ehpi));
+                            addText(getString(R.string.you_cast_magice)+(Integer.parseInt(magiceSplit[0])+dmgi));
+                        }
+                        else
+                        {
+                            addText(getString(R.string.next_to));
+                        }
+                    }
+                    //ha varázs sebzést okoz
+                    if (magiceSplit[2].equals("0")) {
+
+                        int y = (rand.nextInt(20) + 1);
+
+                            y = y + intei;
+
+                        //ha  túl ütöm a pajzsát akkor dmg
+                        if (y > emci) {
+                            charAnime(kaszt,"P","a");
+                            charAnime(ekaszt,"E","h");
+                                    ehpi = ehpi - (Integer.parseInt(magiceSplit[0])+intei);
+                            ehp.setText(Integer.toString(ehpi));
+                            addText(getString(R.string.you_cast_magice)+(Integer.parseInt(magiceSplit[0])+intei));
+                        }
+                        else
+                        {
+                            addText(getString(R.string.next_to));
+                        }
+                    }
+
+                }
+                enemyAttack();
+            }
+        }
     }
 
     /**
