@@ -24,7 +24,7 @@ public class Battle extends AppCompatActivity {
     public static Intent intent;
     public static String id;
     public static String ids;
-    databaseHelper userDB;
+    DatabaseHelper userDB;
     Spinner magice;
     TextView ac,mc,dmg,name,hp,mana;
     TextView eac,emc,edmg,ename,ehp,emana;
@@ -49,7 +49,7 @@ public class Battle extends AppCompatActivity {
         ids=elper[0];
         youID=elper[2];
         hpi=Integer.parseInt(elper[1]);
-        userDB = new databaseHelper(this);
+        userDB = new DatabaseHelper(this);
         Cursor localCursor=userDB.getChar(ids);
         localCursor.moveToNext();
         magiceB=findViewById(R.id.magice);
@@ -339,9 +339,10 @@ public class Battle extends AppCompatActivity {
         int dmg = 0;
         Random rand = new Random();
         int k = 0;
-        k = (rand.nextInt(21) + 1);
+        k = (rand.nextInt(18) + 1);
         if (k % 7 == 0) {
             attackEnemyMagice();
+
         } else {
             k = (rand.nextInt(20) + 1);
             if (k == 20) {

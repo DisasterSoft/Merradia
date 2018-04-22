@@ -15,7 +15,7 @@ import pl.droidsonroids.gif.GifImageView;
 public class MakeCharakter extends AppCompatActivity {
     public static Intent intent;
     public static String id;
-    databaseHelper userDB;
+    DatabaseHelper userDB;
     TextView str,agi,dex,def,con,inte,ref,luck,ac,mc,dmg,move,point,name,hp,mana;
     GifImageView kinght,ork,archer,rouge,wizard;
     Button strm,strp,agim,agip,dexm,dexp,defm,defp,conm,conp,intem,intep,refm,refp,luckm,luckp,save;
@@ -37,7 +37,7 @@ public class MakeCharakter extends AppCompatActivity {
         parkereso();
         intent = getIntent();
         id = intent.getStringExtra("datas");
-        userDB = new databaseHelper(this);
+        userDB = new DatabaseHelper(this);
         Random r = new Random();
         pointsz = r.nextInt(48 - 6) + 6;
         point.setText("points:"+pointsz);

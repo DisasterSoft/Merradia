@@ -11,7 +11,7 @@ import android.widget.TextView;
 public class mainScreen extends AppCompatActivity {
     public static Intent intent;
     public static String id;
-    databaseHelper userDB;
+    DatabaseHelper userDB;
     TextView kiir;
     Button mkchar,editChar,fight;
     @Override
@@ -20,7 +20,7 @@ public class mainScreen extends AppCompatActivity {
         setContentView(R.layout.activity_main_screen);
         intent = getIntent();
         id = intent.getStringExtra("datas");
-        userDB = new databaseHelper(this);
+        userDB = new DatabaseHelper(this);
         Cursor localCursor=userDB.getName(id);
         localCursor.moveToNext();
         kiir=findViewById(R.id.welcome);

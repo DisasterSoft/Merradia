@@ -13,7 +13,7 @@ import pl.droidsonroids.gif.GifImageView;
 public class CharList extends AppCompatActivity {
     public static Intent intent;
     public static String id;
-    databaseHelper userDB;
+    DatabaseHelper userDB;
     TextView nameV,lvlV;
     GifImageView charakter;
     Button edit,delete;
@@ -23,7 +23,7 @@ public class CharList extends AppCompatActivity {
         setContentView(R.layout.activity_char_list);
         intent = getIntent();
         id = intent.getStringExtra("datas");
-        userDB = new databaseHelper(this);
+        userDB = new DatabaseHelper(this);
         Cursor localCursor=userDB.getCharacters(id);
         int i=1;
         /**

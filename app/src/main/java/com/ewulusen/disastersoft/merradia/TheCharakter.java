@@ -13,7 +13,7 @@ public class TheCharakter extends AppCompatActivity {
         public static Intent intent;
         public static String id;
         public static String ids;
-        databaseHelper userDB;
+        DatabaseHelper userDB;
         TextView str,agi,dex,def,con,inte,ref,luck,ac,mc,dmg,move,point,name,hp,mana;
         Button strm,strp,agim,agip,dexm,dexp,defm,defp,conm,conp,intem,intep,refm,refp,luckm,luckp,save;
         int stri;
@@ -36,7 +36,7 @@ public class TheCharakter extends AppCompatActivity {
           String[] elper=  names.split(",");
           id=elper[0];
           ids=elper[1];
-            userDB = new databaseHelper(this);
+            userDB = new DatabaseHelper(this);
             Cursor localCursor=userDB.getChar(ids);
             localCursor.moveToNext();
             parkereso(localCursor);

@@ -18,11 +18,7 @@
     <string name="inte">Intelligent</string>
     <string name="move">Evade</string>
     <string name="attack">Attack</string>
-<<<<<<< HEAD
     <string name="magice">Special Attack</string>
-=======
-    <string name="magice">Magic</string>
->>>>>>> origin/master
     <string name="dmg">Damage</string>
     <string name="save">Save</string>
     <string name="names">Name</string>
@@ -55,25 +51,10 @@
     <string name="error_invalid_password">The password is too short</string>
     <string name="error_incorrect_password">The password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-<<<<<<< HEAD
-    <string name="chesFound">You found a chest! you get:</string>
-    <string name="trappFound">Ohh no its a trap!</string>
-    <string name="youArDeath">You hp is under 0, so your character is  death!</string>
-    <string name="trappAvoid">Thanks to your reflex, you avoid the trap!</string>
-    <string name="trappHit">The Trap dose to you: </string>
-    <string name="next_to">Unfortunately, you ran to the side</string>
-    <string name="next_toe">To your luck the enemy ran to the side</string>
-    <string name="you_hit">You got your opponent!</string>
-    <string name="enemy_hit">The opponent hit you!</string>
-    <string name="select_magice">Please select a magice!</string>
-    <string name="low_mana">You dont have enugh mana to do this!</string>
-    <string name="you_win">Congratulation!You defeated the opponent!</string>
-    <string name="you_lose">You lose, your charakter is death...</string>
     <string name="you_turn">Your Turn!</string>
     <string name="you_heal">Your Heal your self </string>
     <string name="you_cast_magice">Your special attack deal dmg: </string>
     <string name="enemy_heal">Enemy heal him self </string>
-=======
     <string name="chesFound">You found a chest! You get:</string>
     <string name="trappFound">Oh no it is a trap!</string>
     <string name="youArDeath">You HP is under 0, your character is dead.</string>
@@ -85,7 +66,8 @@
     <string name="enemy_hit">The opponent hit you.</string>
     <string name="you_win">Congratulation! You defeated the opponent.</string>
     <string name="you_lose">You lost, your character is dead.</string>
->>>>>>> origin/master
+    <string name="low_mana">Your mana is to low!</string>
+    <string name="select_magice">Please select shom special attack</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
