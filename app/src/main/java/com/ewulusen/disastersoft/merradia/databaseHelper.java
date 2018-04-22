@@ -13,21 +13,16 @@ import java.sql.Timestamp;
  * Ebben a javafájlban fogom létrehozni az adatbázisokat amivel dolgozni fogunk
  */
 
-public class databaseHelper extends SQLiteOpenHelper {
+public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * Előszőr is létrhozzuk az összes változót amivel dolgozni fogunk.
      */
     public static final String DatabaseName = "merradiaUsers.db";
     public static final String uTableName = "users_table_Merradia";
     public static final String mTableName = "magice_table_Merradia";
-<<<<<<< HEAD
     public static final String cTableName = "char_table_Merradia";
     public DatabaseHelper(Context paramContext)
-=======
-    public static final String owner = "OWNER";
-    public static final String charTable = "char_table_Merradia";
-    public databaseHelper(Context paramContext)
->>>>>>> origin/master
+
     {
         super(paramContext, DatabaseName, null, 22);
     }
