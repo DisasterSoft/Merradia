@@ -13,6 +13,9 @@
     <string name="ref">Reflex</string>
     <string name="luck">Luck</string>
     <string name="dex">Skills</string>
+    <string name="trainer">Trainer</string>
+    <string name="armorer">Armorer</string>
+    <string name="blacksmith">Blacksmith</string>
     <string name="ac">Defence Value</string>
     <string name="mc">Magic Defence</string>
     <string name="inte">Intelligent</string>
