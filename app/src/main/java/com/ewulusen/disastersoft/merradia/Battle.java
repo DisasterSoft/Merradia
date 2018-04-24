@@ -29,7 +29,7 @@ public class Battle extends AppCompatActivity {
     TextView ac,mc,dmg,name,hp,mana;
     TextView eac,emc,edmg,ename,ehp,emana;
     Button attack,magiceB;
-    int stri,hpi,mci,aci,movei,manai,dmgi,agii,defi,dexi,intei,coni,refi,lucki,lvli;
+    int stri,hpi,maci,mci,aci,acii,movei,manai,dmgi,dmgii,agii,defi,dexi,intei,coni,refi,lucki,lvli;
     int estri,ehpi,emci,eaci,emanai,edmgi,eagii,edefi,edexi,eintei,econi,erefi,elucki,emovi;
     int kaszt,ekaszt;//1=knight,2=rouge,3=archer,4=ork,5=wizard;
     List<String> items=new ArrayList<String>();
@@ -48,6 +48,7 @@ public class Battle extends AppCompatActivity {
         String[] elper=  datas.split(",");
         ids=elper[0];
         youID=elper[2];
+        datas=youID+","+ids;
         hpi=Integer.parseInt(elper[1]);
         userDB = new DatabaseHelper(this);
         Cursor localCursor=userDB.getChar(ids);
@@ -74,23 +75,26 @@ public class Battle extends AppCompatActivity {
         refi = Integer.parseInt(cursore.getString(cursore.getColumnIndex("REF")).toString());
         lucki = Integer.parseInt(cursore.getString(cursore.getColumnIndex("LUCK")).toString());
         lvli = Integer.parseInt(cursore.getString(cursore.getColumnIndex("LVL")).toString());
+        acii=Integer.parseInt(cursore.getString(cursore.getColumnIndex("AC")).toString());
+        maci=Integer.parseInt(cursore.getString(cursore.getColumnIndex("MAC")).toString());
+        dmgii=Integer.parseInt(cursore.getString(cursore.getColumnIndex("DMG")).toString());
         names = cursore.getString(cursore.getColumnIndex("Name")).toString();
        // Log.d("name",names);
         kaszt = Integer.parseInt(cursore.getString(cursore.getColumnIndex("KASZT")).toString());
         int osszeg;
-        osszeg = intei + defi;
+        osszeg = intei + defi+maci;
         mci = osszeg;
         osszeg = intei * 10;
         manai = osszeg;
         osszeg = refi + lucki;
         movei = osszeg;
         if (kaszt == 3) {
-            osszeg = dexi;
+            osszeg = dexi+dmgii;
         } else {
-            osszeg = stri;
+            osszeg = stri+dmgii;
         }
         dmgi = osszeg;
-        osszeg = coni + defi;
+        osszeg = coni + defi+acii;
         aci = osszeg;
         name=findViewById(R.id.yourName);
         hp=findViewById(R.id.yhp);
@@ -510,7 +514,7 @@ public class Battle extends AppCompatActivity {
         Toast.makeText(Battle.this, getString(R.string.you_win)+" you get "+k+" Trefu and "+z+" xp", Toast.LENGTH_LONG).show();
         Intent intent2 = null;
         intent2 = new Intent(Battle.this, mainScreen.class);
-        intent2.putExtra("datas", youID);
+        intent2.putExtra("datas", datas);
         startActivity(intent2);
         finish();
     }
@@ -520,7 +524,7 @@ public class Battle extends AppCompatActivity {
         Toast.makeText(Battle.this, R.string.you_lose, Toast.LENGTH_LONG).show();
         Intent intent2 = null;
         intent2 = new Intent(Battle.this, mainScreen.class);
-        intent2.putExtra("datas", youID);
+        intent2.putExtra("datas", datas);
         startActivity(intent2);
         finish();
     }

@@ -22,7 +22,6 @@
         app:button_icon="@drawable/hammer"
         app:button_icon_height="50dp"
         app:button_icon_width="50dp"
-        app:magic_button_size="85dp"
         app:expandable_area_color="#d48484"
         app:hide_text="@string/mkchar"
         app:hide_text_color="@android:color/white"
@@ -34,7 +33,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editChar"
         app:layout_constraintVertical_bias="0.0"
-         />//makecharakter
+        app:magic_button_size="85dp" />//makecharakter
 
     <br.com.bloder.magic.view.MagicButton
         android:id="@+id/editChar"
@@ -43,9 +42,8 @@
         app:button_icon="@drawable/lvl"
         app:button_icon_height="50dp"
         app:button_icon_width="50dp"
-        app:magic_button_size="85dp"
         app:expandable_area_color="#6170bb"
-        app:hide_text="@string/edit_char"
+        app:hide_text="@string/select_char"
         app:hide_text_color="@android:color/white"
         app:hide_text_size="15dp"
         app:icon_button_color="#6170bb"
@@ -54,7 +52,7 @@
         app:layout_constraintHorizontal_bias="0.04"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fight"
-         />//editchar
+        app:magic_button_size="85dp" />//editchar
 
     <br.com.bloder.magic.view.MagicButton
         android:id="@+id/fight"
@@ -80,7 +78,7 @@
         android:id="@+id/trainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:button_icon="@drawable/money"
+        app:button_icon="@drawable/potion"
         app:button_icon_height="50dp"
         app:button_icon_width="50dp"
         app:magic_button_size="85dp"
@@ -95,12 +93,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/makechar"
          />//trainer
-
     <br.com.bloder.magic.view.MagicButton
         android:id="@+id/blacksmith"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:button_icon="@drawable/money"
+        app:button_icon="@drawable/axxe"
         app:button_icon_height="50dp"
         app:button_icon_width="50dp"
         app:magic_button_size="85dp"
@@ -120,7 +117,7 @@
         android:id="@+id/armorer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:button_icon="@drawable/money"
+        app:button_icon="@drawable/mail"
         app:button_icon_height="50dp"
         app:button_icon_width="50dp"
         app:magic_button_size="85dp"
@@ -129,7 +126,6 @@
         app:hide_text_color="@android:color/white"
         app:hide_text_size="15dp"
         app:icon_button_color="#858383"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.04"
         app:layout_constraintStart_toStartOf="parent"

@@ -79,7 +79,7 @@
                 android:id="@+id/blank2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                 />
+                android:text="   " />
 
             <TextView
                 android:id="@+id/ename"
@@ -108,6 +108,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/hp" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/enemhptxt"
@@ -145,6 +150,11 @@
                 app:srcCompat="@drawable/mn" />
 
             <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
                 android:id="@+id/eManatxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -178,6 +188,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ac" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/eACtxt"
@@ -215,6 +230,11 @@
                 app:srcCompat="@drawable/energy" />
 
             <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
                 android:id="@+id/eMCtxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -248,6 +268,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/dmg" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/eDMGtxt"

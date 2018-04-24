@@ -16,7 +16,7 @@ public class TheCharakter extends AppCompatActivity {
         DatabaseHelper userDB;
         TextView str,agi,dex,def,con,inte,ref,luck,ac,mc,dmg,move,point,name,hp,mana;
         Button strm,strp,agim,agip,dexm,dexp,defm,defp,conm,conp,intem,intep,refm,refp,luckm,luckp,save;
-        int stri;
+        int stri,aci,dmgi,maci;
         int agii;
         int defi;
         int dexi;
@@ -26,14 +26,14 @@ public class TheCharakter extends AppCompatActivity {
         int lucki;
         int pointsz=0;
         int kaszt;//1=knight,2=rouge,3=archer,4=ork,5=wizard;
-        String names;
+        String names,names1;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_the_charakter);
             intent = getIntent();
-            names = intent.getStringExtra("datas");
-          String[] elper=  names.split(",");
+            names1 = intent.getStringExtra("datas");
+          String[] elper=  names1.split(",");
           id=elper[0];
           ids=elper[1];
             userDB = new DatabaseHelper(this);
@@ -57,6 +57,9 @@ public class TheCharakter extends AppCompatActivity {
             lucki=Integer.parseInt(cursore.getString(cursore.getColumnIndex("LUCK")).toString());
             pointsz=Integer.parseInt(cursore.getString(cursore.getColumnIndex("POINT")).toString());
             kaszt=Integer.parseInt(cursore.getString(cursore.getColumnIndex("KASZT")).toString());
+            aci=Integer.parseInt(cursore.getString(cursore.getColumnIndex("AC")).toString());
+            maci=Integer.parseInt(cursore.getString(cursore.getColumnIndex("MAC")).toString());
+            dmgi=Integer.parseInt(cursore.getString(cursore.getColumnIndex("DMG")).toString());
             names=cursore.getString(cursore.getColumnIndex("Name")).toString();
             point=findViewById(R.id.points);
             point.setText("points:"+pointsz);
@@ -64,7 +67,7 @@ public class TheCharakter extends AppCompatActivity {
             str.setText(getString(R.string.str)+":"+stri);
             dex=findViewById(R.id.dex);
             dex.setText(getString(R.string.dex)+":"+dexi);
-            def=findViewById(R.id.def);
+            def=findViewById(R.id.craft1);
             def.setText(getString(R.string.def)+":"+defi);
             agi=findViewById(R.id.agi);
             agi.setText(getString(R.string.agi)+":"+agii);
@@ -570,7 +573,7 @@ public class TheCharakter extends AppCompatActivity {
             lucki=Integer.parseInt(seged[1]);
             osszeg=stri+coni+defi;
             hp.setText(getString(R.string.hp)+":"+osszeg);
-            osszeg=intei+defi;
+            osszeg=intei+defi+maci;
             mc.setText(getString(R.string.mc)+":"+osszeg);
             osszeg=intei*10;
             mana.setText(getString(R.string.mana)+":"+osszeg);
@@ -578,14 +581,14 @@ public class TheCharakter extends AppCompatActivity {
             move.setText(getString(R.string.move)+":"+osszeg);
             if(kaszt==3)
             {
-                osszeg=dexi;
+                osszeg=dexi+dmgi;
             }
             else
             {
-                osszeg=stri;
+                osszeg=stri +dmgi;
             }
             dmg.setText(getString(R.string.dmg)+":"+osszeg);
-            osszeg=coni+defi;
+            osszeg=coni+defi+aci;
             ac.setText(getString(R.string.ac)+":"+osszeg);
 
         }
@@ -601,7 +604,7 @@ public class TheCharakter extends AppCompatActivity {
                 userDB.upgradeData(datas);
                 Intent intent2 = null;
                 intent2 = new Intent(TheCharakter.this, mainScreen.class);
-                intent2.putExtra("datas", id);
+                intent2.putExtra("datas", names1);
                 startActivity(intent2);
                 finish();
             }
