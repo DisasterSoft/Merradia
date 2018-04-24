@@ -1,11 +1,10 @@
 package com.ewulusen.disastersoft.merradia;
-
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import br.com.bloder.magic.view.MagicButton;
 import android.widget.TextView;
 
 public class mainScreen extends AppCompatActivity {
@@ -13,7 +12,7 @@ public class mainScreen extends AppCompatActivity {
     public static String id;
     DatabaseHelper userDB;
     TextView kiir;
-    Button mkchar,editChar,fight;
+    MagicButton  mkchar,editChar,fight,trainer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +28,7 @@ public class mainScreen extends AppCompatActivity {
         localCursor=userDB.getCharacters(id);
         editChar=findViewById(R.id.editChar);
         fight=findViewById(R.id.fight);
+        trainer=findViewById(R.id.trainer);
         if(localCursor.getCount()==0)
         {
            fight.setEnabled(false);
@@ -39,7 +39,7 @@ public class mainScreen extends AppCompatActivity {
         {
             mkchar.setEnabled(false);
         }
-        mkchar.setOnClickListener(new View.OnClickListener() {
+        mkchar.setMagicButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent2 = null;
@@ -49,7 +49,17 @@ public class mainScreen extends AppCompatActivity {
 
             }
         });
-        editChar.setOnClickListener(new View.OnClickListener() {
+        trainer.setMagicButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*Intent intent2 = null;
+                intent2 = new Intent(mainScreen.this, MainActivity2.class);
+                intent2.putExtra("datas", id);
+                startActivity(intent2);*/
+
+            }
+        });
+        editChar.setMagicButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent2 = null;
@@ -59,7 +69,7 @@ public class mainScreen extends AppCompatActivity {
 
             }
         });
-      fight.setOnClickListener(new View.OnClickListener() {
+      fight.setMagicButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent2 = null;

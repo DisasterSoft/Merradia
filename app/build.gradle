@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.ewulusen.disastersoft.merradia"
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 27
         versionCode 8
         versionName "1.1.2"
@@ -32,4 +32,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.12'
     implementation 'com.android.support:gridlayout-v7:27.1.1'
+    implementation 'com.github.bloder:magic:1.1'
 }
