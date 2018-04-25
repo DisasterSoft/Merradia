@@ -1,7 +1,9 @@
 package com.ewulusen.disastersoft.merradia;
 
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -28,6 +31,7 @@ public class Battle extends AppCompatActivity {
     Spinner magice;
     TextView ac,mc,dmg,name,hp,mana;
     TextView eac,emc,edmg,ename,ehp,emana;
+    MediaPlayer sound;
     Button attack,magiceB;
     int stri,hpi,maci,mci,aci,acii,movei,manai,dmgi,dmgii,agii,defi,dexi,intei,coni,refi,lucki,lvli;
     int estri,ehpi,emci,eaci,emanai,edmgi,eagii,edefi,edexi,eintei,econi,erefi,elucki,emovi;
@@ -49,6 +53,7 @@ public class Battle extends AppCompatActivity {
         ids=elper[0];
         youID=elper[2];
         datas=youID+","+ids;
+        sound = new MediaPlayer();
         hpi=Integer.parseInt(elper[1]);
         userDB = new DatabaseHelper(this);
         Cursor localCursor=userDB.getChar(ids);
@@ -371,7 +376,7 @@ public class Battle extends AppCompatActivity {
                 addText(getString(R.string.enemy_hit) + " and do " + dmg + " dmg");
                 charAnime(kaszt, "P", "h");
                 hpi = hpi - dmg;
-                if (hpi < 0) {
+                if (hpi < 1) {
                     youLose();
                 }
                 hp.setText(Integer.toString(hpi));
@@ -389,7 +394,23 @@ public class Battle extends AppCompatActivity {
                 emanai = emanai - 3;
                 emana.setText(Integer.toString(emanai));
                 //ha mi vagyunk a célpont, akkor healelődünk
+        if(sound.isPlaying())
+        {
+            sound.reset();
+        }
 
+        try {
+            sound.reset();
+            AssetFileDescriptor afd;
+            afd = getAssets().openFd("heal.mp3");
+            sound.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+            sound.prepare();
+            sound.start();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
                     ehpi = ehpi + 3+eintei;
                     ehp.setText(Integer.toString(ehpi));
                     addText(getString(R.string.enemy_heal)+" "+(3+eintei));
@@ -409,6 +430,7 @@ public class Battle extends AppCompatActivity {
         } else {
             //megkapjuka varázs tulajdonságait vesszővel elválasztva
             String theMagice = userDB.getMagicByName(aMagice);
+            Log.d("varázs",theMagice);
             String[] magiceSplit = theMagice.split(",");
             //ha kevesebb manánk van mint amibe kerül a varázs kap 1 üzit
             if (manai - Integer.parseInt(magiceSplit[1])<0) {
@@ -418,16 +440,33 @@ public class Battle extends AppCompatActivity {
                 manai = manai - Integer.parseInt(magiceSplit[1]);
                 mana.setText(Integer.toString(manai));
                 //ha mi vagyunk a célpont, akkor healelődünk
-                if (magiceSplit[3].equals("0")) {
+                if (magiceSplit[2].equals("0")) {
+                    if(sound.isPlaying())
+                    {
+                        sound.reset();
+                    }
+
+                    try {
+                        sound.reset();
+                        AssetFileDescriptor afd;
+                        afd = getAssets().openFd("heal.mp3");
+                        sound.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+                        sound.prepare();
+                        sound.start();
+                    } catch (IllegalStateException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     hpi = hpi + Integer.parseInt(magiceSplit[0])+intei;
                     hp.setText(Integer.toString(hpi));
                     addText(getString(R.string.you_heal)+" "+(Integer.parseInt(magiceSplit[0])+intei));
                 }
                 //ha az ellenfél a célpont
-                if (magiceSplit[3].equals("1")) {
+                if (magiceSplit[2].equals("1")) {
                     Random rand = new Random();
                     //ha fizikai sebzést okoz
-                    if (magiceSplit[2].equals("1")) {
+                    if (magiceSplit[3].equals("1")) {
 
                         int y = (rand.nextInt(20) + 1);
                         if (kaszt == 3) {
@@ -454,7 +493,7 @@ public class Battle extends AppCompatActivity {
                         }
                     }
                     //ha varázs sebzést okoz
-                    if (magiceSplit[2].equals("0")) {
+                    if (magiceSplit[3].equals("0")) {
 
                         int y = (rand.nextInt(20) + 1);
 
@@ -462,6 +501,23 @@ public class Battle extends AppCompatActivity {
 
                         //ha  túl ütöm a pajzsát akkor dmg
                         if (y > emci) {
+                            if(sound.isPlaying())
+                            {
+                                sound.reset();
+                            }
+
+                            try {
+                                sound.reset();
+                                AssetFileDescriptor afd;
+                                afd = getAssets().openFd("spell.wav");
+                                sound.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+                                sound.prepare();
+                                sound.start();
+                            } catch (IllegalStateException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                             charAnime(kaszt,"P","a");
                             charAnime(ekaszt,"E","h");
                                     ehpi = ehpi - (Integer.parseInt(magiceSplit[0])+intei);
@@ -509,9 +565,15 @@ public class Battle extends AppCompatActivity {
         Random rand = new Random();
         int k = (rand.nextInt(400)+1);
         userDB.chesFound(ids,k);
-        int z = (rand.nextInt(60))*lvli;
-        userDB.addXP(ids,z);
-        Toast.makeText(Battle.this, getString(R.string.you_win)+" you get "+k+" Trefu and "+z+" xp", Toast.LENGTH_LONG).show();
+        int z = (rand.nextInt(60))+1*lvli;
+       int ret= userDB.addXP(ids,z);
+       if(ret==0) {
+           Toast.makeText(Battle.this, getString(R.string.you_win) + " you get " + k + " Trefu and " + z + " xp", Toast.LENGTH_LONG).show();
+       }
+       else
+       {
+           Toast.makeText(Battle.this, getString(R.string.you_win) + " you get " + k + " Trefu and " + z + " xp"+" LVL UP! you get 5 point skillpoint", Toast.LENGTH_LONG).show();
+       }
         Intent intent2 = null;
         intent2 = new Intent(Battle.this, mainScreen.class);
         intent2.putExtra("datas", datas);
@@ -523,8 +585,8 @@ public class Battle extends AppCompatActivity {
         userDB.deleteChar(ids);
         Toast.makeText(Battle.this, R.string.you_lose, Toast.LENGTH_LONG).show();
         Intent intent2 = null;
-        intent2 = new Intent(Battle.this, mainScreen.class);
-        intent2.putExtra("datas", datas);
+        intent2 = new Intent(Battle.this, CharList.class);
+        intent2.putExtra("datas", youID);
         startActivity(intent2);
         finish();
     }
@@ -539,6 +601,23 @@ public class Battle extends AppCompatActivity {
         if (who.equals("P")) {
             switch (action) {
                 case "a":
+                    if(sound.isPlaying())
+                    {
+                        sound.reset();
+                    }
+
+                    try {
+                        sound.reset();
+                        AssetFileDescriptor afd;
+                        afd = getAssets().openFd("attack.wav");
+                        sound.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+                        sound.prepare();
+                        sound.start();
+                    } catch (IllegalStateException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     switch (id) {
                         case 1:
                             youChar.setImageResource(R.drawable.k1attak);
@@ -558,6 +637,23 @@ public class Battle extends AppCompatActivity {
                     }
                     break;
                 case "h":
+                    if(sound.isPlaying())
+                    {
+                        sound.reset();
+                    }
+
+                    try {
+                        sound.reset();
+                        AssetFileDescriptor afd;
+                        afd = getAssets().openFd("hurt1.wav");
+                        sound.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+                        sound.prepare();
+                        sound.start();
+                    } catch (IllegalStateException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     switch (id) {
                         case 1:
                             youChar.setImageResource(R.drawable.k1hurt);
@@ -605,6 +701,23 @@ public class Battle extends AppCompatActivity {
         if (who.equals("E")) {
             switch (action) {
                 case "a":
+                    if(sound.isPlaying())
+                    {
+                        sound.reset();
+                    }
+
+                    try {
+                        sound.reset();
+                        AssetFileDescriptor afd;
+                        afd = getAssets().openFd("attack.wav");
+                        sound.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+                        sound.prepare();
+                        sound.start();
+                    } catch (IllegalStateException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     switch (id) {
                         case 0:
                             enemy.setImageResource(R.drawable.fairatttack);
@@ -673,6 +786,23 @@ public class Battle extends AppCompatActivity {
                     }
                     break;
                 case "h":
+                    if(sound.isPlaying())
+                    {
+                        sound.reset();
+                    }
+
+                    try {
+                        sound.reset();
+                        AssetFileDescriptor afd;
+                        afd = getAssets().openFd("hurt2.wav");
+                        sound.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+                        sound.prepare();
+                        sound.start();
+                    } catch (IllegalStateException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     switch (id) {
                         case 0:
                             enemy.setImageResource(R.drawable.fairhurt);

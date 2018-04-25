@@ -1,7 +1,9 @@
 package com.ewulusen.disastersoft.merradia;
 
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.Random;
 
 public class Blacksmith extends AppCompatActivity {
@@ -21,6 +24,7 @@ public class Blacksmith extends AppCompatActivity {
     Button estri,save;
     TextView text;
     String names;
+    MediaPlayer sound;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,13 +34,14 @@ public class Blacksmith extends AppCompatActivity {
         seged_a=seged.split(",");
         id=seged_a[0];
         idC=seged_a[1];
+        sound = new MediaPlayer();
         userDB = new DatabaseHelper(this);
         Cursor localCursor=userDB.getChar(idC);
         localCursor.moveToNext();
         parkereso(localCursor);
     }
     public void parkereso(Cursor cursore) {
-        stri = Integer.parseInt(cursore.getString(cursore.getColumnIndex("STR")).toString());
+        stri = Integer.parseInt(cursore.getString(cursore.getColumnIndex("DMG")).toString());
         lvli = Integer.parseInt(cursore.getString(cursore.getColumnIndex("MONEY")).toString());
         names = cursore.getString(cursore.getColumnIndex("Name")).toString();
         estri=findViewById(R.id.craft1);
@@ -47,7 +52,7 @@ public class Blacksmith extends AppCompatActivity {
         estri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(lvli-100>-1) {
+                if(lvli-500>-1) {
                     Random rand = new Random();
                     int k = (rand.nextInt(20));
                     if (k % 9 == 0) {
@@ -55,7 +60,24 @@ public class Blacksmith extends AppCompatActivity {
                     } else {
                         stri++;
                     }
-                    lvli=lvli-100;
+                    if(sound.isPlaying())
+                    {
+                        sound.reset();
+                    }
+
+                    try {
+                        sound.reset();
+                        AssetFileDescriptor afd;
+                        afd = getAssets().openFd("blacksmith.wav");
+                        sound.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+                        sound.prepare();
+                        sound.start();
+                    } catch (IllegalStateException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    lvli=lvli-500;
                     text.setText(getString(R.string.seller2)+" You have "+lvli+" Trefu.");
                     estri.setText(getString(R.string.craftweapon) + " : " + stri);
                 }

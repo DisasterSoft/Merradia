@@ -48,8 +48,8 @@
     <string name="knigt_select">Knight selected</string>
     <string name="archer_select">Archer selected</string>
     <string name="rouge_select">Rouge selected</string>
-    <string name="no_point">Sorry, you do not have any points left.</string>
-    <string name="no_point1">Sorry, your character points can not be less than 0.</string>
+    <string name="no_point">Sorry, you do not have any skillpoints left.</string>
+    <string name="no_point1">Sorry, your skillpoints can not be less than 0.</string>
     <string name="no_kaszt">Please select a character.</string>
     <string name="no_name">Please give your character a name.</string>
     <string name="action_sign_in">Sign In or Register</string>

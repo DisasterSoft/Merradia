@@ -40,7 +40,7 @@ public class MakeCharakter extends AppCompatActivity {
         userDB = new DatabaseHelper(this);
         Random r = new Random();
         pointsz = r.nextInt(48 - 6) + 6;
-        point.setText("points:"+pointsz);
+        point.setText("skillpoints:"+pointsz);
         kaszt=0;
         lisztenerek();
     }

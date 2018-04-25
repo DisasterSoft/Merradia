@@ -1,7 +1,9 @@
 package com.ewulusen.disastersoft.merradia;
 
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.Random;
 
 public class Armorer extends AppCompatActivity {
@@ -21,6 +24,7 @@ public class Armorer extends AppCompatActivity {
     int stri,stri2,lvli;
     Button estri,emac,save;
     TextView text;
+    MediaPlayer sound;
     String names;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,7 @@ public class Armorer extends AppCompatActivity {
         seged_a=seged.split(",");
         id=seged_a[0];
         idC=seged_a[1];
+        sound = new MediaPlayer();
         userDB = new DatabaseHelper(this);
         Cursor localCursor=userDB.getChar(idC);
         localCursor.moveToNext();
@@ -59,6 +64,23 @@ public class Armorer extends AppCompatActivity {
                     } else {
                         stri++;
                     }
+                    if(sound.isPlaying())
+                    {
+                        sound.reset();
+                    }
+
+                    try {
+                        sound.reset();
+                        AssetFileDescriptor afd;
+                        afd = getAssets().openFd("armorer.wav");
+                        sound.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+                        sound.prepare();
+                        sound.start();
+                    } catch (IllegalStateException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     lvli=lvli-500;
                     text.setText(getString(R.string.seller3)+" You have "+lvli+" Trefu.");
                     estri.setText(getString(R.string.craftarmor) + " : " + stri);
@@ -81,9 +103,26 @@ public class Armorer extends AppCompatActivity {
                     } else {
                         stri2++;
                     }
+                    if(sound.isPlaying())
+                    {
+                        sound.reset();
+                    }
+
+                    try {
+                    sound.reset();
+                    AssetFileDescriptor afd;
+                    afd = getAssets().openFd("armorer.wav");
+                    sound.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+                    sound.prepare();
+                    sound.start();
+                } catch (IllegalStateException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                     lvli=lvli-500;
                     text.setText(getString(R.string.seller3)+" You have "+lvli+" Trefu.");
-                    estri.setText(getString(R.string.craftmarmor) + " : " + stri2);
+                    emac.setText(getString(R.string.craftmarmor) + " : " + stri2);
                 }
                 else
                 {

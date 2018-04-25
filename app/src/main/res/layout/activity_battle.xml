@@ -43,13 +43,14 @@
         android:layout_width="0dp"
         android:layout_height="193dp"
         android:layout_marginBottom="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginStart="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         app:layout_constraintBottom_toTopOf="@+id/attack"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/you">
 
@@ -60,33 +61,37 @@
             <TextView
                 android:id="@+id/yourName"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                 />
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/blank1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                 />
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/blank3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                 />
+                android:text="    " />
 
             <TextView
                 android:id="@+id/blank2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="   " />
+                android:text="                           " />
+
+            <TextView
+                android:id="@+id/blank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="       " />
 
             <TextView
                 android:id="@+id/ename"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                 />
-        </TableRow> 
+                android:layout_height="wrap_content" />
+        </TableRow>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -100,8 +105,13 @@
             <TextView
                 android:id="@+id/yhp"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="66dp"
                 android:layout_height="wrap_content"
-                 />
+                android:text="       " />
 
             <ImageView
                 android:id="@+id/hpImage"
@@ -112,7 +122,8 @@
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="                           " />
 
             <TextView
                 android:id="@+id/enemhptxt"
@@ -123,8 +134,7 @@
             <TextView
                 android:id="@+id/ehp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                 />
+                android:layout_height="wrap_content" />
         </TableRow>
 
         <TableRow
@@ -140,8 +150,13 @@
             <TextView
                 android:id="@+id/mana"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                 />
+                android:text="       " />
 
             <ImageView
                 android:id="@+id/manaImage"
@@ -152,7 +167,8 @@
             <TextView
                 android:id="@+id/textView14"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="                           " />
 
             <TextView
                 android:id="@+id/eManatxt"
@@ -163,8 +179,7 @@
             <TextView
                 android:id="@+id/eMana"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                 />
+                android:layout_height="wrap_content" />
         </TableRow>
 
         <TableRow
@@ -180,8 +195,13 @@
             <TextView
                 android:id="@+id/yAC"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                 />
+                android:text="       " />
 
             <ImageView
                 android:id="@+id/acImage"
@@ -192,7 +212,8 @@
             <TextView
                 android:id="@+id/textView16"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="                           " />
 
             <TextView
                 android:id="@+id/eACtxt"
@@ -203,8 +224,7 @@
             <TextView
                 android:id="@+id/eAC"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                 />
+                android:layout_height="wrap_content" />
         </TableRow>
 
         <TableRow
@@ -220,8 +240,13 @@
             <TextView
                 android:id="@+id/ymc"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                 />
+                android:text="       " />
 
             <ImageView
                 android:id="@+id/mcImage"
@@ -232,7 +257,8 @@
             <TextView
                 android:id="@+id/textView15"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="                           " />
 
             <TextView
                 android:id="@+id/eMCtxt"
@@ -243,8 +269,7 @@
             <TextView
                 android:id="@+id/eMC"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                 />
+                android:layout_height="wrap_content" />
         </TableRow>
 
         <TableRow
@@ -260,8 +285,13 @@
             <TextView
                 android:id="@+id/yDMG"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                 />
+                android:text="       " />
 
             <ImageView
                 android:id="@+id/dmgImage"
@@ -272,7 +302,8 @@
             <TextView
                 android:id="@+id/textView17"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="                           " />
 
             <TextView
                 android:id="@+id/eDMGtxt"
@@ -283,8 +314,7 @@
             <TextView
                 android:id="@+id/eDMG"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                 />
+                android:layout_height="wrap_content" />
         </TableRow>
 
 
@@ -296,24 +326,19 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:layout_marginEnd="4dp"
-        android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
-        android:layout_marginStart="4dp"
         android:text="@string/attack"
         app:layout_constraintBottom_toTopOf="@+id/evensts"
         app:layout_constraintEnd_toStartOf="@+id/magice"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout2"/>
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout2" />
 
     <Button
         android:id="@+id/magice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginStart="4dp"
         android:text="@string/magice"
         app:layout_constraintBottom_toTopOf="@+id/evensts"
         app:layout_constraintEnd_toStartOf="@+id/spinner"
@@ -326,9 +351,7 @@
         android:layout_height="82dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -340,14 +363,10 @@
         android:layout_width="184dp"
         android:layout_height="43dp"
         android:layout_marginBottom="4dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-        android:layout_marginStart="4dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"
         app:layout_constraintBottom_toTopOf="@+id/evensts"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/magice"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout2"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"/>
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout2" />
 </android.support.constraint.ConstraintLayout>

@@ -1,7 +1,9 @@
 package com.ewulusen.disastersoft.merradia;
 
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.Random;
 
 public class Trainer extends AppCompatActivity {
@@ -21,6 +24,7 @@ public class Trainer extends AppCompatActivity {
     Button estri,eagi,edefi,edexi,eintei,econi,erefi,elucki,save;
     TextView text;
     String names;
+    MediaPlayer sound;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +34,7 @@ public class Trainer extends AppCompatActivity {
         seged_a=seged.split(",");
         id=seged_a[0];
         idC=seged_a[1];
+        sound = new MediaPlayer();
         userDB = new DatabaseHelper(this);
         Cursor localCursor=userDB.getChar(idC);
         localCursor.moveToNext();
@@ -76,6 +81,7 @@ public class Trainer extends AppCompatActivity {
                     } else {
                         stri++;
                     }
+                    playSound();
                     lvli=lvli-100;
                     text.setText(getString(R.string.seller1)+" You have "+lvli+" Trefu.");
                     estri.setText(getString(R.string.str) + " : " + stri);
@@ -97,6 +103,7 @@ public class Trainer extends AppCompatActivity {
                     } else {
                         lucki++;
                     }
+                    playSound();
                     lvli = lvli - 100;
                     text.setText(getString(R.string.seller1) + " You have " + lvli + " Trefu.");
                     elucki.setText(getString(R.string.luck) + " : " + lucki);
@@ -119,6 +126,7 @@ public class Trainer extends AppCompatActivity {
                         } else {
                             coni++;
                         }
+                        playSound();
                         lvli = lvli - 100;
                         text.setText(getString(R.string.seller1) + " You have " + lvli + " Trefu.");
                         econi.setText(getString(R.string.con) + " : " + coni);
@@ -141,6 +149,7 @@ public class Trainer extends AppCompatActivity {
                     } else {
                         refi++;
                     }
+                    playSound();
                     lvli = lvli - 100;
                     text.setText(getString(R.string.seller1) + " You have " + lvli + " Trefu.");
                     erefi.setText(getString(R.string.ref) + " : " + refi);
@@ -163,6 +172,7 @@ public class Trainer extends AppCompatActivity {
                         } else {
                             dexi++;
                         }
+                        playSound();
                         lvli = lvli - 100;
                         text.setText(getString(R.string.seller1) + " You have " + lvli + " Trefu.");
                         edexi.setText(getString(R.string.dex) + " : " + dexi);
@@ -184,6 +194,7 @@ public class Trainer extends AppCompatActivity {
                     } else {
                         defi++;
                     }
+                    playSound();
                     lvli = lvli - 100;
                     text.setText(getString(R.string.seller1) + " You have " + lvli + " Trefu.");
                     edefi.setText(getString(R.string.def) + " : " + defi);
@@ -205,6 +216,7 @@ public class Trainer extends AppCompatActivity {
                     } else {
                         intei++;
                     }
+                    playSound();
                     lvli = lvli - 100;
                     text.setText(getString(R.string.seller1) + " You have " + lvli + " Trefu.");
                     eintei.setText(getString(R.string.inte) + " : " + intei);
@@ -226,6 +238,7 @@ public class Trainer extends AppCompatActivity {
                     } else {
                         stri++;
                     }
+                    playSound();
                     lvli = lvli - 100;
                     text.setText(getString(R.string.seller1) + " You have " + lvli + " Trefu.");
                     eagi.setText(getString(R.string.agi) + " : " + agii);
@@ -256,5 +269,26 @@ public class Trainer extends AppCompatActivity {
         intent2.putExtra("datas", seged);
         startActivity(intent2);
         finish();
+    }
+    public void
+ playSound()
+    {
+        if(sound.isPlaying())
+        {
+            sound.reset();
+        }
+
+        try {
+            sound.reset();
+            AssetFileDescriptor afd;
+            afd = getAssets().openFd("ddrink.wav");
+            sound.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+            sound.prepare();
+            sound.start();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -62,7 +62,7 @@ public class TheCharakter extends AppCompatActivity {
             dmgi=Integer.parseInt(cursore.getString(cursore.getColumnIndex("DMG")).toString());
             names=cursore.getString(cursore.getColumnIndex("Name")).toString();
             point=findViewById(R.id.points);
-            point.setText("points:"+pointsz);
+            point.setText("skillpoints:"+pointsz);
             str=findViewById(R.id.str);
             str.setText(getString(R.string.str)+":"+stri);
             dex=findViewById(R.id.dex);

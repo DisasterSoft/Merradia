@@ -400,7 +400,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         paramSQLiteDatabase.insert(mTableName, null, localContentValues);
         localContentValues.clear();
         localContentValues.put("Name", "Thunder");
-        localContentValues.put("DMG",12);
+        localContentValues.put("DMG","12");
         localContentValues.put("MANA", 20);
         localContentValues.put("TARGET", 1);
         localContentValues.put("TYPE", 0);
@@ -454,12 +454,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return magice;
     }
     /**
-     * csata után oda adja a csatáért járó xp-t+ lvl up és 5 pont elosztható
+     * csata után oda adja a csatáért járó xp-t+ lvl up és 5 pont elosztható 0 ad vissza ha nem történt lvl up
      * @param id azaonosító
      * @param xp mennyi xp-t kap
      */
-    public void addXP(String id, int xp)
+    public int addXP(String id, int xp)
     {
+        int ret=0;
         SQLiteDatabase localSQLiteDatabase = getWritableDatabase();
         ContentValues localContentValues = new ContentValues();
         String str1 = "SELECT * FROM "+cTableName+" where ID='"+id+"'";
@@ -467,6 +468,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         localCursor.moveToFirst();
        String mxp=localCursor.getString(localCursor.getColumnIndex("XP")).toString();
         int lvl=Integer.parseInt(localCursor.getString(localCursor.getColumnIndex("LVL")).toString());
+        int lvl2=lvl;
         localCursor.close();
       // Log.d("xpelőtt",mxp+"");
      //  Log.d("id",id+"");
@@ -483,8 +485,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 localContentValues.put("POINT","5");
                 //Toast.makeText(this,R.string.lvlup, Toast.LENGTH_SHORT).show();
             }
+            if(lvl==lvl2)
+            {
+                ret=0;
+            }
+            else
+            {
+                ret=1;
+            }
         localContentValues.put("XP",mxp);
         localSQLiteDatabase.update(cTableName, localContentValues, "ID =" + id, null);
         localContentValues.clear();
+    return ret;
     }
 }
