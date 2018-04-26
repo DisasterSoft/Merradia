@@ -291,6 +291,8 @@ public class Battle extends AppCompatActivity {
      */
     public void attackEnemy()
     {
+        magiceB.setEnabled(false);
+        attack.setEnabled(false);
         int dmg=0;
         Random rand = new Random();
         int k = (rand.nextInt(20)+1);
@@ -345,6 +347,8 @@ public class Battle extends AppCompatActivity {
         }
     }
     public void enemyAttack() {
+        magiceB.setEnabled(true);
+        attack.setEnabled(true);
         int dmg = 0;
         Random rand = new Random();
         int k = 0;
@@ -415,6 +419,8 @@ public class Battle extends AppCompatActivity {
                     ehp.setText(Integer.toString(ehpi));
                     addText(getString(R.string.enemy_heal)+" "+(3+eintei));
 
+        magiceB.setEnabled(true);
+        attack.setEnabled(true);
     }
 
     /**
@@ -422,12 +428,15 @@ public class Battle extends AppCompatActivity {
      *
      */
     public void attackMagice() {
+
         int folytat=0;
         String aMagice = magice.getSelectedItem().toString();
         //ha nem választott ki  semmit akkor kap 1 üzenet
         if (aMagice.equals("Select Magice!") || aMagice.equals("")) {
             addText(getString(R.string.select_magice).toString());
         } else {
+            magiceB.setEnabled(false);
+            attack.setEnabled(false);
             //megkapjuka varázs tulajdonságait vesszővel elválasztva
             String theMagice = userDB.getMagicByName(aMagice);
             Log.d("varázs",theMagice);

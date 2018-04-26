@@ -29,7 +29,7 @@
         app:icon_button_color="#d48484"
         app:layout_constraintBottom_toTopOf="@+id/trainer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintHorizontal_bias="0.04"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editChar"
         app:layout_constraintVertical_bias="0.0"
@@ -61,7 +61,6 @@
         app:button_icon="@drawable/lance"
         app:button_icon_height="50dp"
         app:button_icon_width="50dp"
-        app:magic_button_size="85dp"
         app:expandable_area_color="#4eca25"
         app:hide_text="@string/fight"
         app:hide_text_color="@android:color/white"
@@ -71,8 +70,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.04"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcome"
-        />//fight
+        app:layout_constraintTop_toTopOf="@+id/welcome"
+        app:magic_button_size="85dp" />//fight
 
     <br.com.bloder.magic.view.MagicButton
         android:id="@+id/trainer"
@@ -81,18 +80,18 @@
         app:button_icon="@drawable/potion"
         app:button_icon_height="50dp"
         app:button_icon_width="50dp"
-        app:magic_button_size="85dp"
         app:expandable_area_color="#723eb2"
         app:hide_text="@string/trainer"
         app:hide_text_color="@android:color/white"
-        app:hide_text_size="15dp"
+        app:hide_text_size="10dp"
         app:icon_button_color="#723eb2"
         app:layout_constraintBottom_toTopOf="@+id/blacksmith"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.04"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/makechar"
-         />//trainer
+        app:magic_button_size="85dp" />//trainer
+
     <br.com.bloder.magic.view.MagicButton
         android:id="@+id/blacksmith"
         android:layout_width="wrap_content"
@@ -100,18 +99,17 @@
         app:button_icon="@drawable/axxe"
         app:button_icon_height="50dp"
         app:button_icon_width="50dp"
-        app:magic_button_size="85dp"
         app:expandable_area_color="#e8dc2b"
         app:hide_text="@string/blacksmith"
         app:hide_text_color="@android:color/white"
-        app:hide_text_size="15dp"
+        app:hide_text_size="10dp"
         app:icon_button_color="#e8dc2b"
         app:layout_constraintBottom_toTopOf="@+id/armorer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.04"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/trainer"
-        />//Blacksmith
+        app:magic_button_size="85dp" />//Blacksmith
 
     <br.com.bloder.magic.view.MagicButton
         android:id="@+id/armorer"
@@ -120,18 +118,28 @@
         app:button_icon="@drawable/mail"
         app:button_icon_height="50dp"
         app:button_icon_width="50dp"
-        app:magic_button_size="85dp"
         app:expandable_area_color="#858383"
         app:hide_text="@string/armorer"
         app:hide_text_color="@android:color/white"
-        app:hide_text_size="15dp"
+        app:hide_text_size="10dp"
         app:icon_button_color="#858383"
+        app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.04"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/blacksmith"
-         />//armorer
+        app:magic_button_size="85dp" />//armorer
 
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="248dp"
+        android:layout_height="wrap_content"
+        app:adSize="BANNER"
+        app:adUnitId="@string/admob_id"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/armorer" />
 
 
 </android.support.constraint.ConstraintLayout>

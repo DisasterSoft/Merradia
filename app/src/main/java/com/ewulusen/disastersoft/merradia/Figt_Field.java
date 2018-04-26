@@ -285,57 +285,49 @@ public class Figt_Field extends AppCompatActivity {
     public void moveCharTo(final int i, int j, int x, int y, final int elem)
     {
         moves--;
-        if(sound.isPlaying())
-        {
-            sound.reset();
-        }
+        if(moves!=-1) {
+            if (sound.isPlaying()) {
+                sound.reset();
+            }
 
-        try {
-            sound.reset();
-            AssetFileDescriptor afd;
-            afd = getAssets().openFd("walk.wav");
-            sound.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
-            sound.prepare();
-            sound.start();
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        for(int k=0;k<25;k++) {
-            filds[k].setOnClickListener(null);
-        }
-        if(moves<0)
-        {
-            enemyMove(5);
-        }
-        else {
+            try {
+                sound.reset();
+                AssetFileDescriptor afd;
+                afd = getAssets().openFd("walk.wav");
+                sound.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+                sound.prepare();
+                sound.start();
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            for (int k = 0; k < 25; k++) {
+                filds[k].setOnClickListener(null);
+            }
+
+
             //      Log.d("moveto","bejött");
             if (field[i][j] == 2) {
                 attackTarget();
 
             } else {
-                if(field[i][j]==4)
-                {
+                if (field[i][j] == 4) {
                     Random rand = new Random();
                     int k = (rand.nextInt(300));
-                    addItems(getText(R.string.chesFound).toString()+" "+k+" Trefu");
-                    userDB.chesFound(ids,k);
+                    addItems(getText(R.string.chesFound).toString() + " " + k + " Trefu");
+                    userDB.chesFound(ids, k);
                 }
-                if(field[i][j]==3)
-                {
+                if (field[i][j] == 3) {
                     addItems(getText(R.string.trappFound).toString());
                     Random rand = new Random();
-                    int trap = (rand.nextInt(20)+5);
-                    int you=(rand.nextInt(20)+refi);
-                    if(you>trap) {
+                    int trap = (rand.nextInt(20) + 5);
+                    int you = (rand.nextInt(20) + refi);
+                    if (you > trap) {
                         addItems(getText(R.string.trappAvoid).toString());
-                    }
-                    else
-                    {
-                        int dmg=rand.nextInt(10)+1;
-                        if(sound.isPlaying())
-                        {
+                    } else {
+                        int dmg = rand.nextInt(10) + 1;
+                        if (sound.isPlaying()) {
                             sound.reset();
                         }
 
@@ -343,7 +335,7 @@ public class Figt_Field extends AppCompatActivity {
                             sound.reset();
                             AssetFileDescriptor afd;
                             afd = getAssets().openFd("trap.wav");
-                            sound.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+                            sound.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
                             sound.prepare();
                             sound.start();
                         } catch (IllegalStateException e) {
@@ -352,8 +344,8 @@ public class Figt_Field extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         addItems(getText(R.string.trappHit).toString() + " " + dmg + " dmg");
-                        hp=hp-dmg;
-                        if(hp<0) {
+                        hp = hp - dmg;
+                        if (hp < 0) {
                             userDB.deleteChar(ids);
                             Toast.makeText(Figt_Field.this, R.string.you_lose, Toast.LENGTH_LONG).show();
                             Intent intent2 = null;
@@ -384,6 +376,7 @@ public class Figt_Field extends AppCompatActivity {
                         break;
                 }
 
+
                 final Handler mHandler = new Handler();
 
                 mHandler.postDelayed(new Runnable() {
@@ -398,6 +391,10 @@ public class Figt_Field extends AppCompatActivity {
                 drawField();
             }
         }
+                if (moves == 0) {
+                    enemyMove(5);
+                }
+
 
 
     }
