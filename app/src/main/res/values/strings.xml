@@ -24,9 +24,9 @@
     <string name="inte">Intelligent</string>
     <string name="move">Evade</string>
     <string name="attack">Hit!</string>
-    <string name="admob_id1">ca-app-pub-7036765120364615/6159648359</string>
+    <string name="admob_id">ca-app-pub-7036765120364615/6159648359</string>
     <string name="admob_id2">ca-app-pub-7036765120364615~2433948347</string>
-    <string name="admob_id">ca-app-pub-3940256099942544/5224354917</string>
+    <string name="admob_id1">ca-app-pub-3940256099942544/5224354917</string>
     <string name="magice">Special Attack</string>
     <string name="dmg">Damage</string>
     <string name="save">Save</string>
@@ -80,8 +80,10 @@
     <string name="seller2">Welcome dear friend, I can craft a weapon for you, that chang you dmg, but be care full! I am a bit clumsy and you have opposite effect. 500 Trefu/craft.</string>
     <string name="seller3">Welcome dear friend, I can craft a armore for you, that chang you Deffens, but be care full! I am a bit clumsy and you have opposite effect. 500 Trefu/craft.</string>
     <string name="low_mana">Your mana is to low!</string>
+    <string name="reward">Watch video to get reward</string>
     <string name="no_money">Your dont have enugh money for this action!</string>
-    <string name="reward">You received 1000 Trefu</string>
+    <string name="reward_get">You received</string>
+    <string name="reward_Button">Your reward video is ready to watch</string>
     <string name="lvlup">LVL up!</string>
     <string name="select_magice">Please select shom special attack</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
