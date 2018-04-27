@@ -11,8 +11,11 @@
     <string name="con">Constitution</string>
     <string name="def">Defence</string>
     <string name="ref">Reflex</string>
+    <string name="craftweapon">Craft a weapon for me</string>
+    <string name="craftarmor">Craft a armore for me</string>
+    <string name="craftmarmor">Craft a magice armore for me</string>
     <string name="luck">Luck</string>
-    <string name="dex">Skills</string>
+    <string name="dex">Dexterity</string>
     <string name="trainer">Trainer</string>
     <string name="armorer">Armorer</string>
     <string name="blacksmith">Blacksmith</string>
@@ -20,7 +23,10 @@
     <string name="mc">Magic Defence</string>
     <string name="inte">Intelligent</string>
     <string name="move">Evade</string>
-    <string name="attack">Attack</string>
+    <string name="attack">Hit!</string>
+    <string name="admob_id">ca-app-pub-7036765120364615/6159648359</string>
+    <string name="admob_id2">ca-app-pub-7036765120364615~2433948347</string>
+    <string name="admob_id1">ca-app-pub-3940256099942544/5224354917</string>
     <string name="magice">Special Attack</string>
     <string name="dmg">Damage</string>
     <string name="save">Save</string>
@@ -33,7 +39,8 @@
     <string name="charakter">Character</string>
     <string name="empty1">Empty</string>
     <string name="empty2">None</string>
-    <string name="edit_char">Edit</string>
+    <string name="edit_char">Select</string>
+    <string name="select_char">Edit Charakter</string>
     <string name="delete_char">Delete</string>
     <string name="hp">Health Points</string>
     <string name="mana">Mana points</string>
@@ -44,8 +51,8 @@
     <string name="knigt_select">Knight selected</string>
     <string name="archer_select">Archer selected</string>
     <string name="rouge_select">Rouge selected</string>
-    <string name="no_point">Sorry, you do not have any points left.</string>
-    <string name="no_point1">Sorry, your character points can not be less than 0.</string>
+    <string name="no_point">Sorry, you do not have any skillpoints left.</string>
+    <string name="no_point1">Sorry, your skillpoints can not be less than 0.</string>
     <string name="no_kaszt">Please select a character.</string>
     <string name="no_name">Please give your character a name.</string>
     <string name="action_sign_in">Sign In or Register</string>
@@ -69,7 +76,15 @@
     <string name="enemy_hit">The opponent hit you.</string>
     <string name="you_win">Congratulation! You defeated the opponent.</string>
     <string name="you_lose">You lost, your character is dead.</string>
+    <string name="seller1">Welcome dear friend, you can buy from me potions, that chang you atributes, but be care full! Some of then make the opposite effect. 100 Trefu/potion.</string>
+    <string name="seller2">Welcome dear friend, I can craft a weapon for you, that chang you dmg, but be care full! I am a bit clumsy and you have opposite effect. 500 Trefu/craft.</string>
+    <string name="seller3">Welcome dear friend, I can craft a armore for you, that chang you Deffens, but be care full! I am a bit clumsy and you have opposite effect. 500 Trefu/craft.</string>
     <string name="low_mana">Your mana is to low!</string>
+    <string name="reward">Watch video to get reward</string>
+    <string name="no_money">Your dont have enugh money for this action!</string>
+    <string name="reward_get">You received</string>
+    <string name="reward_Button">Your reward video is ready to watch</string>
+    <string name="lvlup">LVL up!</string>
     <string name="select_magice">Please select shom special attack</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."

@@ -40,7 +40,7 @@ public class MakeCharakter extends AppCompatActivity {
         userDB = new DatabaseHelper(this);
         Random r = new Random();
         pointsz = r.nextInt(48 - 6) + 6;
-        point.setText("points:"+pointsz);
+        point.setText("skillpoints:"+pointsz);
         kaszt=0;
         lisztenerek();
     }
@@ -54,7 +54,7 @@ public class MakeCharakter extends AppCompatActivity {
      str.setText(getString(R.string.str)+":0");
      dex=findViewById(R.id.dex);
         dex.setText(getString(R.string.dex)+":0");
-     def=findViewById(R.id.def);
+     def=findViewById(R.id.craft1);
         def.setText(getString(R.string.def)+":0");
      agi=findViewById(R.id.agi);
         agi.setText(getString(R.string.agi)+":0");
@@ -646,7 +646,7 @@ name=findViewById(R.id.name) ;
             
                     userDB.saveData(datas);
         Intent intent2 = null;
-        intent2 = new Intent(MakeCharakter.this, mainScreen.class);
+        intent2 = new Intent(MakeCharakter.this, CharList.class);
         intent2.putExtra("datas", id);
         startActivity(intent2);
         finish();

@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "202356812135",
+    "firebase_url": "https://merradia-b8b35.firebaseio.com",
+    "project_id": "merradia-b8b35",
+    "storage_bucket": "merradia-b8b35.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:202356812135:android:7c452d318f36675b",
+        "android_client_info": {
+          "package_name": "com.ewulusen.disastersoft.merradia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "202356812135-b0mu050a44tr0cqug68j064uckk2inuc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdCiyTsiqiUxRP6MYCVRdP6Z4zch-4mHk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:202356812135:android:fac582de7a5d4da0",
+        "android_client_info": {
+          "package_name": "ewulusen.disastersoft.merradia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "202356812135-b0mu050a44tr0cqug68j064uckk2inuc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdCiyTsiqiUxRP6MYCVRdP6Z4zch-4mHk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

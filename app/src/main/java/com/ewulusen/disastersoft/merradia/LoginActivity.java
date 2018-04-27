@@ -259,7 +259,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             Cursor localCursor=userDB.login(mEmail,mPassword);
             localCursor.moveToNext();
             Intent intent2 = null;
-            intent2 = new Intent(LoginActivity.this, mainScreen.class);
+            intent2 = new Intent(LoginActivity.this, CharList.class);
             String name=localCursor.getString(0);
             intent2.putExtra("datas", name);
             startActivity(intent2);

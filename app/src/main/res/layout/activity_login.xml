@@ -24,7 +24,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_form"
-        app:srcCompat="@drawable/disastersoft__logo" />
+        app:srcCompat="@drawable/disastersoft2" />
 
     <ProgressBar
         android:id="@+id/login_progress"

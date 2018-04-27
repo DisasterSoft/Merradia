@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
+
 import java.sql.Timestamp;
 
 /**
@@ -24,7 +26,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(Context paramContext)
 
     {
-        super(paramContext, DatabaseName, null, 22);
+        super(paramContext, DatabaseName, null, 23);
     }
 
     /**
@@ -35,8 +37,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public  Cursor getName(String id)
     {
     SQLiteDatabase localSQLiteDatabase = getReadableDatabase();
-    String str1 = "SELECT userName FROM users_table_Merradia where ID='"+id+"'";
-    Log.d("SQL", str1);
+    String str1 = "SELECT Name FROM "+cTableName+" where ID='"+id+"'";
+  //  Log.d("SQL", str1);
     Cursor localCursor = localSQLiteDatabase.rawQuery(str1, null);
     return localCursor;
     }
@@ -102,7 +104,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         paramSQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS "+cTableName+"( ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "Owner TEXT, Name TEXT,  AGI TEXT,   STR TEXT,   DEF TEXT,   CON TEXT," +
                 "   REF TEXT,   LUCK TEXT, DEX TEXT,INTE TEXT,KASZT TEXT," +
-                "POINT TEXT,LVL TEXT DEFAULT '1',MONEY TEXT,XP TEXT DEFAULT '0')");
+                "POINT TEXT,LVL TEXT DEFAULT '1',MONEY TEXT,XP TEXT DEFAULT '0',DMG TEXT DEFAULT '0',AC TEXT DEFAULT '0',MAC TEXT DEFAULT '0')");
         fillMagice(paramSQLiteDatabase);
     }
 
@@ -141,7 +143,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     {
         SQLiteDatabase localSQLiteDatabase = getReadableDatabase();
         String str1 = "SELECT * FROM char_table_Merradia where OWNER='"+id+"'";
-        Log.d("SQL", str1);
+       //Log.d("SQL", str1);
         Cursor localCursor = localSQLiteDatabase.rawQuery(str1, null);
         // printDatabaseHelper(id);
         return localCursor;
@@ -159,7 +161,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     line=line+(cursor.getString(i).toString())+"->"+cursor.getColumnName(i)+",";
                 }
 
-                Log.d("tartalom",line);
+              //  Log.d("tartalom",line);
                 cursor.moveToNext();
             }
         }
@@ -226,6 +228,41 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         localContentValues.put("LUCK", datas[7]);
         localContentValues.put("POINT", datas[9]);
         localSQLiteDatabase.update(cTableName, localContentValues, "ID =" + datas[8], null);
+        localContentValues.clear();
+    }
+    public void upgradeDataSeller1(String datas[])
+    {
+        SQLiteDatabase localSQLiteDatabase = getWritableDatabase();
+        ContentValues localContentValues = new ContentValues();
+        localContentValues.put("STR", datas[0]);
+        localContentValues.put("AGI", datas[1]);
+        localContentValues.put("DEF", datas[2]);
+        localContentValues.put("DEX", datas[3]);
+        localContentValues.put("INTE", datas[4]);
+        localContentValues.put("CON", datas[5]);
+        localContentValues.put("REF", datas[6]);
+        localContentValues.put("LUCK", datas[7]);
+        localContentValues.put("MONEY", datas[8]);
+        localSQLiteDatabase.update(cTableName, localContentValues, "ID =" + datas[9], null);
+        localContentValues.clear();
+    }
+    public void upgradeDataSeller2(String datas[])
+    {
+        SQLiteDatabase localSQLiteDatabase = getWritableDatabase();
+        ContentValues localContentValues = new ContentValues();
+        localContentValues.put("DMG", datas[0]);
+        localContentValues.put("MONEY", datas[1]);
+        localSQLiteDatabase.update(cTableName, localContentValues, "ID =" + datas[2], null);
+        localContentValues.clear();
+    }
+    public void upgradeDataSeller3(String datas[])
+    {
+        SQLiteDatabase localSQLiteDatabase = getWritableDatabase();
+        ContentValues localContentValues = new ContentValues();
+        localContentValues.put("AC", datas[0]);
+        localContentValues.put("MAC", datas[1]);
+        localContentValues.put("MONEY", datas[2]);
+        localSQLiteDatabase.update(cTableName, localContentValues, "ID =" + datas[3], null);
         localContentValues.clear();
     }
     public void deleteChar(String id)
@@ -363,7 +400,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         paramSQLiteDatabase.insert(mTableName, null, localContentValues);
         localContentValues.clear();
         localContentValues.put("Name", "Thunder");
-        localContentValues.put("DMG",12);
+        localContentValues.put("DMG","12");
         localContentValues.put("MANA", 20);
         localContentValues.put("TARGET", 1);
         localContentValues.put("TYPE", 0);
@@ -417,12 +454,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return magice;
     }
     /**
-     * csata után oda adja a csatáért járó xp-t+ lvl up és 5 pont elosztható
+     * csata után oda adja a csatáért járó xp-t+ lvl up és 5 pont elosztható 0 ad vissza ha nem történt lvl up
      * @param id azaonosító
      * @param xp mennyi xp-t kap
      */
-    public void addXP(String id, int xp)
+    public int addXP(String id, int xp)
     {
+        int ret=0;
         SQLiteDatabase localSQLiteDatabase = getWritableDatabase();
         ContentValues localContentValues = new ContentValues();
         String str1 = "SELECT * FROM "+cTableName+" where ID='"+id+"'";
@@ -430,23 +468,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         localCursor.moveToFirst();
        String mxp=localCursor.getString(localCursor.getColumnIndex("XP")).toString();
         int lvl=Integer.parseInt(localCursor.getString(localCursor.getColumnIndex("LVL")).toString());
+        int lvl2=lvl;
         localCursor.close();
-       Log.d("xpelőtt",mxp+"");
-       Log.d("id",id+"");
+      // Log.d("xpelőtt",mxp+"");
+     //  Log.d("id",id+"");
         mxp=Integer.toString(Integer.parseInt(mxp)+xp);
-        Log.d("xp",mxp+"");
+      /*  Log.d("xp",mxp+"");
         Log.d("xpszámol",(Integer.parseInt(mxp)/(lvl*100))+"");
-        Log.d("lvl",lvl+"");
+        Log.d("lvl",lvl+"");*/
         if(Integer.parseInt(mxp)/(lvl*100)>0)
             {
                 mxp=Integer.toString(Integer.parseInt(mxp)%(lvl*100));
-                Log.d("bejöttxp",mxp+"");
+                //Log.d("bejöttxp",mxp+"");
                 lvl++;
                 localContentValues.put("LVL",Integer.toString(lvl));
                 localContentValues.put("POINT","5");
+                //Toast.makeText(this,R.string.lvlup, Toast.LENGTH_SHORT).show();
+            }
+            if(lvl==lvl2)
+            {
+                ret=0;
+            }
+            else
+            {
+                ret=1;
             }
         localContentValues.put("XP",mxp);
         localSQLiteDatabase.update(cTableName, localContentValues, "ID =" + id, null);
         localContentValues.clear();
+    return ret;
     }
 }

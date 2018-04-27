@@ -1,7 +1,9 @@
 package com.ewulusen.disastersoft.merradia;
 
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,7 +13,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -23,6 +27,7 @@ public class Figt_Field extends AppCompatActivity {
     public static String id;
     public static String ids;
     DatabaseHelper userDB;
+    MediaPlayer sound;
     TextView name;
     GifImageView a1, a2, a3, a4, a5, b1, b2, b3, b4, b5, c1, c2, c3, c4, c5, d1, d2, d3, d4, d5, e1, e2, e3, e4, e5,mainChar;
     GifImageView[] filds = new GifImageView[25];
@@ -50,6 +55,7 @@ public class Figt_Field extends AppCompatActivity {
         String[] elper = names.split(",");
         id = elper[0];
         ids = elper[1];
+        sound = new MediaPlayer();
         userDB = new DatabaseHelper(this);
         Cursor localCursor = userDB.getChar(ids);
         localCursor.moveToNext();
@@ -279,42 +285,74 @@ public class Figt_Field extends AppCompatActivity {
     public void moveCharTo(final int i, int j, int x, int y, final int elem)
     {
         moves--;
-        for(int k=0;k<25;k++) {
-            filds[k].setOnClickListener(null);
-        }
-        if(moves<0)
-        {
-            enemyMove(5);
-        }
-        else {
+        if(moves!=-1) {
+            if (sound.isPlaying()) {
+                sound.reset();
+            }
+
+            try {
+                sound.reset();
+                AssetFileDescriptor afd;
+                afd = getAssets().openFd("walk.wav");
+                sound.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+                sound.prepare();
+                sound.start();
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            for (int k = 0; k < 25; k++) {
+                filds[k].setOnClickListener(null);
+            }
+
+
             //      Log.d("moveto","bejött");
             if (field[i][j] == 2) {
                 attackTarget();
 
             } else {
-                if(field[i][j]==4)
-                {
+                if (field[i][j] == 4) {
                     Random rand = new Random();
                     int k = (rand.nextInt(300));
-                    addItems(getText(R.string.chesFound).toString()+" "+k+" Trefu");
-                    userDB.chesFound(ids,k);
+                    addItems(getText(R.string.chesFound).toString() + " " + k + " Trefu");
+                    userDB.chesFound(ids, k);
                 }
-                if(field[i][j]==3)
-                {
+                if (field[i][j] == 3) {
                     addItems(getText(R.string.trappFound).toString());
                     Random rand = new Random();
-                    int trap = (rand.nextInt(20)+5);
-                    int you=(rand.nextInt(20)+refi);
-                    if(you>trap) {
+                    int trap = (rand.nextInt(20) + 5);
+                    int you = (rand.nextInt(20) + refi);
+                    if (you > trap) {
                         addItems(getText(R.string.trappAvoid).toString());
-                    }
-                    else
-                    {
-                        int dmg=rand.nextInt(10)+1;
+                    } else {
+                        int dmg = rand.nextInt(10) + 1;
+                        if (sound.isPlaying()) {
+                            sound.reset();
+                        }
+
+                        try {
+                            sound.reset();
+                            AssetFileDescriptor afd;
+                            afd = getAssets().openFd("trap.wav");
+                            sound.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+                            sound.prepare();
+                            sound.start();
+                        } catch (IllegalStateException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         addItems(getText(R.string.trappHit).toString() + " " + dmg + " dmg");
-                        hp=hp-dmg;
-                        if(hp<0) {
+                        hp = hp - dmg;
+                        if (hp < 0) {
                             userDB.deleteChar(ids);
+                            Toast.makeText(Figt_Field.this, R.string.you_lose, Toast.LENGTH_LONG).show();
+                            Intent intent2 = null;
+                            intent2 = new Intent(Figt_Field.this, CharList.class);
+                            intent2.putExtra("datas", id);
+                            startActivity(intent2);
+                            finish();
                         }
                     }
                 }
@@ -338,6 +376,7 @@ public class Figt_Field extends AppCompatActivity {
                         break;
                 }
 
+
                 final Handler mHandler = new Handler();
 
                 mHandler.postDelayed(new Runnable() {
@@ -352,6 +391,10 @@ public class Figt_Field extends AppCompatActivity {
                 drawField();
             }
         }
+                if (moves == 0) {
+                    enemyMove(5);
+                }
+
 
 
     }
