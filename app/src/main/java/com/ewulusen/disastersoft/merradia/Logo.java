@@ -13,8 +13,6 @@ public class Logo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logo);
-
-
         GifImageView logo;
         logo=findViewById(R.id.logo);
         logo.setOnClickListener(new View.OnClickListener() {
