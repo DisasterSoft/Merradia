@@ -48,7 +48,7 @@ public class mainScreen extends AppCompatActivity {
         }
         else {
         kiir=findViewById(R.id.welcome);
-        kiir.setText("Welcome dear "+localCursor.getString(0)+"!" );
+        kiir.setText(getString(R.string.welcome_main)+" "+localCursor.getString(0)+"!" );
         localCursor=userDB.getCharacters(id);
         editChar=findViewById(R.id.editChar);
         fight=findViewById(R.id.fight);

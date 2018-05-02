@@ -86,7 +86,13 @@
     <string name="reward_Button">A jutalomvideó elő van készítve</string>
     <string name="lvlup">Szintlépés!</string>
     <string name="select_magice">Kérlek válasz speciális támadást!</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+    <string name="welcome_main">Üdvözöllek kedves </string>
+    <string name="welcome_fightfield">Üdvözöllek al abirintusba,próbáld megtalálni a szörnyet, valahol rejtőzik, de vigyázz minden telle lehet csapdákkal!</string>
+    <string name="welcome_battle">Gyerünk öljük meg ezt az izét!</string>
+    <string name="Select_Magice">Válasz Támadást</string>
+    <string name="and_do">és okozot</string>
+    <string name="you_get"> kaptál </string>
+    <string name="Trefuand"> Trefu és </string>
+    <string name="lvlupmsg">  Szintlépés! és kaptál 5  képességpontot</string>
+    <string name="maxheal">  Teljesen fel vagy gyógyúlva</string>
 </resources>

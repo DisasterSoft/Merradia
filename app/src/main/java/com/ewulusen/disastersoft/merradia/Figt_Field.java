@@ -61,8 +61,7 @@ public class Figt_Field extends AppCompatActivity {
         localCursor.moveToNext();
         initialList = new ArrayList<String>();
         display_events=(ListView) findViewById(R.id.list_);
-        addItems("Welcome to the maze,try to find the monster, ther hiding shomwhere, but bee carefull." +
-                "everithing is full of traps" + "\n");
+        addItems(getString(R.string.welcome_fightfield));
         parkereso(localCursor);
         makeField();
         drawField();

@@ -33,8 +33,8 @@ public class Battle extends AppCompatActivity {
     TextView eac,emc,edmg,ename,ehp,emana;
     MediaPlayer sound;
     Button attack,magiceB;
-    int stri,hpi,maci,mci,aci,acii,movei,manai,dmgi,dmgii,agii,defi,dexi,intei,coni,refi,lucki,lvli;
-    int estri,ehpi,emci,eaci,emanai,edmgi,eagii,edefi,edexi,eintei,econi,erefi,elucki,emovi;
+    int stri,hpi,maci,mci,aci,acii,movei,manai,dmgi,dmgii,agii,defi,dexi,intei,coni,refi,lucki,lvli,mhpi;
+    int estri,ehpi,emci,eaci,emanai,edmgi,eagii,edefi,edexi,eintei,econi,erefi,elucki,emovi,emhpi;
     int kaszt,ekaszt;//1=knight,2=rouge,3=archer,4=ork,5=wizard;
     List<String> items=new ArrayList<String>();
     GifImageView enemy,youChar;
@@ -65,7 +65,7 @@ public class Battle extends AppCompatActivity {
         magice.setAdapter(adapter);
         initialList = new ArrayList<String>();
         display_events=(ListView) findViewById(R.id.evensts);
-        addText("C'om lets kill this thing!" + "\n");
+        addText(getString(R.string.welcome_battle) + "\n");
         mAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, initialList);
         mAdapter.notifyDataSetChanged();
         display_events.setAdapter(mAdapter);
@@ -103,6 +103,7 @@ public class Battle extends AppCompatActivity {
         aci = osszeg;
         name=findViewById(R.id.yourName);
         hp=findViewById(R.id.yhp);
+        mhpi=stri+coni+defi;
         mc=findViewById(R.id.ymc);
         ac=findViewById(R.id.yAC);
         mana=findViewById(R.id.mana);
@@ -173,9 +174,11 @@ public class Battle extends AppCompatActivity {
         elucki=rand.nextInt(20)+lvli;
         eintei=rand.nextInt(20)+lvli;
         erefi=rand.nextInt(20)+lvli;
+
         int osszeg = 0;
         osszeg = estri + econi + edefi;
         ehpi = osszeg;
+        emhpi = osszeg;
         osszeg = eintei + edefi;
         emci = osszeg;
         osszeg = eintei * 10;
@@ -274,7 +277,7 @@ public class Battle extends AppCompatActivity {
      */
     public void addMagiceItems(int id)
     {
-        items.add("Select Magice!");
+        items.add(getString(R.string.Select_Magice));
         String[] nevek=userDB.getMagicName(id);
        // Log.d("nevek",nevek[1]);
                 items.add(nevek[0]);
@@ -326,7 +329,7 @@ public class Battle extends AppCompatActivity {
         if(dmg>0)
         {
             charAnime(kaszt,"P","a");
-            addText(getString(R.string.you_hit)+" and do "+dmg+" dmg");
+            addText(getString(R.string.you_hit)+" "+getString(R.string.and_do)+" "+dmg+" "+getString(R.string.dmg));
             ehpi=ehpi-dmg;
             charAnime(ekaszt,"E","h");
             if(ehpi<=0)
@@ -377,7 +380,7 @@ public class Battle extends AppCompatActivity {
             }
             if (dmg > 0) {
                 charAnime(ekaszt, "E", "a");
-                addText(getString(R.string.enemy_hit) + " and do " + dmg + " dmg");
+                addText(getString(R.string.enemy_hit)+" "+getString(R.string.and_do) +" "+ dmg +" "+ getString(R.string.dmg));
                 charAnime(kaszt, "P", "h");
                 hpi = hpi - dmg;
                 if (hpi < 1) {
@@ -390,37 +393,41 @@ public class Battle extends AppCompatActivity {
     }
     public void attackEnemyMagice()
     {
+if(ehpi<=emhpi) {
+    if (emanai < (emanai - 3)) {
+        addText(getString(R.string.low_mana));
+    }
+    //levonjuk a manát
+    emanai = emanai - 3;
+    emana.setText(Integer.toString(emanai));
+    //ha mi vagyunk a célpont, akkor healelődünk
+    if (sound.isPlaying()) {
+        sound.reset();
+    }
 
-            if (emanai < (emanai - 3)) {
-                addText(getString(R.string.low_mana));
-            }
-                //levonjuk a manát
-                emanai = emanai - 3;
-                emana.setText(Integer.toString(emanai));
-                //ha mi vagyunk a célpont, akkor healelődünk
-        if(sound.isPlaying())
-        {
-            sound.reset();
-        }
+    try {
+        sound.reset();
+        AssetFileDescriptor afd;
+        afd = getAssets().openFd("heal.mp3");
+        sound.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+        sound.prepare();
+        sound.start();
+    } catch (IllegalStateException e) {
+        e.printStackTrace();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    ehpi = ehpi + 3 + eintei;
+    ehp.setText(Integer.toString(ehpi));
+    addText(getString(R.string.enemy_heal) + " " + (3 + eintei));
 
-        try {
-            sound.reset();
-            AssetFileDescriptor afd;
-            afd = getAssets().openFd("heal.mp3");
-            sound.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
-            sound.prepare();
-            sound.start();
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-                    ehpi = ehpi + 3+eintei;
-                    ehp.setText(Integer.toString(ehpi));
-                    addText(getString(R.string.enemy_heal)+" "+(3+eintei));
-
-        magiceB.setEnabled(true);
-        attack.setEnabled(true);
+    magiceB.setEnabled(true);
+    attack.setEnabled(true);
+}
+else
+{
+    enemyAttack();
+}
     }
 
     /**
@@ -432,24 +439,26 @@ public class Battle extends AppCompatActivity {
         int folytat=0;
         String aMagice = magice.getSelectedItem().toString();
         //ha nem választott ki  semmit akkor kap 1 üzenet
-        if (aMagice.equals("Select Magice!") || aMagice.equals("")) {
+        if (aMagice.equals(getString(R.string.select_magice)) || aMagice.equals("")) {
             addText(getString(R.string.select_magice).toString());
         } else {
-            magiceB.setEnabled(false);
-            attack.setEnabled(false);
+
             //megkapjuka varázs tulajdonságait vesszővel elválasztva
             String theMagice = userDB.getMagicByName(aMagice);
-            Log.d("varázs",theMagice);
+
             String[] magiceSplit = theMagice.split(",");
             //ha kevesebb manánk van mint amibe kerül a varázs kap 1 üzit
             if (manai - Integer.parseInt(magiceSplit[1])<0) {
                 addText(getString(R.string.low_mana));
             } else {
+                magiceB.setEnabled(false);
+                attack.setEnabled(false);
                 //levonjuk a manát
                 manai = manai - Integer.parseInt(magiceSplit[1]);
                 mana.setText(Integer.toString(manai));
                 //ha mi vagyunk a célpont, akkor healelődünk
                 if (magiceSplit[2].equals("0")) {
+                    if(hpi<=mhpi){
                     if(sound.isPlaying())
                     {
                         sound.reset();
@@ -470,6 +479,15 @@ public class Battle extends AppCompatActivity {
                     hpi = hpi + Integer.parseInt(magiceSplit[0])+intei;
                     hp.setText(Integer.toString(hpi));
                     addText(getString(R.string.you_heal)+" "+(Integer.parseInt(magiceSplit[0])+intei));
+
+                    }
+                    else
+                    {
+                        folytat=1;
+                        magiceB.setEnabled(true);
+                        attack.setEnabled(true);
+                        addText(getString(R.string.maxheal));
+                    }
                 }
                 //ha az ellenfél a célpont
                 if (magiceSplit[2].equals("1")) {
@@ -489,7 +507,7 @@ public class Battle extends AppCompatActivity {
                             charAnime(ekaszt,"E","h");
                             ehpi = ehpi - (Integer.parseInt(magiceSplit[0])+dmgi);
                             ehp.setText(Integer.toString(ehpi));
-                            addText(getString(R.string.you_cast_magice)+(Integer.parseInt(magiceSplit[0])+dmgi));
+                            addText(getString(R.string.you_cast_magice)+" "+(Integer.parseInt(magiceSplit[0])+dmgi));
                             if(ehpi<=0)
                             {
                                 folytat=1;
@@ -531,7 +549,7 @@ public class Battle extends AppCompatActivity {
                             charAnime(ekaszt,"E","h");
                                     ehpi = ehpi - (Integer.parseInt(magiceSplit[0])+intei);
                             ehp.setText(Integer.toString(ehpi));
-                            addText(getString(R.string.you_cast_magice)+(Integer.parseInt(magiceSplit[0])+intei));
+                            addText(getString(R.string.you_cast_magice)+" "+(Integer.parseInt(magiceSplit[0])+intei));
                             if(ehpi<=0)
                             {
                                 folytat=1;
@@ -577,11 +595,11 @@ public class Battle extends AppCompatActivity {
         int z = (rand.nextInt(60))+1*lvli;
        int ret= userDB.addXP(ids,z);
        if(ret==0) {
-           Toast.makeText(Battle.this, getString(R.string.you_win) + " you get " + k + " Trefu and " + z + " xp", Toast.LENGTH_LONG).show();
+           Toast.makeText(Battle.this, getString(R.string.you_win) +" "+ getString(R.string.you_get) +" "+ k +" "+ getString(R.string.Trefuand) +" "+ z +" "+ " xp", Toast.LENGTH_LONG).show();
        }
        else
        {
-           Toast.makeText(Battle.this, getString(R.string.you_win) + " you get " + k + " Trefu and " + z + " xp"+" LVL UP! you get 5 point skillpoint", Toast.LENGTH_LONG).show();
+           Toast.makeText(Battle.this, getString(R.string.you_win) +" "+ getString(R.string.you_get) +" "+ k +" "+ getString(R.string.Trefuand) +" "+ z +" "+ " xp"+" "+getString(R.string.lvlupmsg), Toast.LENGTH_LONG).show();
        }
         Intent intent2 = null;
         intent2 = new Intent(Battle.this, mainScreen.class);

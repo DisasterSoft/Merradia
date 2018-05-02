@@ -55,7 +55,7 @@
     <string name="no_point1">Sorry, your skillpoints can not be less than 0.</string>
     <string name="no_kaszt">Please select a character.</string>
     <string name="no_name">Please give your character a name.</string>
-    <string name="action_sign_in">Sign In or Register</string>
+    <string name="action_sign_in">Register and Sign In</string>
     <string name="action_sign_in_short">Sign In</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">The password is too short</string>
@@ -85,8 +85,14 @@
     <string name="reward_get">You received</string>
     <string name="reward_Button">Your reward video is ready to watch</string>
     <string name="lvlup">LVL up!</string>
-    <string name="select_magice">Please select shom special attack</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+    <string name="select_magice">Please select some special attack</string>
+    <string name="welcome_main">Welcome dear </string>
+    <string name="welcome_fightfield">Welcome to the maze,try to find the monster, ther hiding shomwhere, but bee carefull,everithing is full of traps</string>
+    <string name="welcome_battle">Com lets kill this thing!</string>
+    <string name="Select_Magice">Select Magice!</string>
+    <string name="and_do">and do</string>
+    <string name="you_get"> you get </string>
+    <string name="Trefuand"> Trefu and </string>
+    <string name="lvlupmsg">  LVL UP! you get 5 point skillpoint </string>
+    <string name="maxheal">  You ar at full healt</string>
 </resources>
