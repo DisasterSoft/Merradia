@@ -8,23 +8,23 @@
     tools:context="com.ewulusen.disastersoft.merradia.MakeCharakter">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="16dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <Button
@@ -41,16 +41,16 @@
 
                     <TableLayout
                         android:id="@+id/tableLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/name">
 
                         <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
 
                             <TextView
                                 android:id="@+id/dex"
@@ -95,8 +95,8 @@
                         </TableRow>
 
                         <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
 
                             <TextView
                                 android:id="@+id/str"
@@ -140,8 +140,8 @@
                         </TableRow>
 
                         <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
 
                             <TextView
                                 android:id="@+id/agi"
@@ -187,8 +187,8 @@
                         </TableRow>
 
                         <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
 
                             <TextView
                                 android:id="@+id/con"
@@ -233,8 +233,8 @@
                         </TableRow>
 
                         <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
 
                             <TextView
                                 android:id="@+id/inte"
@@ -279,8 +279,8 @@
                         </TableRow>
 
                         <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
 
                             <TextView
                                 android:id="@+id/ref"
@@ -325,8 +325,8 @@
                         </TableRow>
 
                         <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
 
                             <TextView
                                 android:id="@+id/craft1"
@@ -361,8 +361,8 @@
                         </TableRow>
 
                         <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
 
                             <TextView
                                 android:id="@+id/luck"
@@ -396,8 +396,8 @@
                         </TableRow>
 
                         <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
 
                             <TextView
                                 android:id="@+id/textView"
@@ -407,7 +407,7 @@
                         </TableRow>
 
                         <TableRow
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="150dp">
 
                             <pl.droidsonroids.gif.GifImageView
@@ -425,8 +425,8 @@
                         </TableRow>
 
                         <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
 
                             <pl.droidsonroids.gif.GifImageView
                                 android:id="@+id/archer"
@@ -451,14 +451,14 @@
 
                     <TextView
                         android:id="@+id/points"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="42dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <EditText
                         android:id="@+id/name"
-                        android:layout_width="match_parent"
+                        android:layout_width="364dp"
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:hint="@string/names"
