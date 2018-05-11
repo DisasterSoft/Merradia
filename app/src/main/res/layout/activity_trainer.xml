@@ -8,12 +8,12 @@
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/seller1"
-        android:layout_width="344dp"
+        android:layout_width="0dp"
         android:layout_height="236dp"
+        android:src="@drawable/seller1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/seller1" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/str"
@@ -67,13 +67,13 @@
 
     <TextView
         android:id="@+id/text"
-        android:layout_width="376dp"
-        android:layout_height="73dp"
-        android:layout_marginBottom="11dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="@string/seller1"
         app:layout_constraintBottom_toTopOf="@+id/str"

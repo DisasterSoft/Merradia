@@ -51,7 +51,7 @@ public class Armorer extends AppCompatActivity {
         emac=findViewById(R.id.craft2);
         save=findViewById(R.id.save);
         text=findViewById(R.id.text);
-        text.setText(getString(R.string.seller3)+" You have "+lvli+" Trefu.");
+        text.setText(getString(R.string.seller3)+getString(R.string.youhave)+" "+lvli+" Trefu.");
         estri.setText(getString(R.string.craftarmor)+" : "+stri);
         estri.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,8 +60,12 @@ public class Armorer extends AppCompatActivity {
                     Random rand = new Random();
                     int k = (rand.nextInt(20));
                     if (k % 9 == 0) {
-                        stri--;
-                    } else {
+                        if(stri--<0)
+                        {}
+                        else {
+                            stri--;
+                        }}
+                        else {
                         stri++;
                     }
                     if(sound.isPlaying())
@@ -99,7 +103,11 @@ public class Armorer extends AppCompatActivity {
                     Random rand = new Random();
                     int k = (rand.nextInt(20));
                     if (k % 9 == 0) {
-                        stri2--;
+                        if(stri2--<0)
+                        {}
+                        else {
+                            stri2--;
+                        }
                     } else {
                         stri2++;
                     }

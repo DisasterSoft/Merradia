@@ -6,7 +6,7 @@
     <string name="mkchar">Make Characters</string>
     <string name="editchar">Edit Characters</string>
     <string name="fight">Fight</string>
-    <string name="agi">Agility</string>
+    <string name="agi">Agility/Move</string>
     <string name="str">Strength</string>
     <string name="con">Constitution</string>
     <string name="def">Defence</string>
@@ -95,4 +95,7 @@
     <string name="Trefuand"> Trefu and </string>
     <string name="lvlupmsg">  LVL UP! you get 5 point skillpoint </string>
     <string name="maxheal">  You ar at full healt</string>
+    <string name="buyit">  Sorry the free version allow you to train charakter to lvl 3, please buy the full app.</string>
+    <string name="howto">  How to use this game</string>
+    <string name="youhave">You have</string>
 </resources>

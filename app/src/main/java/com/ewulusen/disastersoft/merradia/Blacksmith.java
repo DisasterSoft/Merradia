@@ -47,7 +47,7 @@ public class Blacksmith extends AppCompatActivity {
         estri=findViewById(R.id.craft1);
         save=findViewById(R.id.save);
         text=findViewById(R.id.text);
-        text.setText(getString(R.string.seller2)+" You have "+lvli+" Trefu.");
+        text.setText(getString(R.string.seller2)+getString(R.string.youhave)+" "+lvli+" Trefu.");
         estri.setText(getString(R.string.craftweapon)+" : "+stri);
         estri.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +56,11 @@ public class Blacksmith extends AppCompatActivity {
                     Random rand = new Random();
                     int k = (rand.nextInt(20));
                     if (k % 9 == 0) {
-                        stri--;
+                        if(stri--<0)
+                        {}
+                        else {
+                            stri--;
+                        }
                     } else {
                         stri++;
                     }

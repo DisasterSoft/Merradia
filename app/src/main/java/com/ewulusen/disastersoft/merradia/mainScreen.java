@@ -7,7 +7,7 @@ import android.util.Log;
 import android.view.View;
 import br.com.bloder.magic.view.MagicButton;
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 
 public class mainScreen extends AppCompatActivity {
@@ -101,13 +101,19 @@ public class mainScreen extends AppCompatActivity {
             fight.setMagicButtonClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent2 = null;
-                    intent2 = new Intent(mainScreen.this, Figt_Field.class);
-                    intent2.putExtra("datas", seged);
-                    startActivity(intent2);
-                    finish();
-
-                }
+                   /* Cursor llcursor=userDB.getLvL(idC);
+                    llcursor.moveToNext();
+                    if(Integer.parseInt(llcursor.getString(0).toString())>=3)
+                    {
+                        Toast.makeText(mainScreen.this, R.string.buyit, Toast.LENGTH_LONG).show();}
+                    else {*/
+                        Intent intent2 = null;
+                        intent2 = new Intent(mainScreen.this, Figt_Field.class);
+                        intent2.putExtra("datas", seged);
+                        startActivity(intent2);
+                        finish();
+                    }
+               // }
             });
             reward.setMagicButtonClickListener(new View.OnClickListener() {
                 @Override

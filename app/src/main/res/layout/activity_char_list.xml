@@ -8,10 +8,16 @@
 
     <TableLayout
         android:id="@+id/tableLayout3"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="278dp"
-        tools:layout_editor_absoluteX="241dp"
-        tools:layout_editor_absoluteY="7dp">
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TableRow
             android:layout_width="match_parent"
@@ -275,16 +281,21 @@
 
     <br.com.bloder.magic.view.MagicButton
         android:id="@+id/makechar"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:button_icon="@drawable/hammer"
-        app:button_icon_height="50dp"
-        app:button_icon_width="50dp"
+        app:button_icon_height="40dp"
+        app:button_icon_width="40dp"
         app:expandable_area_color="#d48484"
         app:hide_text="@string/mkchar"
         app:hide_text_color="@android:color/white"
-        app:hide_text_size="15dp"
+        app:hide_text_size="10dp"
         app:icon_button_color="#d48484"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -292,5 +303,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout3"
         app:layout_constraintVertical_bias="0.0"
-        app:magic_button_size="85dp" />//makecharakter
+        app:magic_button_size="65dp" />//makecharakter
+
+    <br.com.bloder.magic.view.MagicButton
+        android:id="@+id/hint"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:button_icon="@drawable/help"
+        app:button_icon_height="40dp"
+        app:button_icon_width="40dp"
+        app:expandable_area_color="#aa8aaa"
+        app:hide_text="@string/howto"
+        app:hide_text_color="@android:color/white"
+        app:hide_text_size="8dp"
+        app:icon_button_color="#aa8aaa"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/makechar"
+        app:layout_constraintVertical_bias="0.117"
+        app:magic_button_size="65dp" />//makecharakter
 </android.support.constraint.ConstraintLayout>

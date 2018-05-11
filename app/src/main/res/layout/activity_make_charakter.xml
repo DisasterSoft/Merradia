@@ -49,6 +49,66 @@
                         app:layout_constraintTop_toBottomOf="@+id/name">
 
                         <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/ac"
+                                android:layout_width="60dp"
+                                android:layout_height="17dp"
+
+                                android:text="@string/ac"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/dmg"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:text="@string/dmg"
+                                app:layout_constraintEnd_toStartOf="@+id/dexp"
+                                app:layout_constraintTop_toBottomOf="@+id/mana" />
+
+                            <TextView
+                                android:id="@+id/move"
+                                android:layout_width="match_parent"
+                                android:layout_height="19dp"
+
+                                android:text="@string/move"
+                                app:layout_constraintEnd_toStartOf="@+id/conp"
+                                app:layout_constraintTop_toBottomOf="@+id/dex" />
+                        </TableRow>
+                        <TableRow>
+
+                            <TextView
+                                android:id="@+id/mc"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:text="@string/mc"
+                                app:layout_constraintEnd_toStartOf="@+id/intep"
+                                app:layout_constraintTop_toBottomOf="@+id/move" />
+
+                            <TextView
+                                android:id="@+id/mana"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:text="@string/mana"
+                                app:layout_constraintEnd_toStartOf="@+id/refp"
+                                app:layout_constraintTop_toBottomOf="@+id/yourName" />
+
+                            <TextView
+                                android:id="@+id/yourName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:text="@string/hp"
+                                app:layout_constraintEnd_toStartOf="@+id/defp"
+                                app:layout_constraintTop_toBottomOf="@+id/textView12" />
+                        </TableRow>
+                        <TableRow
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
@@ -83,17 +143,9 @@
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/refm" />
 
-                            <TextView
-                                android:id="@+id/ac"
-                                android:layout_width="60dp"
-                                android:layout_height="17dp"
 
-                                android:text="@string/ac"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
 
                         </TableRow>
-
                         <TableRow
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
@@ -129,14 +181,6 @@
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/intem" />
 
-                            <TextView
-                                android:id="@+id/dmg"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-
-                                android:text="@string/dmg"
-                                app:layout_constraintEnd_toStartOf="@+id/dexp"
-                                app:layout_constraintTop_toBottomOf="@+id/mana" />
                         </TableRow>
 
                         <TableRow
@@ -176,14 +220,6 @@
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/name" />
 
-                            <TextView
-                                android:id="@+id/move"
-                                android:layout_width="match_parent"
-                                android:layout_height="19dp"
-
-                                android:text="@string/move"
-                                app:layout_constraintEnd_toStartOf="@+id/conp"
-                                app:layout_constraintTop_toBottomOf="@+id/dex" />
                         </TableRow>
 
                         <TableRow
@@ -222,14 +258,6 @@
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/agim" />
 
-                            <TextView
-                                android:id="@+id/mc"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-
-                                android:text="@string/mc"
-                                app:layout_constraintEnd_toStartOf="@+id/intep"
-                                app:layout_constraintTop_toBottomOf="@+id/move" />
                         </TableRow>
 
                         <TableRow
@@ -268,14 +296,6 @@
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/defm" />
 
-                            <TextView
-                                android:id="@+id/yourName"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-
-                                android:text="@string/hp"
-                                app:layout_constraintEnd_toStartOf="@+id/defp"
-                                app:layout_constraintTop_toBottomOf="@+id/textView12" />
                         </TableRow>
 
                         <TableRow
@@ -314,14 +334,6 @@
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/conm" />
 
-                            <TextView
-                                android:id="@+id/mana"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-
-                                android:text="@string/mana"
-                                app:layout_constraintEnd_toStartOf="@+id/refp"
-                                app:layout_constraintTop_toBottomOf="@+id/yourName" />
                         </TableRow>
 
                         <TableRow

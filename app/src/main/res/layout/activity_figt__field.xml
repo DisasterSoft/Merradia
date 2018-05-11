@@ -8,26 +8,33 @@
 
     <TextView
         android:id="@+id/charName"
-        android:layout_width="202dp"
+        android:layout_width="0dp"
         android:layout_height="53dp"
 
-        app:layout_constraintEnd_toStartOf="@+id/mainChar"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:drawableEnd="@drawable/move"
         android:drawableRight="@drawable/move"
+        app:layout_constraintEnd_toStartOf="@+id/mainChar"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.GridLayout
         android:id="@+id/gridLayout2"
-        android:layout_width="368dp"
+        android:layout_width="0dp"
         android:layout_height="362dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/_dynamic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/charName"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="MissingConstraints,UnknownId"
-        tools:layout_editor_absoluteX="8dp">
+        tools:ignore="MissingConstraints,UnknownId">
 
         <pl.droidsonroids.gif.GifImageView
             android:id="@+id/a1"
@@ -193,7 +200,7 @@
 
     <ListView
         android:id="@+id/list_"
-        android:layout_width="395dp"
+        android:layout_width="0dp"
         android:layout_height="123dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -207,6 +214,12 @@
         android:id="@+id/mainChar"
         android:layout_width="70dp"
         android:layout_height="70dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/green"
         app:layout_constraintBottom_toTopOf="@+id/gridLayout2"
         app:layout_constraintEnd_toEndOf="parent"

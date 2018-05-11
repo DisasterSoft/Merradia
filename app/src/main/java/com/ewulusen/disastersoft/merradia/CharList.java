@@ -18,7 +18,7 @@ public class CharList extends AppCompatActivity {
     TextView nameV,lvlV;
     GifImageView charakter;
     Button edit,delete;
-    MagicButton mkchar;
+    MagicButton mkchar,hint;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +28,7 @@ public class CharList extends AppCompatActivity {
         userDB = new DatabaseHelper(this);
         Cursor localCursor = userDB.getCharacters(id);
         mkchar=findViewById(R.id.makechar);
+        hint=findViewById(R.id.hint);
         if(localCursor.getCount()==5)
         {
             mkchar.setEnabled(false);
@@ -45,6 +46,16 @@ public class CharList extends AppCompatActivity {
                 }
             });
         }
+        hint.setMagicButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = null;
+                intent2 = new Intent(CharList.this, hint.class);
+                intent2.putExtra("datas", id);
+                startActivity(intent2);
+
+            }
+        });
         int i = 1;
         /**
          * végig futunk a kapott karakter listán és beállítjuk a kinézete hozzá+ azt hogy mi történjen ha rákattintunk

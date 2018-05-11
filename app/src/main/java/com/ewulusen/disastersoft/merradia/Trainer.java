@@ -61,7 +61,7 @@ public class Trainer extends AppCompatActivity {
         econi=findViewById(R.id.con);
         save=findViewById(R.id.save);
         text=findViewById(R.id.text);
-        text.setText(getString(R.string.seller1)+" You have "+lvli+" Trefu.");
+        text.setText(getString(R.string.seller1)+getString(R.string.youhave)+" "+lvli+" Trefu.");
        estri.setText(getString(R.string.str)+" : "+stri);
        eintei.setText(getString(R.string.inte)+" : "+intei);
        eagi.setText(getString(R.string.agi)+" : "+agii);
@@ -77,8 +77,11 @@ public class Trainer extends AppCompatActivity {
                     Random rand = new Random();
                     int k = (rand.nextInt(20));
                     if (k % 9 == 0) {
-                        stri--;
-                    } else {
+                        if(stri--<0)
+                        {}
+                        else {
+                            stri--;
+                        }} else {
                         stri++;
                     }
                     playSound();
@@ -99,7 +102,11 @@ public class Trainer extends AppCompatActivity {
                     Random rand = new Random();
                     int k = (rand.nextInt(20));
                     if (k % 9 == 0) {
-                        lucki--;
+                         if(lucki--<0)
+                            {}
+                            else {
+                             lucki--;
+                         }
                     } else {
                         lucki++;
                     }
@@ -122,7 +129,10 @@ public class Trainer extends AppCompatActivity {
                         Random rand = new Random();
                         int k = (rand.nextInt(20));
                         if (k % 9 == 0) {
-                            coni--;
+                            if(coni--<0)
+                            {}
+                            else{
+                            coni--;}
                         } else {
                             coni++;
                         }
@@ -145,7 +155,8 @@ public class Trainer extends AppCompatActivity {
                     Random rand = new Random();
                     int k = (rand.nextInt(20));
                     if (k % 9 == 0) {
-                        refi--;
+                        if(refi--<0){}else{
+                        refi--;}
                     } else {
                         refi++;
                     }
@@ -168,7 +179,7 @@ public class Trainer extends AppCompatActivity {
                         Random rand = new Random();
                         int k = (rand.nextInt(20));
                         if (k % 9 == 0) {
-                            dexi--;
+                            if(dexi--<0){}else{dexi--;}
                         } else {
                             dexi++;
                         }
@@ -190,7 +201,8 @@ public class Trainer extends AppCompatActivity {
                     Random rand = new Random();
                     int k = (rand.nextInt(20));
                     if (k % 9 == 0) {
-                        defi--;
+                        if(defi--<0){}else{
+                        defi--;}
                     } else {
                         defi++;
                     }
@@ -212,7 +224,8 @@ public class Trainer extends AppCompatActivity {
                     Random rand = new Random();
                     int k = (rand.nextInt(20));
                     if (k % 9 == 0) {
-                        intei--;
+                        if(intei--<0){}else{
+                        intei--;}
                     } else {
                         intei++;
                     }
@@ -234,9 +247,10 @@ public class Trainer extends AppCompatActivity {
                     Random rand = new Random();
                     int k = (rand.nextInt(20));
                     if (k % 9 == 0) {
-                        agii--;
+                        if(agii--<0){}else{
+                        agii--;}
                     } else {
-                        stri++;
+                        agii++;
                     }
                     playSound();
                     lvli = lvli - 100;

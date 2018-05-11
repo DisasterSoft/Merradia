@@ -45,14 +45,22 @@
         <activity
             android:name=".Battle"
             android:screenOrientation="portrait" />
-        <activity android:name=".Trainer" />
-        <activity android:name=".Blacksmith" />
-        <activity android:name=".Armorer" />
+        <activity android:name=".Trainer"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Blacksmith"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Armorer"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:theme="@android:style/Theme.Translucent" />
-        <activity android:name=".Reward"></activity>
+        <activity android:name=".Reward"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".hint"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".images"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

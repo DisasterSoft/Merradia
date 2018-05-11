@@ -42,6 +42,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     Cursor localCursor = localSQLiteDatabase.rawQuery(str1, null);
     return localCursor;
     }
+    public  Cursor getLvL(String id)
+    {
+    SQLiteDatabase localSQLiteDatabase = getReadableDatabase();
+    String str1 = "SELECT LVL FROM "+cTableName+" where ID='"+id+"'";
+  //  Log.d("SQL", str1);
+    Cursor localCursor = localSQLiteDatabase.rawQuery(str1, null);
+    return localCursor;
+    }
     /**
      * hozzá ad egy sort a felhasználó táblához
      * @param paramString1-email

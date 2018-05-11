@@ -6,11 +6,11 @@
     <string name="mkchar">Karakter készítése</string>
     <string name="editchar">Karakter Szerkesztése</string>
     <string name="fight">Harc</string>
-    <string name="agi">Mozgékonyság</string>
+    <string name="agi">Mozgékonyság/mozgás</string>
     <string name="str">Erő</string>
     <string name="con">Szívóság</string>
     <string name="def">Védekezés</string>
-    <string name="ref">Refleksz</string>
+    <string name="ref">Reflex</string>
     <string name="craftweapon">Készíts nekem egy fegyvert</string>
     <string name="craftarmor">Készíts nekem egy páncélt</string>
     <string name="craftmarmor">Készíts nekem egy varázs páncélt</string>
@@ -95,4 +95,7 @@
     <string name="Trefuand"> Trefu és </string>
     <string name="lvlupmsg">  Szintlépés! és kaptál 5  képességpontot</string>
     <string name="maxheal">  Teljesen fel vagy gyógyúlva</string>
+    <string name="buyit">Sajnálom,ebben a verzióban csak lvl 3 ig fejlődhetsz.Kérlek vedd meg az alkalmazást ha tovább akarsz menni.</string>
+    <string name="howto">  Segítség a játék használatához</string>
+    <string name="youhave">neked van</string>
 </resources>
